@@ -1,0 +1,55 @@
+<div fxLayoutAlign="start center" class="mat-dialog-title">
+  <button
+    appDropZone
+    (click)="file.click()"
+    (dropped)="onUploadImg($event)"
+    class="header-img cursor-pointer"
+  >
+    <img [src]="tournamentToUpdate.img | images: 'tournaments'" />
+    <div class="img-upload">
+      <mat-icon>camera_alt</mat-icon>
+    </div>
+    <input
+      [hidden]="true"
+      type="file"
+      id="file"
+      (change)="onUploadImg($event.target.files[0])"
+      #file
+    />
+  </button>
+  <h2 class="m-b-0" fxFlex="auto">{{ tournamentToUpdate.tournamentName }}</h2>
+  <button mat-dialog-close mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+<form [formGroup]="editTournamentForm" (ngSubmit)="onSubmitForm()">
+  <mat-dialog-content>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Nome Torneo</mat-label>
+      <input
+        cdkFocusInitial
+        matInput
+        autocomplete="name"
+        autocorrect="off"
+        formControlName="tournamentName"
+      />
+      <mat-error *ngIf="formError.tournamentName">
+        {{ formError.tournamentName }}
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      Annulla
+    </button>
+    <button
+      mat-button
+      type="submit"
+      color="accent"
+      [disabled]="!editTournamentForm.valid"
+    >
+      Salva
+    </button>
+  </mat-dialog-actions>
+</form>

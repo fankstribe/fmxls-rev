@@ -1,0 +1,44 @@
+@import '.~@angular/material/theming';
+
+@mixin fmxls-form-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  a,
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
+  .mat-form-field.mat-focused .mat-form-field-label
+  {
+    color: mat-color($accent);
+  }
+
+  .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: mat-color($accent);
+  }
+
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled)
+  {
+    color: mat-color($foreground, text);
+  }
+
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label,
+  .mat-form-field.mat-form-field-invalid .mat-form-field-ripple
+   {
+    color: mat-color($warn);
+  }
+
+  .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+    background-color: mat-color($warn);
+  }
+
+  .mat-input-element {
+    caret-color: mat-color($foreground, text);
+  }
+
+  .mat-pseudo-checkbox-checked {
+    background: mat-color($accent) !important;
+  }
+
+}

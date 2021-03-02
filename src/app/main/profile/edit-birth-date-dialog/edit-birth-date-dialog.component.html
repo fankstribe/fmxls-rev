@@ -1,0 +1,27 @@
+<form [formGroup]="birthDateForm" (ngSubmit)="onSubmitForm()">
+  <div mat-dialog-title>Modifica Data di Nascita</div>
+  <div mat-dialog-content>
+    <div fxLayout fxFlex="100">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Data di Nascita</mat-label>
+        <input
+          matInput
+          [max]="validDate"
+          [matDatepicker]="picker"
+          placeholder="Scegli una data"
+          formControlName="birthDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker touchUi startView="year"></mat-datepicker>
+        <mat-hint>Età minima richiesta: <strong>16</strong> anni.</mat-hint>
+        <mat-error *ngIf="formError.birthDate">
+          {{ formError.birthDate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>Annulla</button>
+    <button mat-button type="submit" color="accent" [disabled]="!birthDateForm.valid">Salva</button>
+  </div>
+</form>

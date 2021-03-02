@@ -1,0 +1,33 @@
+<div class="container-wrap">
+  <ng-progress></ng-progress>
+  <mat-sidenav-container class="sidenav-container" autosize fullscreen>
+    <mat-sidenav
+      #sidenav
+      autoFocus="false"
+      [mode]="sidenavMode"
+      [opened]="sidenavOpened"
+      class="sidenav"
+    >
+      <mat-toolbar>
+        <a class="brand" routerLink="/admin-home">
+          <img src="./assets/images/logo.png" alt="logo" class="brand-logo" />
+          <span class="brand-name">fmxls</span>
+        </a>
+      </mat-toolbar>
+      <app-admin-sidenav (sidenavClose)="sidenav.close()"></app-admin-sidenav>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="main-container" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
+        <app-admin-topnav [sidenav]="sidenav"></app-admin-topnav>
+        <div class="main-content">
+          <div fxLayout fxLayoutAlign="start center" class="page-header m-b-32 m-t-12">
+            <div fxFlex="1 1 auto" class="page-header-title">{{title}}</div>
+          </div>
+          <router-outlet #o="outlet"></router-outlet>
+        </div>
+      </div>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,13 @@
+$text: (
+  'text-align': (
+    property: text-align,
+    class: text,
+    values: (
+      center: center,
+      right: right,
+      left: left
+    )
+  )
+);
+
+$utilities: map-merge($text, $utilities);

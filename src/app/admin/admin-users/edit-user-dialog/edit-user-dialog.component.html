@@ -1,0 +1,50 @@
+<form [formGroup]="editUserForm" (ngSubmit)="onSubmitForm()">
+  <div fxLayoutAlign="start center"  class="mat-dialog-title">
+    <img class="img-user">
+    <h2 class="m-b-0" fxFlex="auto">{{ userToUpdate.name }}</h2>
+    <button mat-dialog-close mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+  <mat-dialog-content>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input
+        cdkFocusInitial
+        matInput
+        autocomplete="name"
+        autocorrect="off"
+        formControlName="name"
+      />
+      <mat-error *ngIf="formError.name">
+        {{ formError.name }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        autocomplete="email"
+        autocorrect="off"
+        formControlName="email"
+      />
+      <mat-error *ngIf="formError.email">
+        {{ formError.email }}
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      Annulla
+    </button>
+    <button
+      mat-button
+      type="submit"
+      color="accent"
+      [disabled]="!editUserForm.valid"
+    >
+      Salva
+    </button>
+  </mat-dialog-actions>
+</form>

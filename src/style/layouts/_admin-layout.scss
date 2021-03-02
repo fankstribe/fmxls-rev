@@ -1,0 +1,16 @@
+@import "../abstracts/breakpoints";
+
+// Admin
+.page-header {
+  height: 48px;
+
+  .page-header-title {
+    padding: 0 8px;
+    font-size: 18px;
+    font-weight: 500;
+
+      @include bp-gt(xsmall) {
+        padding: 0 4px;
+      }
+    }
+}

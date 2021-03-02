@@ -1,0 +1,62 @@
+<mat-toolbar class="toolbar">
+
+    <button
+      class="m-r-4"
+      mat-icon-button
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="themeSwitch"
+      class="m-x-4"
+    >
+      <mat-icon>wb_sunny</mat-icon>
+    </button>
+    <mat-menu #themeSwitch="matMenu" xPosition="before">
+      <div class="switch-theme-list">
+        <mat-radio-group class="theme-list" [(ngModel)]="selectedTheme">
+          <mat-radio-button
+            *ngFor="let theme of themes"
+            [value]="theme"
+            (click)="setTheme(theme)"
+          >
+            {{ theme.name }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-menu>
+    <button
+      class="m-x-4"
+      mat-icon-button
+      [matMenuTriggerFor]="toolbarUserMenu"
+      disableRipple="true"
+    >
+      <img class="img-profile" [src]="user.imageUrl">
+    </button>
+    <mat-menu #toolbarUserMenu="matMenu" xPosition="before" yPosition="below" [overlapTrigger]="false" class="dropdown">
+      <div class="dropdown-menu-header">
+        <div class="dropdown-menu-header-img">
+          <img class="img-profile" [src]="user.imageUrl">
+        </div>
+        <div class="dropdown-menu-header-info">
+          <div class="header-name">{{user.name}}</div>
+          <div class="header-email muted">{{user.email}}</div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="dropdown-menu-content">
+        <a routerLink="/profile" matRipple class="dropdown-menu-item">
+          <mat-icon class="dropdown-menu-icons material-icons-outlined">account_circle</mat-icon>
+          <div fxFlex="auto">Profilo</div>
+          <mat-icon class="dropdown-menu-icons-chevron-right material-icons-outlined" fxFlex="none">chevron_right</mat-icon>
+        </a>
+      </div>
+      <div class="dropdown-menu-footer">
+        <a mat-stroked-button (click)="logout()" color="accent">Esci dal tuo account</a>
+      </div>
+    </mat-menu>
+
+</mat-toolbar>

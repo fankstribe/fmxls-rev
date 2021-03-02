@@ -1,0 +1,73 @@
+<div class="table-card border-radius">
+  <div fxLayout fxLayoutAlign="start center" class="toolbar-actions">
+    <h3 fxHide.xs fxFlex="none" class="p-r-16 m-r-16 m-y-0">Cerca Manager</h3>
+    <div class="toolbar-actions-search p-x-16" fxFlex="400px" fxFlex.lt-md="auto" fxLayout fxLayoutAlign="start center">
+      <mat-icon>search</mat-icon>
+      <input
+        class="p-x-16 p-y-12 full-width"
+        placeholder="Cerca..."
+        type="text"
+        (keyup)="doFilter($event)"
+      >
+    </div>
+    <span fxFlex></span>
+    <button
+      fxFlex="none"
+      mat-mini-fab
+      class="mat-elevation-z0 m-l-16"
+      color="accent"
+      type="button"
+      (click)="add()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-progress-bar *ngIf="isLoadingResults" color="accent" mode="indeterminate" bufferValue="75" value="50"></mat-progress-bar>
+
+  <table [hidden]="noItems" mat-table class="full-width" [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
+    <ng-container matColumnDef="user" sticky>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Manager</th>
+      <td class="cell" mat-cell *matCellDef="let managers">{{managers.user}}</td>
+    </ng-container>
+    <ng-container matColumnDef="team">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Squadra</th>
+      <td class="cell" mat-cell *matCellDef="let managers">{{managers.team}}</td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Creazione</th>
+      <td class="cell" mat-cell *matCellDef="let managers">{{managers.createdAt | date: 'dd/MM/yyyy'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Modifica</th>
+      <td class="cell" mat-cell *matCellDef="let managers">
+        <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="update(dataSource.data.indexOf(managers._id))">
+            <mat-icon class="material-icons-outlined">create</mat-icon>
+            Modifica
+          </button>
+          <button mat-menu-item (click)="delete(dataSource.data.indexOf(managers))">
+            <mat-icon class="material-icons-outlined">delete</mat-icon>
+            Elimina
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="element-row" mat-row *matRowDef="let managers; columns: displayedColumns;" (click)="update(dataSource.data.indexOf(managers))"></tr>
+  </table>
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+
+  <div [hidden]="!noItems" class="no-data-found-wrapper">
+    <div class="no-data-found">
+      <div class="no-data-found-container">
+        <div class="no-data-found-img">
+          <img src="assets/images/no-data.png" />
+        </div>
+        <div class="no-data-found-text">Nessun dato presente</div>
+      </div>
+    </div>
+  </div>
+</div>

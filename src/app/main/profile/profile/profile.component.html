@@ -1,0 +1,121 @@
+<div class="p-t-24">
+  <div fxLayout fxLayoutAlign="center center">
+    <button
+      appDropZone
+      (click)="file.click()"
+      (dropped)="onUploadImg($event)"
+      (hovered)="toggleHover($event)"
+      class="avatar-profile border cursor-pointer"
+    >
+      <img [src]="user.imageUrl"/>
+      <div class="img-upload">
+        <mat-icon>camera_alt</mat-icon>
+      </div>
+      <input
+        [hidden]="true"
+        type="file"
+        (change)="onUploadImg($event.target.files[0])"
+        #file
+      />
+    </button>
+  </div>
+  <h1 class="profile-header-title">
+    Ciao, {{user.name}}
+  </h1>
+  <div class="profile-header-subtitle muted">
+    Gestisci il tuo account e le impostazioni del sito
+  </div>
+</div>
+<div class="row">
+  <div class="col" fxLayout="column" fxFlex="100">
+    <mat-card class="m-t-24 p-x-0" [ngClass]="routeAnimationsElements">
+      <div class="card-title">
+        Account
+      </div>
+      <div class="card-subtitle">
+        Aggiorna i tuoi dati personali
+      </div>
+      <mat-card-content class="profile-content">
+        <div class="profile-list" matRipple>
+          <a class="profile-inner cursor-pointer hover" (click)="onEditName()">
+            <div fxLayoutAlign="center center">
+              <div fxFlex="1 1 0">
+                <div class="profile-container">
+                  <div class="profile-list-title">
+                    <div class="p-t-4" fxLayoutAlign="center center">
+                      <h4 class="profile-title m-0">nome</h4>
+                    </div>
+                  </div>
+                  <div class="profile-list-description">
+                    <div class="p-t-4" fxLayoutAlign="center center">
+                      <div class="profile-description">{{user.name}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div fxFlex fxBasis="0" fxGrow="0" fxShrink="0" class="m-l-16">
+                <div fxLayoutAlign="center center">
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="profile-list" matRipple>
+          <a class="profile-inner cursor-pointer hover" (click)="onEditEmail()">
+            <div fxLayoutAlign="center center">
+              <div fxFlex fxGrow="1" fxShrink="1" fxBasis="0">
+                <div class="profile-container">
+                  <div class="profile-list-title">
+                    <div class="p-t-4" fxLayoutAlign="center center">
+                      <h4 class="profile-title m-0">email</h4>
+                    </div>
+                  </div>
+                  <div class="profile-list-description">
+                    <div class="p-t-4" fxLayoutAlign="center center">
+                      <div class="profile-description">{{user.email}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div fxFlex fxBasis="0" fxGrow="0" fxShrink="0" class="m-l-16">
+                <div fxLayoutAlign="center center">
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="profile-list" matRipple>
+          <a class="profile-inner cursor-pointer hover" (click)="onEditBirthDate()">
+            <div fxLayoutAlign="center center">
+              <div fxFlex fxGrow="1" fxShrink="1" fxBasis="0">
+                <div class="profile-container">
+                  <div class="profile-list-title">
+                    <div class="p-t-4" fxLayoutAlign="center center">
+                      <h4 class="profile-title m-0">data di nascita</h4>
+                    </div>
+                  </div>
+                  <div class="profile-list-description">
+                    <div class="p-t-4" fxLayoutAlign="center center">
+                      <div class="profile-description">{{user.birthDate | date: "dd/MM/yyyy"}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div fxFlex fxBasis="0" fxGrow="0" fxShrink="0" class="m-l-16">
+                <div fxLayoutAlign="center center">
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+

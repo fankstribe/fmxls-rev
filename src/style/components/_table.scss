@@ -1,0 +1,61 @@
+@import '../abstracts/breakpoints';
+
+// Tabelle Admin
+.table-card {
+  overflow: auto;
+  margin-bottom: 20px;
+
+  .toolbar-actions {
+    padding: 0 14px;
+    height: 4rem;
+
+    @include bp-gt(xsmall) {
+      padding: 0 24px;
+    }
+
+    .toolbar-actions-search {
+      border-radius: 9999px;
+    }
+  }
+}
+
+.mat-column-img {
+  width: 2rem;
+  min-width: 2rem;
+}
+
+.mat-table .mat-cell,
+.mat-table .mat-header-cell {
+  box-sizing: content-box;
+  padding-right: 12px;
+  padding-left: 12px;
+  white-space: nowrap;
+
+  .mat-slide-toggle > .mat-slide-toggle-label > .mat-slide-toggle-bar > .mat-slide-toggle-thumb-container {
+    z-index: 0;
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 9999px;
+    vertical-align: middle;
+  }
+}
+
+tr.element-row {
+  cursor: pointer;
+}
+
+ // FIXME - colore del bordo quando la tabella è
+ // visualizzata in posizione sticky
+// .mat-table-sticky:first-child {
+//   border-right: 1px solid black;
+// }
+
+.mat-paginator,
+.toolbar-actions {
+  position: sticky;
+  left: 0;
+}

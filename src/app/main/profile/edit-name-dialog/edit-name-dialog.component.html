@@ -1,0 +1,24 @@
+<form [formGroup]="nameForm" (ngSubmit)="onSubmitForm()">
+  <div mat-dialog-title>Modifica Nome</div>
+  <div mat-dialog-content>
+    <div fxLayout fxFlex="100">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input
+          matInput
+          name="name"
+          autocomplete="name"
+          autocorrect="off"
+          formControlName="name"
+        />
+        <mat-error *ngIf="formError.name">
+          {{ formError.name }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>Annulla</button>
+    <button mat-button type="submit" color="accent" [disabled]="!nameForm.valid">Salva</button>
+  </div>
+</form>

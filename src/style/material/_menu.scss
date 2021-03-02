@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+
+@mixin fmxls-menu-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-menu-panel {
+    color: mat-color($foreground, text);
+
+    &.dropdown .dropdown-menu-content .dropdown-menu-item {
+      color: mat-color($foreground, text);
+      border-bottom: 1px solid mat-color($foreground, divider);
+
+      &:hover, &:focus {
+        background: mat-color($background, hover);
+      }
+    }
+  }
+}

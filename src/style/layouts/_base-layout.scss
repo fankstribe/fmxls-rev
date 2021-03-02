@@ -1,0 +1,80 @@
+@import "../abstracts/breakpoints";
+
+.container-wrap {
+  height: 100vh;
+
+  .sidenav-container {
+    max-width: 100%;
+    height: 100vh;
+
+    .sidenav {
+      width: 280px;
+      border-right: none;
+
+      .mat-toolbar {
+        padding: 0 1.5rem;
+      }
+
+      .brand {
+        color: inherit;
+        white-space: nowrap;
+        font-size: 18px;
+
+        .brand-logo {
+          width: 35px;
+          height: 35px;
+          margin-right: 10px;
+          vertical-align: middle;
+        }
+
+        .brand-name {
+          font-weight: 700;
+          vertical-align: middle;
+        }
+      }
+      .team-panel .divider {
+        padding-top: 15px;
+        width: 14.5rem;
+        margin: 0.75rem 0;
+        margin-left: 1rem;
+      }
+    }
+
+    .mat-drawer:not(.mat-drawer-side) {
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.28);
+    }
+
+    .main-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      float: right;
+      height: 100vh;
+      transition: width 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+
+      .main-content {
+        max-width: 1176px;
+        margin: 0 auto;
+        width: 100%;
+        padding-left: 32px;
+        padding-right: 32px;
+
+        @include bp-lt(desktop) {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+      }
+
+      // @include bp-gt(medium) {
+      //   padding-left: 24px;
+      //   padding-right: 24px
+      // }
+
+      // @include bp-gt(desktop) {
+      //   padding-left: 48px;
+      //   padding-right: 48px
+      // }
+    }
+  }
+}

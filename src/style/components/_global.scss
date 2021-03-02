@@ -1,0 +1,62 @@
+@import '../abstracts/breakpoints';
+@import '~@angular/material/theming';
+
+// Globals
+a {
+  text-decoration: none;
+}
+
+.img-upload {
+  transition: opacity .2s ease-in-out;
+  background-color: rgb(32, 33, 36, 0.6);
+  bottom: 0;
+  height: 33%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  text-align: center;
+  color: #fff;
+
+  mat-icon {
+    position: relative;
+    top: 4px;
+  }
+}
+
+.no-data-found-wrapper {
+  @include bp-gt(medium) {
+    overflow: hidden;
+    max-width: 660px;
+    margin: 0 auto;
+  }
+
+  .no-data-found {
+    padding: 16px;
+    @include bp-gt(medium) {
+      padding: 24px;
+    }
+
+    .no-data-found-container {
+      padding: 112px 16px;
+      text-align: center;
+
+      .no-data-found-img {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        margin-bottom: 12px;
+        max-width: 312px;
+        width: 100%;
+      }
+
+      .no-data-found-text {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.ng-bar-placeholder {
+  height: 2px !important;
+}

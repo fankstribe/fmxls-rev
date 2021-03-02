@@ -1,0 +1,24 @@
+<form [formGroup]="emailForm" (ngSubmit)="onSubmitForm()">
+  <div mat-dialog-title>Modifica Email</div>
+  <div mat-dialog-content>
+    <div fxLayout fxFlex="100">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          name="email"
+          autocomplete="email"
+          autocorrect="off"
+          formControlName="email"
+        />
+        <mat-error *ngIf="formError.email">
+          {{ formError.email }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>Annulla</button>
+    <button mat-button type="submit" color="accent" [disabled]="!emailForm.valid">Salva</button>
+  </div>
+</form>

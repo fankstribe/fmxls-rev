@@ -1,0 +1,129 @@
+$my-white-theme-primary: (
+  50 : #fefeff,
+  100 : #fdfdfe,
+  200 : #fcfcfd,
+  300 : #fafbfc,
+  400 : #f9fafc,
+  500 : #f8f9fb,
+  600 : #f7f8fa,
+  700 : #f6f7fa,
+  800 : #f5f6f9,
+  900 : #f3f5f8,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffffff,
+  A700 : #ffffff,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #000000,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+$my-white-theme-accent: (
+  50 : #e3edfa,
+  100 : #bad1f2,
+  200 : #8cb3e9,
+  300 : #5e95e0,
+  400 : #3c7ed9,
+  500 : #1967d2,
+  600 : #165fcd,
+  700 : #1254c7,
+  800 : #0e4ac1,
+  900 : #0839b6,
+  A100 : #e0e7ff,
+  A200 : #adc0ff,
+  A400 : #7a99ff,
+  A700 : #6185ff,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+
+$mat-light-theme-foreground: (
+  base:              black,
+  divider:           rgba(100,121,143,0.12),
+  dividers:          $dark-dividers,
+  disabled:          $dark-disabled-text,
+  disabled-button:   rgba(black, 0.26),
+  disabled-text:     $dark-disabled-text,
+  elevation:         black,
+  hint-text:         $dark-disabled-text,
+  secondary-text:    #5f6368,
+  icon:              rgba(black, 0.54),
+  icons:             rgba(black, 0.54),
+  text:              #3c4043,
+  slider-min:        rgba(black, 0.87),
+  slider-off:        rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38),
+  snack-bar: white,
+);
+
+$mat-light-theme-background: (
+  sidebar: mat-color($my-white-theme-primary, 500),
+  status-bar: #fff,
+  app-bar: mat-color($my-white-theme-primary, 500),
+  background: mat-color($my-white-theme-primary, 500),
+  hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
+  card:       white,
+  dialog:     white,
+  disabled-button: rgba(black, 0.12),
+  raised-button: white,
+  focused-button: $dark-focused,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+  unselected-chip: map_get($mat-grey, 300),
+  disabled-list-option: map_get($mat-grey, 200),
+  snack-bar: #202124
+);
+
+@function fmxls-mat-light-theme(
+  $primary,
+  $accent,
+  $warn: mat-palette($mat-red)
+) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $mat-light-theme-foreground,
+    background: $mat-light-theme-background
+  );
+}
+
+$custom-white-theme-primary: mat-palette($my-white-theme-primary);
+$custom-white-theme-accent: mat-palette($my-white-theme-accent);
+$custom-white-theme-warn: mat-palette($mat-red);
+
+$fmxls-white-theme: fmxls-mat-light-theme(
+  $custom-white-theme-primary,
+  $custom-white-theme-accent,
+  $custom-white-theme-warn
+);

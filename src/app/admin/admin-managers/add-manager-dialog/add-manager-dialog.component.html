@@ -1,0 +1,47 @@
+<form [formGroup]="addManagerForm" (ngSubmit)="onSubmitForm()">
+  <div fxLayoutAlign="start center"  class="mat-dialog-title">
+    <img class="img-user">
+    <h2 class="m-b-0" fxFlex="auto">Crea Manager</h2>
+    <button mat-dialog-close mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+  <mat-dialog-content>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Utente</mat-label>
+      <mat-select placeholder="Seleziona un utente" formControlName="name">
+        <mat-option *ngFor="let user of selectedUsers" [value]="user.uid">
+          {{ user.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formError.name">
+        {{ formError.name }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Squadra</mat-label>
+      <mat-select placeholder="Seleziona una squadra" formControlName="teamName">
+        <mat-option *ngFor="let team of selectedTeams" [value]="team._id">
+          {{ team.teamName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formError.teamName">
+        {{ formError.teamName }}
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      Annulla
+    </button>
+    <button
+      mat-button
+      type="submit"
+      color="accent"
+      [disabled]="!addManagerForm.valid"
+    >
+      Salva
+    </button>
+  </mat-dialog-actions>
+</form>

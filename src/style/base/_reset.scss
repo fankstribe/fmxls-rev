@@ -1,0 +1,31 @@
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+* {
+  &:active,
+  :focus {
+    outline: none !important;
+  }
+}
+
+dl, ol, ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol li, ul li {
+  list-style-type: none;
+}

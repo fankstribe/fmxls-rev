@@ -1,0 +1,74 @@
+@import '../abstracts/breakpoints';
+
+.auth-wrapper {
+  @include bp-gt(small) {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100vh;
+
+    &::before, &::after {
+      flex-grow: 1;
+      content: '';
+      display: block;
+    }
+
+    &::before {
+      min-height: 30px;
+    }
+
+    &::after {
+      min-height: 64px;
+    }
+  }
+}
+
+.auth-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  max-width: 100%;
+
+  @include bp-gt(small) {
+    flex-shrink: 0;
+    display: block;
+    margin: 0 auto;
+    min-height: 0;
+    width: 450px;
+  }
+}
+
+.auth-card {
+  flex-grow: 1;
+  padding: 24px 24px 36px;
+  overflow: hidden;
+  height: 100vh;
+
+  @include bp-gt(xsmall) {
+    padding: 48px 40px 36px !important;
+  }
+  @include bp-gt(small) {
+    height: auto;
+  }
+
+  .auth-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 600;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .additional-link {
+    padding-bottom: 3px;
+    padding-top: 9px;
+    text-align: center;
+  }
+}

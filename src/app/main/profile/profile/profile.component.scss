@@ -1,0 +1,119 @@
+@import "../../../../style/abstracts/breakpoints";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  max-width: 840px;
+  margin: auto;
+
+  .avatar-profile {
+    width: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    background: none;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    display: block;
+
+    img {
+      width: 96px;
+      height: 96px;
+      position: relative;
+      top: 2px;
+      border-radius: 50%;
+    }
+  }
+
+  .avatar-profile:hover > .img-upload {
+    @include bp-gt(xsmall) {
+      opacity: 1;
+    }
+  }
+
+  .profile-header-title {
+    margin: 18px 0;
+    text-align: center;
+    word-break: break-word;
+    word-wrap: break-word;
+  }
+
+  .profile-header-subtitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    word-break: break-word;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .profile-content {
+
+    .profile-list {
+      min-height: 1px;
+
+      .profile-inner {
+        display: block;
+        padding-top: 15px;
+        padding-bottom: 16px;
+        padding-right: 16px;
+        padding-left: 16px;
+        color: inherit;
+
+        @media (max-width: 1023px) and (min-width: 720px), (min-width: 1048px) {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+
+        .profile-container {
+
+          @include bp-gt(small) {
+            display: flex;
+            align-items: stretch;
+            flex-wrap: wrap;
+          }
+
+          .profile-list-title {
+            flex-basis: 156px;
+            align-items: center;
+            display: flex;
+            margin-right: 24px;
+            padding-top: 4px;
+
+            .profile-title {
+              letter-spacing: 0.07272727em;
+              font-size: 0.6875rem;
+              font-weight: 500;
+              line-height: 1rem;
+              text-transform: uppercase;
+              word-break: break-word;
+              word-wrap: break-word;
+            }
+          }
+
+          .profile-list-description {
+            flex-basis: 328px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            margin-right: 24px;
+            width: 100%;
+
+            .profile-description {
+              letter-spacing: 0.00625em;
+              font-size: 1rem;
+              line-height: 1.5rem;
+              width: 100%;
+              word-break: break-word;
+              word-wrap: break-word;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

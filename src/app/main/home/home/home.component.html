@@ -1,0 +1,26 @@
+<div fxLayout fxLayoutAlign="start center" class="page-header m-b-32 m-t-12">
+  <div fxFlex="1 1 auto" class="page-header-title">Competizioni</div>
+</div>
+<div gdColumn="1/span 12" gdColumns="repeat(12,minmax(0,1fr))" gdGap="16px 32px" gdGap.xs="16px 0">
+  <div gdColumn="span 8" gdColumn.lt-md="span 12" *ngFor="let tournament of tournaments">
+    <mat-card *ngIf="tournament.completed" class="card-home p-0 m-b-0 w-100 h-100" fxLayout="column">
+      <a routerLink="/fixtures/{{tournament._id}}" class="p-24">
+        <div fxLayout="column" fxFlex>
+          <h2>{{tournament.tournamentName}}</h2>
+        </div>
+        <div fxLayoutAlign="center center">
+          <div style="display: block;">
+            <div fxLayoutAlign="center center" style="width: 100px; height: 100px; overflow: hidden;">
+              <img [src]="tournament.img | images: 'tournaments'" style="height: 100%; width: auto;">
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </a>
+    </mat-card>
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+$breakpoints: (
+  xsmall: 450px,
+  small: 600px,
+  medium: 720px,
+  tablet: 960px,
+  desktop: 1024px
+);
+
+@function bp($name, $breakpoints: $breakpoints) {
+  $min: map-get($breakpoints, $name);
+
+  @return $min
+}
+
+@mixin bp-gt($name, $breakpoints: $breakpoints) {
+  $min: bp($name, $breakpoints);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+
+  @else {
+    @content;
+  }
+}
+
+@mixin bp-lt($name, $breakpoints: $breakpoints) {
+  $max: bp($name, $breakpoints);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+
+  @else {
+    @content;
+  }
+
+}

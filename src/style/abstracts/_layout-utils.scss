@@ -1,0 +1,37 @@
+.flex {
+  display: flex;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.full-width {
+  width: 100%;
+}
+
+@include bp-gt(small) {
+  .flex-row-sm {
+    flex-direction: row;
+  }
+  .m-t-24-sm {
+    margin-top: 24px;
+  }
+  .m-b-24-sm {
+    margin-bottom: 24px;
+  }
+  .m-l-24-sm {
+    margin-left: 24px;
+  }
+  .m-r-24-sm {
+    margin-right: 24px;
+  }
+}

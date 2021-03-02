@@ -1,0 +1,14 @@
+@import '.~@angular/material/theming';
+
+@mixin fmxls-dialog-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mat-dialog-title .header-img img {
+    background-color: mat-color($background, hover);
+  }
+
+}

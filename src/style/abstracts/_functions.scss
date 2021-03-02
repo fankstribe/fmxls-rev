@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+
+
+
+@function custom-mat-dark-theme(
+  $primary,
+  $accent,
+  $warn
+) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: true,
+    foreground: $mat-dark-theme-foreground,
+    background: $mat-dark-theme-background
+  );
+}
+
+@function negativify-map($map) {
+  $result: ();
+
+  @each $key, $value in $map {
+    @if $key !=0 {
+      $result: map-merge($result, ('-' + $key: (-$value)));
+    }
+  }
+
+  @return $result;
+}

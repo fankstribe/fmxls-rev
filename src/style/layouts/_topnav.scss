@@ -1,0 +1,154 @@
+@import '../abstracts/breakpoints';
+@import '~@angular/material/theming';
+
+.toolbar {
+  padding: 0 4px !important;
+  padding-left: 8px !important;
+
+  @include bp-gt(xsmall) {
+    padding: 0 8px !important;
+  }
+
+  .brand {
+    color: inherit;
+    white-space: nowrap;
+    font-size: 18px;
+
+    .brand-logo {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      vertical-align: middle;
+    }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .img-profile {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+}
+
+.switch-theme-list {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding: 16px 16px 0;
+
+  .theme-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .mat-radio-button {
+      margin-bottom: 12px;
+    }
+  }
+
+}
+
+.mat-menu-panel.dropdown {
+  width: 350px;
+  max-width: 100vw;
+  overflow: hidden;
+  border-radius: 8px;
+
+  .mat-menu-content:not(:empty) {
+    padding: 0;
+  }
+
+  .dropdown-menu-header {
+    margin: 20px 33px;
+
+    .dropdown-menu-header-img {
+      margin-left: 101px;
+      margin-bottom: 10px;
+      position: relative;
+      height: 86px;
+      width: 86px;
+
+      img {
+        margin-right: 6px;
+        vertical-align: top;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+    }
+
+    .dropdown-menu-header-info {
+      display: block;
+      vertical-align: top;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+
+      .header-name  {
+        letter-spacing: .29px;
+        margin: 0;
+        text-align: center;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .header-email {
+        @extend .header-name;
+        font-size: 14px;
+        font-weight: 400
+      }
+    }
+  }
+
+  .dropdown-menu-content {
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .dropdown-menu-item {
+      display: block;
+      position: relative;
+      white-space: nowrap;
+      padding: 12px 33px 13px;
+      height: 50px;
+
+      .dropdown-menu-icons {
+        margin-right: 20px;
+      }
+
+      .dropdown-menu-icons-chevron {
+        height: 18px;
+        width: 18px;
+        height: 18px;
+      }
+
+    }
+  }
+
+  .dropdown-menu-footer {
+    padding: 0 17px;
+    text-align: center;
+
+    a {
+      display: inline-block;
+      margin: 16px;
+    }
+  }
+
+  .mat-menu-item {
+    line-height: 0;
+
+    span {
+      vertical-align: middle;
+    }
+  }
+}

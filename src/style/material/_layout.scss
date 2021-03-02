@@ -1,0 +1,38 @@
+@import '.~@angular/material/theming';
+
+@mixin fmxls-layout-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
+
+  // Sidebar
+  .sidenav {
+    background-color: mat-color($background, sidebar);
+  }
+
+  .list .list-item {
+    color: mat-color($foreground, text);
+
+    &.active, &:hover {
+      background: rgba(mat-color($accent, default), 0.15);
+      color: lighten(mat-color($accent, default), 0);
+    }
+  }
+
+  .team-panel .divider {
+    border-bottom: 1px solid mat-color($foreground, divider);
+  }
+
+  // Auth
+  .auth-wrapper {
+    background: mat-color($background, background);
+  }
+
+  // Admin
+  .page-header {
+    border-bottom: 1px solid mat-color($foreground, divider);
+  }
+}

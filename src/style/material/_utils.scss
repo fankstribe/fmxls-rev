@@ -1,0 +1,28 @@
+@import '.~@angular/material/theming';
+
+@mixin fmxls-utils-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
+
+  // Bordo
+  .border {
+    border: 1px solid mat-color($foreground, divider);
+  }
+
+  // Testo
+  .muted {
+    color: mat-color($foreground, secondary-text);
+  }
+
+  // Background
+  .hover:hover,
+  .bg-hover
+  {
+    background-color: mat-color($background, hover);
+  }
+
+}

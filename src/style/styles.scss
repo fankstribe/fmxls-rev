@@ -1,0 +1,52 @@
+// Functions and helpers
+@import "abstracts/abstracts";
+
+// Base
+@import "base/reset";
+
+// Components
+@import "components/components";
+
+// Layouts
+@import "layouts/layouts";
+
+// Material theme
+@import "material/material";
+
+@import '~@angular/material/theming';
+
+// Custom typography
+$fmxls-typography: mat-typography-config(
+  $font-family: "Poppins, arial, sans-serif",
+  $body-1: mat-typography-level(14px, 24px, 400),
+  $title:
+    mat-typography-level(1.375rem, 1.75rem, 400, '"Poppins", arial, sans-serif'),
+  $headline:
+    mat-typography-level(1.75rem, 2.25rem, 400, '"Poppins", arial, sans-serif'),
+  $button: mat-typography-level(14px, 24px, 500, '"Poppins", arial, sans-serif'),
+);
+
+@include mat-core($fmxls-typography);
+
+// Themes
+@import "themes/light-theme", "themes/black-theme";
+
+@mixin custom-components-theme($theme) {
+  @include fmxls-utils-theme($theme);
+  @include fmxls-card-theme($theme);
+  @include fmxls-form-theme($theme);
+  @include fmxls-layout-theme($theme);
+  @include fmxls-menu-theme($theme);
+  @include fmxls-snackbar-theme($theme);
+  @include fmxls-table-theme($theme);
+}
+
+.light-theme {
+  @include angular-material-theme($fmxls-white-theme);
+  @include custom-components-theme($fmxls-white-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($fmxls-black-theme);
+  @include custom-components-theme($fmxls-black-theme);
+}

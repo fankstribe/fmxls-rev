@@ -1,0 +1,40 @@
+<div fxLayoutAlign="start center" class="mat-dialog-title">
+  <button
+    class="header-img"
+  >
+    <img [src]="managerToUpdate.user.img | images: 'users'" />
+  </button>
+  <h2 class="m-b-0" fxFlex="auto">{{ managerToUpdate.user.name }}</h2>
+  <button mat-dialog-close mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+<form [formGroup]="editManagerForm" (ngSubmit)="onSubmitForm()">
+  <mat-dialog-content>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+
+      <mat-select [(value)]="managerToUpdate.team._id" [compareWith]="compareSelectedObj"  formControlName="teamName">
+        <mat-option *ngFor="let team of selectedTeams" [value]="team._id">
+          {{ team.teamName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formError.teamName">
+        {{ formError.teamName }}
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      Annulla
+    </button>
+    <button
+      mat-button
+      type="submit"
+      color="accent"
+      [disabled]="!editManagerForm.valid"
+    >
+      Salva
+    </button>
+  </mat-dialog-actions>
+</form>

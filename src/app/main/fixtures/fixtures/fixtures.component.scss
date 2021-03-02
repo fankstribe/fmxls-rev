@@ -1,0 +1,44 @@
+@import "../../../../style/abstracts/breakpoints";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+
+  .fixture-page .teams {
+
+    width: 85%;
+    padding-right: .75rem;
+
+    .teams-content {
+      display: block;
+
+      .team-logo {
+        width: 2rem;
+        height: 2rem;
+        object-fit: cover;
+        border-radius: 9999px;
+        flex-shrink: 0;
+       
+        img {
+          max-width: 100%;
+        }
+      }
+
+      .team-name {
+        max-width: 100%;
+        margin-left: 15px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;        
+      }
+
+      .score {
+        margin-left: auto;
+        padding-left: 10px;
+        white-space: nowrap;
+      }
+    }
+  }
+  
+}

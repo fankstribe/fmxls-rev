@@ -1,0 +1,163 @@
+const { response } = require("express")
+const bcrypt = require("bcryptjs")
+
+const { deleteImage } = require('../helpers/save-image')
+
+const User = require("../models/user")
+const Team = require("../models/team")
+const Manager = require("../models/manager")
+const { tokenJWT } = require('../helpers/jwt')
+
+const getUsers = async (req, res) => {
+  // const from = Number(req.query.limit) || 0
+
+  const users = await User.find({})
+
+  res.json({
+    ok: true,
+    users
+  })
+}
+
+const createUser = async (req, res = response) => {
+  const { email, password } = req.body
+
+  try {
+    const emailExists = await User.findOne({ email })
+
+    if (emailExists) {
+      return res.status(400).json({
+        ok: false,
+        msg: "L'email è già utilizzata",
+      })
+    }
+
+    const user = new User(req.body)
+
+    // Cripta la password
+    const salt = bcrypt.genSaltSync()
+    user.password = bcrypt.hashSync(password, salt)
+
+    // Salva l'utente
+    await user.save()
+
+    // Crea token
+    const token = await tokenJWT(user.id)
+
+    res.json({
+      ok: true,
+      user,
+      token
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      ok: false,
+      msg: "Errore inatteso",
+    })
+  }
+}
+
+const updateUser = async (req, res = response) => {
+  const uid = req.params.id
+
+  try {
+    const userDB = await User.findById(uid)
+
+    if (!userDB) {
+      return res.status(404).json({
+        ok: false,
+        msg: "Non esiste nessun utente con queste credenziali.",
+      })
+    }
+
+    // Aggiorna dati utente
+    const { password, email, ...fields } = req.body
+
+    if (userDB.email !== email) {
+      const emailExists = await User.findOne({ email })
+
+      if (emailExists) {
+        return res.status(400).json({
+          ok: false,
+          msg: "Esiste già un utente con questa email.",
+        })
+      }
+    }
+    fields.email = email
+    const userUpdated = await User.findByIdAndUpdate(uid, fields, {
+      new: true,
+    })
+
+    res.json({
+      ok: true,
+      user: userUpdated,
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      ok: false,
+      msg: "Errore inatteso",
+    })
+  }
+}
+
+const deleteUser = async (req, res = response) => {
+  const uid = req.params.id
+
+  try {
+    const userDB = await User.findById(uid)
+    const pathView = `./uploads/users/${userDB.img}`
+
+    if (!userDB) {
+      return res.status(404).json({
+        ok: false,
+        msg: "Non esiste nessun utente con queste credenziali.",
+      })
+    }
+
+    if (userDB.role === 'ADMIN_ROLE') {
+      return res.status(404).json({
+        ok: false,
+        msg: "Non è possibile eliminare un utente amministratore.",
+      })
+    }
+
+    const countDocs = await User.find().countDocuments()
+
+    if (countDocs == 1) {
+      return res.status(404).json({
+        ok: false,
+        msg: "Non puoi eliminare l'ultimo utente.",
+      })
+    }
+
+    if (userDB.img) {
+      await deleteImage(pathView)
+    }
+
+    await Team.findOneAndUpdate({user: uid}, {$unset: {user: ''}})
+    await Manager.deleteOne({user: uid})
+
+    await User.findByIdAndDelete(uid)
+
+    res.json({
+      ok: true,
+      msg: 'Utente eliminato.',
+      countDocs
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      ok: false,
+      msg: "Errore inatteso",
+    })
+  }
+}
+
+module.exports = {
+  getUsers,
+  createUser,
+  updateUser,
+  deleteUser,
+}

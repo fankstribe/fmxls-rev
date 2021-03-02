@@ -1,0 +1,28 @@
+.list {
+
+  margin-right: 10px;
+
+  .list-item {
+    position: relative;
+    align-items: center;
+    min-height: 48px;
+    margin: .25rem 1rem;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    width: unset;
+
+
+  }
+
+  .list-item.active {
+    font-weight: 600;
+  }
+
+  .sidemenu-icon {
+    margin-right: 16px;
+  }
+
+  .sidemenu-item {
+    font-size: 0.875rem;
+  }
+}
