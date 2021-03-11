@@ -5,16 +5,13 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Tournament } from './../../models/tournament';
 
-const base_url = environment.base_url
+const base_url = environment.base_url;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TournamentService {
-
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   get token(): string {
     return localStorage.getItem('token') || '';
@@ -23,31 +20,33 @@ export class TournamentService {
   get headers() {
     return {
       headers: {
-        'x-token': this.token
-      }
-    }
+        'x-token': this.token,
+      },
+    };
   }
 
   getTournaments() {
     const url = `${base_url}/tournaments`;
 
-    return this.http.get<Tournament>(url, this.headers)
-      .pipe(
-        map((res:any) => res.tournaments)
-      );
+    return this.http
+      .get<Tournament>(url, this.headers)
+      .pipe(map((res: any) => res.tournaments));
   }
 
   getTournament(_id: string) {
     const url = `${base_url}/tournaments/${_id}`;
-    
-    return this.http.get<Tournament>(url, this.headers)
-      .pipe(
-        map((res:any) => res.tournament)
-    );
+
+    return this.http
+      .get<Tournament[]>(url, this.headers)
+      .pipe(map((res: any) => res.tournament));
   }
 
-    // Lato Admin
-  createTournament(data: {tournamentName: string, teams: string, format: string}) {
+  // Lato Admin
+  createTournament(data: {
+    tournamentName: string;
+    teams: string;
+    format: string;
+  }) {
     const url = `${base_url}/tournaments`;
 
     return this.http.post(url, { ...data }, this.headers);
@@ -63,7 +62,6 @@ export class TournamentService {
   updateState(_id: string, completed: boolean) {
     const url = `${base_url}/tournaments/${_id}`;
     return this.http.put(url, { completed }, this.headers);
-
   }
 
   // Lato Admin

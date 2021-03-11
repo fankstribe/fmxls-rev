@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/services/animations/route.animations';
 import { TournamentService } from '../../../core/services/tournament.service';
@@ -14,8 +15,12 @@ import { Tournament } from '../../../models/tournament';
 export class FixturesComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
-  id: any;
-  tournaments: Tournament[];
+  fixtures: Tournament;
+  rounds: any [];
+  matchesItem: any [];
+  matches: any;
+  arrayRounds: any [];
+
 
   constructor(
     private tournamentService: TournamentService,
@@ -24,13 +29,17 @@ export class FixturesComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.id = params;
-      console.log(this.id);
+      this.tournamentService.getTournament(params['id']).subscribe(res => {
+        this.fixtures = res
+        this.matches = this.fixtures.matches
+        this.matches.forEach((item:any) => {
+          this.rounds = item.round
+          this.arrayRounds = Array(this.rounds).fill(null).map((x, i) => i + 1)
+          this.matchesItem = this.arrayRounds.map(x => this.matches.filter(match => match.round === x))
+        })
+      })
     })
-    this.tournamentService.getTournament(this.id).subscribe(res => {
-      this.tournaments = res;
-      console.log( this.tournaments);
-    })
+
   }
 
 }

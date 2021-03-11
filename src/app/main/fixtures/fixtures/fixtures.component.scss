@@ -5,6 +5,10 @@
   flex-direction: column;
   margin: auto;
 
+  .matchday-title {
+    font-size: 16px;
+  }
+
   .fixture-page .teams {
 
     width: 85%;
@@ -19,7 +23,7 @@
         object-fit: cover;
         border-radius: 9999px;
         flex-shrink: 0;
-       
+
         img {
           max-width: 100%;
         }
@@ -30,7 +34,7 @@
         margin-left: 15px;
         white-space: nowrap;
         text-overflow: ellipsis;
-        overflow: hidden;        
+        overflow: hidden;
       }
 
       .score {
@@ -40,5 +44,5 @@
       }
     }
   }
-  
+
 }

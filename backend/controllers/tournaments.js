@@ -1,26 +1,23 @@
 const { response } = require('express')
 
-const roundRobin = require('roundrobin')
-const shuffle = require('shuffle-array')
-
 const { deleteImage } = require('../helpers/save-image')
 
 const Tournament = require('../models/tournament')
 const Match = require('../models/match')
 
-// shuffle = (array) => {
-//   let curIndex = array.length
-//   let tempValue
-//   let randomIndex
-//   while (0 !== curIndex) {
-//     randomIndex = Math.floor(Math.random() * curIndex)
-//     curIndex -= 1
-//     tempValue = array[curIndex]
-//     array[curIndex] = array[randomIndex]
-//     array[randomIndex] = tempValue
-//   }
-//   return array
-// }
+shuffle = (array) => {
+  let curIndex = array.length
+  let tempValue
+  let randomIndex
+  while (0 !== curIndex) {
+    randomIndex = Math.floor(Math.random() * curIndex)
+    curIndex -= 1
+    tempValue = array[curIndex]
+    array[curIndex] = array[randomIndex]
+    array[randomIndex] = tempValue
+  }
+  return array
+}
 
 const getTournaments = async(req, res = response) => {
 
@@ -35,16 +32,16 @@ const getTournaments = async(req, res = response) => {
 }
 
 const getTournament = async (req, res = response) => {
-  const _id = req.params._id
+  const id = req.params.id
 
-  const tournament = await Tournament.findOne({_id: _id})
+  const tournament = await Tournament.findOne({_id: id})
     .populate({
-      path: 'matches', 
+      path: 'matches',
       select: '-tournament',
       populate: [
         { path: 'homeTeam', select: 'teamName img' },
         { path: 'awayTeam', select: 'teamName img' }
-      ]    
+      ]
     })
 
     res.json({
@@ -58,43 +55,59 @@ const createTournament = async(req, res = response) => {
 
   try {
     const tournament = new Tournament(body)
-    const createMatches = roundRobin(tournament.teams.length, tournament.teams)
-    let i
-    for (i = 1; i <= 1; i++) {
-      const matchesArr = createMatches.reduce((matches, match) => {
-        match.map(m => {
-          let awayTeam, homeTeam
-          if (i % 2 === 0) {
-            awayTeam = m[0]
-            homeTeam = m[1]
-          } else {
-            awayTeam = m[1]
-            homeTeam = m[0]
-          }
+    const teams = tournament.teams
 
-          const match = new Match({
-            tournament: tournament._id,
-            homeTeam: homeTeam._id,
-            awayTeam: awayTeam._id,
-            round: i
-          })
-          matches.push(match)
+    const firstRound = []
+    const secondRound = []
+
+    const teamList = shuffle(teams)
+    const numOfTeams = teamList.length
+
+    const homeTeam = [] = teamList.slice(0, numOfTeams/2)
+    const awayTeam = [] = teamList.slice(numOfTeams/2, numOfTeams)
+
+    for (let i = 0; i < numOfTeams - 1; i++) {
+      for (let j = 0; j < homeTeam.length; j++) {
+        const teamItem = shuffle([homeTeam[j], awayTeam[j]])
+        const round = i + 1
+
+        firstRound.push({
+          tournament: tournament._id,
+          awayTeam: teamItem[1],
+          homeTeam: teamItem[0],
+          round
         })
-        return matches
-      }, [])
 
-      const randomArray = shuffle(matchesArr)
-      randomArray.map(match => {
-        match.save()
-        tournament.matches = tournament.matches.concat(match._id)
+        secondRound.push({
+          tournament: tournament._id,
+          awayTeam: teamItem[0],
+          homeTeam: teamItem[1],
+          round: round + numOfTeams - 1
+        })
+      }
+
+      const fixedTeam = homeTeam.shift()
+      homeTeam.unshift(awayTeam.shift())
+      homeTeam.unshift(fixedTeam)
+      awayTeam.push(homeTeam.pop())
+
+    }
+
+    const fixture = firstRound.concat(secondRound)
+
+    const fixtureData = [... fixture]
+
+    for (let fixtureDataItem in fixtureData) {
+      await new Match(fixtureData[fixtureDataItem]).save().then((data) => {
+        tournament.matches = tournament.matches.concat(data._id)
       })
     }
 
-    const tournamentDB = await tournament.save()
+    await tournament.save()
 
     res.json({
       ok: true,
-      tournaments: tournamentDB
+      tournament
     })
   } catch (error) {
     console.log(error)
@@ -155,6 +168,7 @@ const deleteTournament = async(req, res = response) => {
     }
 
     await Tournament.findByIdAndDelete(id)
+    await Match.deleteMany({tournament: id})
 
 
     res.json({
@@ -173,6 +187,6 @@ module.exports = {
   getTournaments,
   getTournament,
   createTournament,
-  updateTournament,  
+  updateTournament,
   deleteTournament
 }

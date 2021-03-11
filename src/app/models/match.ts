@@ -8,6 +8,7 @@ export class Match {
     public homeTeam: Team,
     public awayTeam: Team,
     public tournament: Tournament,
+    public round: number,
     public completed: boolean
   ) {}
 }

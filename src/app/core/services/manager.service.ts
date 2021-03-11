@@ -61,7 +61,6 @@ export class ManagerService {
   // Lato Admin
   createManager(data: {user: string, team: string}) {
     const url = `${base_url}/managers`;
-
     return this.http.post(url, { ...data }, this.headers);
   }
 

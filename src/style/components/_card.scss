@@ -19,7 +19,7 @@
       line-height: 1.75rem;
       padding-left: 24px;
       padding-right: 24px;
-    }    
+    }
   }
 
   .card-subtitle {
@@ -42,8 +42,4 @@
 
 .mat-card:not([class*=mat-elevation-z]) {
   box-shadow: none !important;
-}
-
-.card-home h2 {
-    word-break: break-word;
 }

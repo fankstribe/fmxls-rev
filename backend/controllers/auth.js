@@ -10,7 +10,6 @@ const login = async(req, res = response) => {
   const { email, password } = req.body
 
   try {
-
     // Verifica email
     const userDB = await User.findOne({email})
 

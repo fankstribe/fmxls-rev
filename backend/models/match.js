@@ -13,6 +13,7 @@ const MatchSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Tournament'
   },
+  round: Number,
   completed: {
     type: Boolean,
     default: false

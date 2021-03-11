@@ -1,12 +1,15 @@
 @import '../abstracts/breakpoints';
-@import '~@angular/material/theming';
 
-.toolbar {
+.mat-toolbar-single-row.toolbar {
   padding: 0 4px !important;
-  padding-left: 8px !important;
+  padding-left: 12px !important;
 
   @include bp-gt(xsmall) {
     padding: 0 8px !important;
+  }
+
+  @include bp-lt(small) {
+    height: 56px;
   }
 
   .brand {
