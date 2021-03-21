@@ -1,0 +1,80 @@
+<mat-card class="p-0" style="overflow: hidden;">
+  <div class="header-img-container">
+    <img class="img-bg" src="assets/images/bg-header.jpg" />
+    <div class="sc-contrast"></div>
+    <img class="logo-img bg-hover" [src]="tournamentImg | images: 'tournaments'" />
+  </div>
+  <div class="header-tabs-container">
+    <img class="bg-hover" [src]="tournamentImg | images: 'tournaments'" />
+    <div class="header-tabs-content">
+      <div class="tournament-name">
+        <span>{{tournamentName}}</span>
+      </div>
+      <nav class="border-0" mat-tab-nav-bar color="accent">
+        <a mat-tab-link
+          *ngFor="let link of navLinks"
+          [routerLink]="link.link"
+          routerLinkActive #rla="routerLinkActive"
+          [active]="rla.isActive"
+        >
+          {{ link.label }}
+        </a>
+      </nav>
+    </div>
+  </div>
+</mat-card>
+
+<router-outlet></router-outlet>
+
+
+
+
+<!--
+
+
+
+<div
+  gdColumn="1/span 12"
+  gdColumns="repeat(12,minmax(0,1fr))"
+  gdGap="20px 32px"
+  gdGap.xs="16px 0"
+>
+  <ng-container *ngFor="let fixture of matchesItem; let i = index">
+    <p class="matchday-title" gdColumn="1/12">Giornata {{ i + 1 }}</p>
+    <ng-container *ngFor="let match of fixture">
+      <div
+        class="fixture-page"
+        gdColumn.lt-sm="span 12"
+        gdColumn.gt-xs="span 6"
+        gdColumn.gt-md="span 4"
+      >
+        <mat-card class="m-b-0">
+          <div fxLayout="column">
+            <div fxLayoutAlign="space-between">
+              <div class="teams">
+                <div class="teams-content" fxLayoutAlign="center center">
+                  <div class="team-logo bg-hover">
+                    <img [src]="match.homeTeam.img | images: 'teams'" />
+                  </div>
+                  <div class="team-name">
+                    {{ match.homeTeam.teamName }}
+                  </div>
+                  <div class="score"></div>
+                </div>
+                <div class="teams-content m-t-24" fxLayoutAlign="center center">
+                  <div class="team-logo bg-hover">
+                    <img [src]="match.awayTeam.img | images: 'teams'" />
+                  </div>
+                  <div class="team-name">
+                    {{ match.awayTeam.teamName }}
+                  </div>
+                  <div class="score"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </ng-container>
+  </ng-container>
+</div> -->

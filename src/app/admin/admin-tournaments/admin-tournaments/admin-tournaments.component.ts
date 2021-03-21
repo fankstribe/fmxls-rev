@@ -13,6 +13,7 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
 import { Tournament } from '../../../models/tournament';
 import { EditTournamentDialogComponent } from '../edit-tournament-dialog/edit-tournament-dialog.component';
 import { AddTournamentDialogComponent } from '../add-tournament-dialog/add-tournament-dialog.component';
+import { EditMatchesDialogComponent } from '../edit-matches-dialog/edit-matches-dialog.component';
 
 @Component({
   selector: 'app-admin-tournaments',
@@ -32,8 +33,9 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
     'tournamentName',
     'teams',
     'format',
-    'completed',
+    'status',
     'createdAt',
+    'fixtures',
     'action'
   ];
 
@@ -116,6 +118,7 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
     dialogConfig.maxWidth = '100vw';
     dialogConfig.maxHeight = '100%';
     dialogConfig.data = {data: this.dataSource.data[id]};
+    console.log(this.dataSource.data[id])
 
     const dialogRef = this.d.open(EditTournamentDialogComponent, dialogConfig);
 
@@ -151,10 +154,40 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
 
   onUpdateState(tournament: Tournament) {
     const id = tournament._id;
-    const completed = tournament.completed;
-    this.tournamentService.updateState(id, completed).subscribe(res => {
+    const status = tournament.status;
+    this.tournamentService.updateState(id, status).subscribe(res => {
       this.snackBar.showSuccessSnackbar(`Stato modificato!`);
     })
+  }
+
+  updateMatches(id: string) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = '80%';
+    dialogConfig.maxWidth = '640px';
+    dialogConfig.maxHeight = '800px';
+    dialogConfig.height = '80%';
+    dialogConfig.data = {data: this.dataSource.data[id]};
+
+    const dialogRef = this.d.open(EditMatchesDialogComponent, dialogConfig);
+
+    const smallDialogSub = this.isSmall.subscribe(size => {
+      if (size.matches) {
+        dialogRef.updateSize('100%', '100%');
+      } else {
+        dialogRef.updateSize('80%');
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.tournamentsTableList();
+        this.snackBar.showSuccessSnackbar('Torneo modificato!');
+      }
+      smallDialogSub.unsubscribe();
+    });
   }
 
 }

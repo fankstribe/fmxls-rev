@@ -17,7 +17,7 @@ import { Team } from '../../../models/team';
 export class EditManagerDialogComponent implements OnInit {
   editManagerForm: FormGroup;
 
-  managerToUpdate: Manager;
+  managerToUpdate: any = Manager;
   selectedTeams: Team[];
 
   formError = {
@@ -46,17 +46,16 @@ export class EditManagerDialogComponent implements OnInit {
 
     this.teamService.getTeams().subscribe(data => {
       let arrayTeam = [];
-      const team = data.filter(team => team._id === this.managerToUpdate.team._id)
+      const team = data.filter(team => team._id === this.managerToUpdate.teamId)
       arrayTeam = data.filter(team => !team.user);
       arrayTeam.push(...team);
       this.selectedTeams = arrayTeam;
-
     })
   }
 
   createForm() {
     this.editManagerForm = this.formBuilder.group({
-      teamName: [this.managerToUpdate.team._id, [Validators.required]]
+      teamName: [this.managerToUpdate.teamId, [Validators.required]]
     });
     this.editManagerForm.valueChanges.subscribe(data => this.onValueChanged(data));
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SpinnerService } from './core/services/spinner.service';
 import { TitleService } from './core/services/title.service';
 
 @Component({
@@ -13,14 +12,12 @@ export class AppComponent implements OnInit {
 
   constructor(
     private titleService: TitleService,
-    private spinner: SpinnerService,
   ) {
 
   }
 
   ngOnInit() {
     this.titleService.trackingRouteEvent();
-    this.spinner.pageSpinner(this.spinnerName);
   }
 
 }

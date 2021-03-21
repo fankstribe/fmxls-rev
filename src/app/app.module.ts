@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { HttpLoadingInterceptor } from './core/interceptors/http-loading.interceptor';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -13,10 +14,7 @@ import { AppComponent } from './app.component';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DialogComponent
-  ],
+  declarations: [AppComponent, DialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,13 +22,17 @@ import { DialogComponent } from '../shared/dialog/dialog.component';
     AppRoutingModule,
 
     // Shared
-    SharedModule
+    SharedModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoadingInterceptor,
+      multi: true,
+    },
   ],
   entryComponents: [DialogComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

@@ -11,15 +11,17 @@ export class SnackBarService {
   ) {}
 
   showSuccessSnackbar(message: string) {
-    const config = new MatSnackBarConfig();
-    config.duration = 3000;
-    config.panelClass = 'snack-custom';
-    config.horizontalPosition = 'center';
-    config.verticalPosition = 'bottom';
+    setTimeout(() => {
+      const config = new MatSnackBarConfig();
+      config.duration = 3000;
+      config.panelClass = 'snack-custom';
+      config.horizontalPosition = 'center';
+      config.verticalPosition = 'bottom';
 
-    this.zone.run(() => {
-      this.snackBar.open(message, 'Close', config);
-    });
+      this.zone.run(() => {
+        this.snackBar.open(message, 'Close', config);
+      });
+    }, 800)
   }
 
   showErrorSnackbar(message: string) {

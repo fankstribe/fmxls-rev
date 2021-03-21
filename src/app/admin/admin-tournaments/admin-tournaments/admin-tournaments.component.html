@@ -33,7 +33,7 @@
       </ng-container>
       <ng-container matColumnDef="tournamentName" sticky>
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Torneo</th>
-        <td class="cell" mat-cell *matCellDef="let tournaments">{{tournaments.tournamentName}}</td>
+        <td class="cell cell-truncate-text" mat-cell *matCellDef="let tournaments">{{tournaments.tournamentName}}</td>
       </ng-container>
       <ng-container matColumnDef="teams">
         <th mat-header-cell *matHeaderCellDef>Nr. Squadre</th>
@@ -46,19 +46,26 @@
           <span *ngIf="tournaments.format === 'eliminazione'">Eliminazione</span>
         </td>
       </ng-container>
-      <ng-container matColumnDef="completed">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Stato</th>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell matTooltip="Attiva/Disattiva Torneo" matTooltipClass="tooltip" *matHeaderCellDef mat-sort-header>*Stato</th>
         <td class="cell" mat-cell *matCellDef="let tournaments" (click)="$event.stopPropagation()">
           <mat-slide-toggle
-            [(ngModel)]="tournaments.completed"
+            [(ngModel)]="tournaments.status"
             (change)="onUpdateState(tournaments)"
-
           ></mat-slide-toggle>
         </td>
       </ng-container>
       <ng-container matColumnDef="createdAt">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Creazione</th>
         <td class="cell" mat-cell *matCellDef="let tournaments">{{tournaments.createdAt | date: 'dd/MM/yyyy'}}</td>
+      </ng-container>
+      <ng-container matColumnDef="fixtures">
+        <th mat-header-cell *matHeaderCellDef>Incontri</th>
+        <td class="cell" mat-cell *matCellDef="let tournaments" (click)="$event.stopPropagation()">
+          <button mat-icon-button (click)="updateMatches(dataSource.data.indexOf(tournaments))">
+            <mat-icon>today</mat-icon>
+          </button>
+        </td>
       </ng-container>
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Modifica</th>

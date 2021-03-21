@@ -8,12 +8,10 @@
   .tournament-content {
 
     .tournament-logo {
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 4.5rem;
+      height: 4.5rem;
       border-radius: 4px;
       flex-shrink: 0;
-      box-shadow: 0 1px 5px 0 rgb(0 0 0 / 16%), 0 1px 2px 0 rgb(0 0 0 / 26%);
-
 
       img {
         width: 100%;
@@ -26,6 +24,14 @@
     .tournament-title {
       font-size: 16px;
       font-weight: 500;
+    }
+
+    .tournament-info {
+      font-size: 13px;
+    }
+
+    .badge {
+      margin-top: 6px;
     }
   }
 

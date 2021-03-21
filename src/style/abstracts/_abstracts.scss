@@ -3,7 +3,8 @@
   'functions',
   'spacing',
   'text',
-  'layout-utils';
+  'layout-utils',
+  'colors';
 
   @each $key, $utility in $utilities {
     $values: map-get($utility, values);

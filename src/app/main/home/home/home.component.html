@@ -1,4 +1,4 @@
-<div fxLayout fxLayoutAlign="start center" class="page-header m-b-32 m-t-12">
+<div fxLayout fxLayoutAlign="start center" class="page-header m-b-32">
   <div fxFlex="1 1 auto" class="page-header-title">Competizioni</div>
 </div>
 <div
@@ -7,44 +7,48 @@
   gdGap="16px 32px"
   gdGap.xs="16px 0"
 >
-  <div
-    class="home-tournament-page"
-    gdColumns.gt-md="repeat(2,minmax(0,1fr))"
-    gdGap="16px 32px"
-    gdGap.xs="16px 0"
-    gdColumn="span 8"
-    gdColumn.lt-md="span 12"
-  >
-    <ng-container *ngFor="let tournament of tournaments">
-
+  <main gdColumn="span 8" gdColumn.lt-md="1/span 12">
+    <div
+      class="home-tournament-page"
+      gdColumns.gt-md="repeat(2,minmax(0,1fr))"
+      gdGap="20px 32px"
+      gdGap.xs="16px 0"
+      gdColumn="span 8"
+      gdColumn.lt-md="span 12"
+    >
+      <ng-container *ngFor="let tournament of tournaments">
         <mat-card
-          class="m-b-0 cursor-pointer"
-          routerLink="/fixtures/{{ tournament._id }}"
+          *ngIf="tournament.status"
+          matRipple
+          class="m-b-0 cursor-pointer hover"
+          routerLink="/tournaments/fixtures/{{ tournament._id }}"
         >
           <div class="tournament-content" fxLayoutAlign>
-            <div class="tournament-logo m-r-24">
+            <div class="tournament-logo m-r-12">
               <img [src]="tournament.img | images: 'tournaments'" />
             </div>
-            <div fxLayoutAlign="center center">
-              <span class="tournament-title">{{ tournament.tournamentName }}</span>
+            <div fxLayout="column" fxLayoutAlign="center">
+              <span class="tournament-title">{{tournament.tournamentName}}</span>
+              <span class="tournament-info muted">{{tournament.teams.length}} Squadre - {{tournament.matches.length}} Incontri</span>
+              <div><span class="badge bg-red">In Corso</span></div>
             </div>
           </div>
         </mat-card>
-
-    </ng-container>
-  </div>
-
-  <div
-    class="home-tournament-page"
-    gdColumn="span 4"
-    gdGap="16px 32px"
-    gdGap.xs="16px 0"
-    gdColumn.lt-md="span 12"
-  >
-    <mat-card>
-      <div fxLayout="column">
-        <mat-card-title>Ciao Ciro mane</mat-card-title>
-      </div>
-    </mat-card>
-  </div>
+      </ng-container>
+    </div>
+  </main>
+  <aside gdColumn="span 4" gdColumn.lt-md="1/span 12">
+    <div
+      gdColumn="span 4"
+      gdGap="20px 32px"
+      gdGap.xs="16px 0"
+      gdColumn.lt-md="span 12"
+    >
+      <mat-card>
+        <div fxLayout="column">
+          <mat-card-title><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p></mat-card-title>
+        </div>
+      </mat-card>
+    </div>
+  </aside>
 </div>

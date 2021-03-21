@@ -142,7 +142,7 @@ export class AdminManagersComponent implements OnInit, AfterViewInit {
       if (res) {
         this.managerService.deleteManager(data._id).subscribe(() => {
           this.managersTableList();
-          this.snackBar.showSuccessSnackbar(`Il manager ${data.user.name} è stato eliminato con successo!`);
+          this.snackBar.showSuccessSnackbar(`Il manager ${data.user} è stato eliminato con successo!`);
         });
       }
     })

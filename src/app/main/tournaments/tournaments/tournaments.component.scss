@@ -1,0 +1,135 @@
+@import "../../../../style/abstracts/breakpoints";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+
+  .header-img-container {
+    position: relative;
+    overflow: hidden;
+    height: 16rem;
+
+    @include bp-lt(small) {
+      height: 12rem;
+    }
+
+    .sc-contrast {
+      z-index: 0;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      top: 0;
+      right: 0;
+      position: absolute;
+      opacity: .25;
+      background-color: rgba(0,0,0,1);
+    }
+
+    .img-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-img {
+      position: absolute;
+      display: none;
+      width: 6rem;
+      top: 1.5rem;
+      left: 1rem;
+      border-radius: 9999px;
+      object-fit: cover;
+
+      @include bp-lt(small) {
+        display: block;
+      }
+    }
+  }
+
+  .header-tabs-container {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    position: relative;
+    z-index: 10;
+    margin-top: -4rem;
+
+    img {
+      display: block;
+      width: 6rem;
+      height: 6rem;
+      flex: none;
+      border: 3px solid #fff;
+      object-fit: cover;
+      border-radius: 9999px;
+
+      @include bp-lt(small) {
+        display: none;
+      }
+    }
+
+    .header-tabs-content {
+      flex: 1 1 auto;
+      max-width: 100%;
+
+      @include bp-gt(small) {
+        margin-left: 1.5rem;
+      }
+
+      .tournament-name {
+        height: 4rem;
+        align-items: center;
+        display: flex;
+
+        span {
+          font-size: 22px;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+    }
+
+  }
+
+  .matchday-title {
+    font-size: 16px;
+  }
+
+  .fixture-page .teams {
+
+    width: 85%;
+    padding-right: .75rem;
+
+    .teams-content {
+      display: block;
+
+      .team-logo {
+        width: 2rem;
+        height: 2rem;
+        object-fit: cover;
+        border-radius: 9999px;
+        flex-shrink: 0;
+
+        img {
+          max-width: 100%;
+        }
+      }
+
+      .team-name {
+        max-width: 100%;
+        margin-left: 15px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .score {
+        margin-left: auto;
+        padding-left: 10px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+}

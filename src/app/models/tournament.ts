@@ -7,7 +7,7 @@ export class Tournament {
     public tournamentName: string,
     public _id: string,
     public img: string,
-    public completed: boolean,
+    public status: boolean,
     public format: string,
     public teams: Team,
     public matches: Match,

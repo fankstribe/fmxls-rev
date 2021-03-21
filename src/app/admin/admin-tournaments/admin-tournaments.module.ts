@@ -8,6 +8,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { AdminTournamentsComponent } from './admin-tournaments/admin-tournaments.component';
 import { EditTournamentDialogComponent } from "./edit-tournament-dialog/edit-tournament-dialog.component";
 import { AddTournamentDialogComponent } from './add-tournament-dialog/add-tournament-dialog.component';
+import { EditMatchesDialogComponent } from "./edit-matches-dialog/edit-matches-dialog.component";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { AddTournamentDialogComponent } from './add-tournament-dialog/add-tourna
   declarations: [
     AdminTournamentsComponent,
     AddTournamentDialogComponent,
-    EditTournamentDialogComponent
+    EditTournamentDialogComponent,
+    EditMatchesDialogComponent
   ]
 })
 export class AdminTournamentsModule {}

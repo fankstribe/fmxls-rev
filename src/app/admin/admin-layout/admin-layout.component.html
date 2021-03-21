@@ -21,7 +21,7 @@
       <div class="main-container" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
         <app-admin-topnav [sidenav]="sidenav"></app-admin-topnav>
         <div class="main-content">
-          <div fxLayout fxLayoutAlign="start center" class="page-header m-b-32 m-t-12">
+          <div fxLayout fxLayoutAlign="start center" class="page-header m-b-32">
             <div fxFlex="1 1 auto" class="page-header-title">{{title}}</div>
           </div>
           <router-outlet #o="outlet"></router-outlet>

@@ -7,7 +7,7 @@ const User = require("../models/user")
 const getManagers = async (req, res = response) => {
   const managers = await Manager.find()
     .populate("user", "name img")
-    .populate("team", "teamName")
+    .populate("team")
 
   res.json({
     ok: true,

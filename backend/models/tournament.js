@@ -6,7 +6,7 @@ const TournamentSchema = Schema({
     required: true
   },
   img: String,
-  completed: {
+  status: {
     type: Boolean,
     default: false
   },

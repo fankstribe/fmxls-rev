@@ -59,9 +59,9 @@ export class TournamentService {
   }
 
   // Lato Admin
-  updateState(_id: string, completed: boolean) {
+  updateState(_id: string, status: boolean) {
     const url = `${base_url}/tournaments/${_id}`;
-    return this.http.put(url, { completed }, this.headers);
+    return this.http.put(url, { status }, this.headers);
   }
 
   // Lato Admin

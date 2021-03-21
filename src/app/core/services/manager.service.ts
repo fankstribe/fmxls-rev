@@ -1,10 +1,11 @@
 import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { Manager } from '../../models/manager';
-import { map } from 'rxjs/operators';
+
 
 const base_url = environment.base_url
 
@@ -40,6 +41,7 @@ export class ManagerService {
             _id: manager._id,
             user: manager.user.name,
             team: manager.team.teamName,
+            teamId: manager.team._id,
             createdAt: manager.createdAt
           }))
           return managers;

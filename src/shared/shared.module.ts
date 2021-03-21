@@ -21,6 +21,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatNativeDateModule} from '@angular/material/core';
@@ -37,8 +38,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { DropZoneDirective } from './directives/drop-zone.directive';
+
 
 @NgModule({
     imports: [
@@ -51,6 +54,8 @@ import { DropZoneDirective } from './directives/drop-zone.directive';
 
         NgProgressModule.withConfig({
           spinner: false,
+          trickleSpeed: 20,
+          speed: 100
         }),
         NgProgressHttpModule,
         NgProgressRouterModule,
@@ -67,6 +72,8 @@ import { DropZoneDirective } from './directives/drop-zone.directive';
         MatSelectModule,
         MatIconModule,
         MatMenuModule,
+        MatChipsModule,
+        MatTooltipModule,
         MatDatepickerModule,
         MatNativeDateModule,
         MatListModule,
@@ -108,12 +115,14 @@ import { DropZoneDirective } from './directives/drop-zone.directive';
         MatSelectModule,
         MatIconModule,
         MatMenuModule,
+        MatChipsModule,
         MatDatepickerModule,
         MatNativeDateModule,
         MatListModule,
         MatSlideToggleModule,
         MatSnackBarModule,
         MatRadioModule,
+        MatTooltipModule,
         MatTabsModule,
         MatExpansionModule,
         MatDialogModule,

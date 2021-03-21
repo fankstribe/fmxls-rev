@@ -21,7 +21,7 @@
     </ng-container>
     <ng-container matColumnDef="name" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
-      <td class="cell" mat-cell *matCellDef="let users">{{users.name}}</td>
+      <td class="cell cell-truncate-text" mat-cell *matCellDef="let users">{{users.name}}</td>
     </ng-container>
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>

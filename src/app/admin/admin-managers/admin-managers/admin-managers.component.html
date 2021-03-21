@@ -27,7 +27,7 @@
   <table [hidden]="noItems" mat-table class="full-width" [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
     <ng-container matColumnDef="user" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Manager</th>
-      <td class="cell" mat-cell *matCellDef="let managers">{{managers.user}}</td>
+      <td class="cell cell-truncate-text" mat-cell *matCellDef="let managers">{{managers.user}}</td>
     </ng-container>
     <ng-container matColumnDef="team">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Squadra</th>

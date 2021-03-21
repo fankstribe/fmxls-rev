@@ -24,8 +24,8 @@ const routes: Routes = [
         loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule),
       },
       {
-        path: 'fixtures/:id',
-        loadChildren: () => import('./fixtures/fixtures.module').then((m) => m.FixturesModule),
+        path: 'tournaments',
+        loadChildren: () => import('./tournaments/tournaments.module').then((m) => m.TournamentsModule),
       },
     ],
   },

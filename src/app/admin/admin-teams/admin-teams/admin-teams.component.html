@@ -33,7 +33,7 @@
     </ng-container>
     <ng-container matColumnDef="teamName" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Squadra</th>
-      <td class="cell" mat-cell *matCellDef="let teams">{{teams.teamName}}</td>
+      <td class="cell cell-truncate-text" mat-cell *matCellDef="let teams">{{teams.teamName}}</td>
     </ng-container>
     <ng-container matColumnDef="user">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Manager</th>

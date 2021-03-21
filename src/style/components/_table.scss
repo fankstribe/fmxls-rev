@@ -59,3 +59,9 @@ tr.element-row {
   position: sticky;
   left: 0;
 }
+
+.cell-truncate-text {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
