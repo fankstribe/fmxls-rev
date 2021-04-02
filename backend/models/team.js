@@ -13,6 +13,14 @@ const TeamSchema = Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  tournaments: {
+    type: Schema.Types.ObjectId,
+    ref: 'Tournament'
+  },
+  matches: {
+    type: Schema.Types.ObjectId,
+    ref: 'Match'
   }
 })
 

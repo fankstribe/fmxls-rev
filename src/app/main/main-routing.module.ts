@@ -27,6 +27,10 @@ const routes: Routes = [
         path: 'tournaments',
         loadChildren: () => import('./tournaments/tournaments.module').then((m) => m.TournamentsModule),
       },
+      {
+        path: 'match',
+        loadChildren: () => import('./match/match.module').then((m) => m.MatchModule)
+      }
     ],
   },
 ];

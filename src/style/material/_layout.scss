@@ -31,4 +31,14 @@
     background: mat-color($background, background);
   }
 
+  .mat-sidenav-content {
+    background: mat-color($background, background);
+  }
+
+  .toolbar-brand {
+    background: mat-color($background, toolbar-brand);
+    color: white;
+  }
+
+
 }

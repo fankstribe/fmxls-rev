@@ -1,0 +1,67 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout fxLayoutAlign="start center" class="m-b-12 w-100">
+    <div class="m-r-8">
+      <button routerLink="/tournaments/fixtures/{{ match?.tournament._id }}" mat-icon-button >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+
+    <div
+      fxFlex="1 0 0"
+      class="tournament-title"
+      [ngClass]="routeAnimationsElements"
+    >
+      <span>{{ match?.tournament.tournamentName }}</span>
+    </div>
+  </div>
+
+  <div
+    gdColumns="2fr 1fr 2fr"
+    gdGap="0"
+    gdGap.gt-xs="0 64px"
+    gdGap.gt-md="0 96px"
+    class="match-container"
+    [ngClass]="routeAnimationsElements"
+  >
+    <div class="team-container">
+      <a
+        href=""
+        fxLayout="column"
+        fxLayout.gt-xs="row-reverse"
+        fxLayoutAlign="center center"
+      >
+        <div class="team-logo">
+          <img [src]="match?.homeTeam.img | images: 'teams'" />
+        </div>
+        <span class="team-name home text-primary">{{
+          match?.homeTeam.teamName
+        }}</span>
+      </a>
+    </div>
+    <div
+      fxLayout="column"
+      fxLayoutAlign="space-evenly center"
+      class="score-container"
+    >
+      <span class="score">2 : 0</span>
+      <span fxLayout="column" class="match-state secondary-text"
+        >Terminata</span
+      >
+    </div>
+    <div class="team-container">
+      <a
+        href=""
+        fxLayout="column"
+        fxLayout.gt-xs="row"
+        fxLayoutAlign="stretch center"
+      >
+        <div class="team-logo">
+          <img [src]="match?.awayTeam.img | images: 'teams'" />
+        </div>
+        <span class="team-name away text-primary">{{
+          match?.awayTeam.teamName
+        }}</span>
+      </a>
+    </div>
+  </div>
+</div>

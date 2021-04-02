@@ -15,7 +15,7 @@ import { TablesComponent } from './tables/tables.component';
   declarations: [
     FixturesComponent,
     TournamentsComponent,
-    TablesComponent
+    TablesComponent,
   ]
 })
 export class TournamentsModule {}

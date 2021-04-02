@@ -5,16 +5,19 @@
   gdColumn="1/span 12"
   gdColumns="repeat(12,minmax(0,1fr))"
   gdGap="16px 32px"
-  gdGap.xs="16px 0"
+  gdGap.lt-sm="16px 0"
 >
   <main gdColumn="span 8" gdColumn.lt-md="1/span 12">
     <div
       class="home-tournament-page"
+      gdColumns.sm="repeat(2,minmax(0,1fr))"
       gdColumns.gt-md="repeat(2,minmax(0,1fr))"
-      gdGap="20px 32px"
-      gdGap.xs="16px 0"
-      gdColumn="span 8"
-      gdColumn.lt-md="span 12"
+      gdGap.sm="20px 32px"
+      gdGap.gt-md="20px 32px"
+      gdGap="16px 0px"
+      gdColumn.sm="span 4"
+      gdColumn.gt-md="span 4"
+      gdColumn="span 12"
     >
       <ng-container *ngFor="let tournament of tournaments">
         <mat-card
@@ -41,12 +44,12 @@
     <div
       gdColumn="span 4"
       gdGap="20px 32px"
-      gdGap.xs="16px 0"
+      gdGap.lt-sm="16px 0"
       gdColumn.lt-md="span 12"
     >
       <mat-card>
         <div fxLayout="column">
-          <mat-card-title><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p></mat-card-title>
+         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
         </div>
       </mat-card>
     </div>

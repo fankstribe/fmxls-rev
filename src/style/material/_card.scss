@@ -7,8 +7,8 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
-  .mat-card {
-    border: 1px solid mat-color($foreground, divider);
-  }
+  // .mat-card {
+  //   border: 1px solid mat-color($foreground, divider);
+  // }
 
 }

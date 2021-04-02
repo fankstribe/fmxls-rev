@@ -84,11 +84,12 @@ $mat-black-theme-foreground: (
 );
 
 $mat-black-theme-background: (
-  sidebar: mat-color($my-black-theme-primary, 500),
+  sidebar: #2A2B2E,
   status-bar: black,
   app-bar:    mat-color($my-black-theme-primary, 500),
+  toolbar-brand: #E91E63,
   background: mat-color($my-black-theme-primary, 500),
-  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  hover:      rgba(white, 0.08), // TODO(kara): check style with Material Design UX
   card:       #2A2B2E,
   dialog:     #2A2B2E,
   disabled-button: rgba(white, 0.12),

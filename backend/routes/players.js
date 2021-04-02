@@ -1,11 +1,12 @@
-/* Route: /api/match */
+/* Route: /api/players */
 const { Router } = require('express')
 
-const { getMatch } = require('../controllers/matches')
 const { jwtValidator } = require('../middlewares/validate-jwt')
+
+const { getPlayers } = require('../controllers/players')
 
 const router = Router()
 
-router.get('/:id', jwtValidator, getMatch)
+router.get('/', jwtValidator, getPlayers)
 
 module.exports = router

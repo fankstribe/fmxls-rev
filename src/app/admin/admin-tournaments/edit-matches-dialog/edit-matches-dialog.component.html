@@ -4,5 +4,31 @@
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+<mat-dialog-content>
+  <ng-container *ngFor="let fixture of matchesItem; let i = index">
+    <div class="matchday-item p-t-16 p-b-16">
+      <div fxLayoutAlign="space-between center">
+        <div fxLayoutAlign="center" class="matchday-title m-b-16">
+          <span>Giornata {{ i + 1 }}</span>
+        </div>
+      </div>
+      <ng-container *ngFor="let match of fixture">
+        <div fxLayoutAlign="space-between center">
+          <div fxLayout="column">
+            <div class="p-y-12">
+              <div class="team-name">
+                <span>{{match.homeTeam.teamName}}</span>
+              </div>
+              <div class="team-name m-t-4">
+                <span>{{match.awayTeam.teamName}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </div>
+
+  </ng-container>
+</mat-dialog-content>
 

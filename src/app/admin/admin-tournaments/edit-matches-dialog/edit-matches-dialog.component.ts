@@ -24,11 +24,13 @@ export class EditMatchesDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.matches = this.fixtures.matches;
     this.matches.forEach((item:any) => {
       this.rounds = item.round;
       this.arrayRounds = Array(this.rounds).fill(null).map((x, i) => i + 1);
       this.matchesItem = this.arrayRounds.map(x => this.matches.filter((match: any) => match.round === x));
     })
+    console.log(this.matches)
   }
 }

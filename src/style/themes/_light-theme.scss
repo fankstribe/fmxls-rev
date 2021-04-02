@@ -86,12 +86,12 @@ $mat-light-theme-foreground: (
 
 $mat-light-theme-background: (
   sidebar: white,
-  status-bar: #fff,
-  app-bar: white,
-  background: white,
-  hover:      rgba(black, 0.04),
+  app-bar:    white,
+  toolbar-brand: #333333,
+  background: mat-color($my-white-theme-primary, 500),
   card:       white,
   dialog:     white,
+  hover:      rgba(black, 0.04),
   disabled-button: rgba(black, 0.12),
   raised-button: white,
   focused-button: $dark-focused,

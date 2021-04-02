@@ -9,6 +9,8 @@ import {NgProgressHttpModule} from 'ngx-progressbar/http';
 import {NgProgressRouterModule} from 'ngx-progressbar/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { CustomBreakPointsProvider } from './custom-breakpoints';
+
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { PipesModule } from './pipes/pipes.module';
@@ -40,6 +42,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { DropZoneDirective } from './directives/drop-zone.directive';
 
 
@@ -135,8 +138,11 @@ import { DropZoneDirective } from './directives/drop-zone.directive';
         MatCheckboxModule,
     ],
     providers: [
+      CustomBreakPointsProvider,
       { provide: MAT_DATE_LOCALE, useValue: 'it-IT' }
     ],
-    declarations: [DropZoneDirective]
+    declarations: [
+      DropZoneDirective
+    ]
 })
 export class SharedModule {}

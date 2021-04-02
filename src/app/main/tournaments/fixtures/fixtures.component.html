@@ -2,7 +2,7 @@
   gdColumn="1/span 12"
   gdColumns="repeat(12,minmax(0,1fr))"
   gdGap="20px 32px"
-  gdGap.xs="16px 0"
+  gdGap.lt-sm="16px 0px"
 >
   <ng-container *ngFor="let fixture of matchesItem; let i = index">
     <p class="matchday-title" gdColumn="1/12">Giornata {{ i + 1 }}</p>
@@ -13,7 +13,10 @@
         gdColumn.gt-xs="span 6"
         gdColumn.gt-md="span 4"
       >
-        <mat-card class="m-b-0">
+        <mat-card
+          class="m-b-0 cursor-pointer hover"
+          routerLink="/match/{{match._id}}"
+        >
           <div fxLayout="column">
             <div fxLayoutAlign="space-between">
               <div class="teams">

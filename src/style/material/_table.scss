@@ -10,8 +10,7 @@
 
   .table-card {
     background-color: mat-color($background, card);
-    border: 1px solid mat-color($foreground, divider);
-    // @include mat-elevation(2);
+    @include mat-elevation(2);
 
     .toolbar-actions {
       background-color: mat-color($primary, 700);

@@ -17,6 +17,10 @@ const MatchSchema = Schema({
   completed: {
     type: Boolean,
     default: false
+  },
+  scores: {
+    type: Schema.Types.ObjectId,
+    ref: 'Score'
   }
 })
 

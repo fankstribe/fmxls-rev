@@ -1,0 +1,86 @@
+@import "../../../../style/abstracts/breakpoints";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+
+  .tournament-title {
+    font-size: 16px;
+    text-align: center;
+    margin-right: 45px;
+  }
+
+  .match-container {
+    padding: 4px 4px 0;
+    @include bp-gt(medium) {
+      padding: 8px 16px 0;
+    }
+    .team-container {
+      min-width: 25%;
+
+      @include bp-gt(medium) {
+        place-self: center stretch;
+      }
+
+      .team-logo {
+        width: 2.75rem;
+        height: 2.75rem;
+        object-fit: cover;
+        border-radius: 4px;
+
+        @include bp-gt(medium) {
+          width: 4rem;
+          height: 4rem;
+        }
+
+        img {
+          max-width: 100%;
+        }
+      }
+
+      .team-name {
+        margin-top: 10px;
+        text-align: center;
+        font-weight: 500;
+        max-width: 80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        @include bp-gt(medium) {
+          font-size: 16px;
+          margin-top: 0;
+          max-width: 100%;
+        }
+      }
+
+      @include bp-gt(medium) {
+        .team-name.home {
+          margin-right: 16px;
+        }
+
+        .team-name.away {
+          margin-left: 16px;
+        }
+      }
+    }
+
+    .score-container {
+      .score {
+        display: block;
+        font-size: 36px;
+        line-height: 36px;
+        text-align: center;
+        white-space: nowrap;
+        font-weight: 500;
+      }
+
+      .match-state {
+        overflow: hidden;
+        text-align: center;
+        margin-top: 18px;
+      }
+    }
+  }
+}
