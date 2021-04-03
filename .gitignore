@@ -47,6 +47,6 @@ Thumbs.db
 
 /backend/node_modules
 /backend/.env
-/backend/uploads/teams
-/backend/uploads/tournaments
-/backend/uploads/users
+/backend/uploads/teams/
+/backend/uploads/tournaments/
+/backend/uploads/users/
