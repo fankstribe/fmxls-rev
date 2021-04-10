@@ -48,7 +48,7 @@ export class SidenavService {
     {
       'name': 'Giocatori',
       'icon': 'directions_run',
-      'link': '/admin-players'
+      // 'link': '/admin-players'
     }
   ];
 }

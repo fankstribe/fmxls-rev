@@ -66,10 +66,10 @@ export class AddDatabaseDialogComponent implements OnInit {
 
     console.log(source)
 
-    // this.playerService.createPlayersDB(source).subscribe((res) => {
-    //   this.dialogRef.close(res);
-    // }, err => {
-    //   this.dialogRef.close(false);
-    // });
+    this.playerService.createPlayersDB(source).subscribe((res) => {
+      this.dialogRef.close(res);
+    }, err => {
+      this.dialogRef.close(false);
+    });
   }
 }
