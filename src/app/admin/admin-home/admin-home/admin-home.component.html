@@ -1,1 +1,25 @@
-<p>admin-home works!</p>
+<div
+  gdColumn="1/span 12"
+  gdColumns="repeat(12,minmax(0,1fr))"
+  gdGap="16px 32px"
+  gdGap.lt-sm="16px 0"
+>
+  <div
+    gdColumn="span 12"
+  >
+    <mat-card class="p-0">
+      <div fxLayoutAlign="center center" class="border-bottom p-24">
+        <h3 fxFlex="auto" class="m-0">Database Giocatori</h3>
+        <button mat-icon-button (click)="addDatabase()" matTooltip="Carica DB" matTooltipClass="tooltip"><mat-icon class="material-icons-outlined">add</mat-icon></button>
+        <button mat-icon-button matTooltip="Scarica csv" matTooltipClass="tooltip"><mat-icon class="material-icons-outlined">file_download</mat-icon></button>
+        <button mat-icon-button matTooltip="Carica csv" matTooltipClass="tooltip"><mat-icon class="material-icons-outlined">file_upload</mat-icon></button>
+      </div>
+      <div fxLayout fxLayout.lt-sm="column" class="p-24">
+        <div fxLayout="column" class="p-t-16 p-b-24 p-x-24" fxFlex="auto">
+          <h2 class="m-0">{{ dbName | uppercase }}</h2>
+          <h5 class="m-b-0 m-t-4">Database Attuale</h5>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

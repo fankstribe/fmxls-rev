@@ -1,8 +1,8 @@
-import { UserService } from '../../core/services/user.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 
 import { AnimationsService } from '../../core/services/animations/animations.service';
+import { LoaderService } from '../../core/services/loader.service';
 import { SidenavService } from '../../core/services/sidenav.service';
 
 import { routeAnimations } from '../../core/services/animations/route.animations';
@@ -13,15 +13,16 @@ import { routeAnimations } from '../../core/services/animations/route.animations
   styleUrls: ['./main-layout.component.scss'],
   animations: [routeAnimations],
 })
-export class MainLayoutComponent implements OnInit {
+export class MainLayoutComponent implements OnInit, AfterViewChecked {
   sidenavOpened: boolean = true;
   sidenavMode: string = 'side';
 
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private mediaOb: MediaObserver,
     private animationService: AnimationsService,
     private sidenavService: SidenavService,
-    private userService: UserService
+    public loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +36,10 @@ export class MainLayoutComponent implements OnInit {
       true,
       true
     );
+  }
 
+  ngAfterViewChecked() {
+    this.changeDetector.detectChanges();
   }
 
   toggleView() {

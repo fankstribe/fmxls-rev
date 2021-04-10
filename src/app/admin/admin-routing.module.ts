@@ -51,6 +51,13 @@ const routes: Routes = [
         data: {
           title: 'Tornei'
         },
+      },
+      {
+        path: 'admin-players',
+        loadChildren: () => import('../admin/admin-players/admin-players.module').then(m => m.AdminPlayersModule),
+        data: {
+          title: 'Giocatori'
+        },
       }
     ]
   }

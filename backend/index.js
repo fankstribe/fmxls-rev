@@ -24,6 +24,7 @@ app.use('/api/tournaments', require('./routes/tournaments'))
 app.use('/api/matches', require('./routes/matches'))
 app.use('/api/scores', require('./routes/scores'))
 app.use('/api/players', require('./routes/players'))
+app.use('/api/playersdbs', require('./routes/playersdbs'))
 
 app.use('/api/login', require('./routes/auth'))
 app.use('/api/uploads', require('./routes/uploads'))

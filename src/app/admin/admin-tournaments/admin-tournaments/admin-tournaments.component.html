@@ -63,7 +63,7 @@
         <th mat-header-cell *matHeaderCellDef>Incontri</th>
         <td class="cell" mat-cell *matCellDef="let tournaments" (click)="$event.stopPropagation()">
           <button mat-icon-button (click)="updateMatches(dataSource.data.indexOf(tournaments))">
-            <mat-icon>today</mat-icon>
+            <mat-icon class="material-icons-outlined">today</mat-icon>
           </button>
         </td>
       </ng-container>

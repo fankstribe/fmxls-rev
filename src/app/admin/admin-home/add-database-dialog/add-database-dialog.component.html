@@ -1,0 +1,35 @@
+<form [formGroup]="addDatabaseForm" (ngSubmit)="onSubmitForm()">
+  <div fxLayoutAlign="start center"  class="mat-dialog-title">
+    <img class="img-user">
+    <h2 class="m-b-0" fxFlex="auto">Carica Nuovo Database</h2>
+    <button mat-dialog-close mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+  <mat-dialog-content>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Sorgente</mat-label>
+      <mat-select placeholder="Seleziona un sito" formControlName="source">
+        <mat-option value="sofifa">Sofifa</mat-option>
+        <mat-option value="pesdb">Pesdb</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formError.source">
+        {{ formError.source }}
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      Annulla
+    </button>
+    <button
+      mat-button
+      type="submit"
+      color="accent"
+      [disabled]="!addDatabaseForm.valid"
+    >
+      Salva
+    </button>
+  </mat-dialog-actions>
+</form>

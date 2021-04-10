@@ -6,6 +6,12 @@ a {
   text-decoration: none;
 }
 
+.loader-container {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+
 .img-upload {
   transition: opacity .2s ease-in-out;
   background-color: rgb(32, 33, 36, 0.6);

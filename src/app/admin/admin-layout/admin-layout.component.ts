@@ -1,11 +1,11 @@
-import { UserService } from '../../core/services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 
 import { routeAnimations } from '../../core/services/animations/route.animations';
 
 import { AnimationsService } from '../../core/services/animations/animations.service';
 import { TitleService } from './../../core/services/title.service';
+import { LoaderService } from '../../core/services/loader.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -13,15 +13,16 @@ import { TitleService } from './../../core/services/title.service';
   styleUrls: ['./admin-layout.component.scss'],
   animations: [routeAnimations]
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit, AfterViewChecked {
   sidenavOpened: boolean = true;
   sidenavMode: string = 'side';
 
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private mediaOb: MediaObserver,
     private animationService: AnimationsService,
     private titleService: TitleService,
-    private userService: UserService
+    public loaderService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -33,7 +34,10 @@ export class AdminLayoutComponent implements OnInit {
       true,
       true
     );
+  }
 
+  ngAfterViewChecked() {
+    this.changeDetector.detectChanges();
   }
 
   get title() {

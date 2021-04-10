@@ -5,10 +5,12 @@ import { SharedModule } from '../../../shared/shared.module';
 import { AdminHomeRoutingModule } from './admin-home-routing.module';
 
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AddDatabaseDialogComponent } from './add-database-dialog/add-database-dialog.component';
 
 @NgModule({
   declarations: [
-    AdminHomeComponent
+    AdminHomeComponent,
+    AddDatabaseDialogComponent
   ],
   imports: [
     SharedModule,

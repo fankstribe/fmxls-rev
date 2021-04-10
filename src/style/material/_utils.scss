@@ -13,6 +13,15 @@
     border: 1px solid mat-color($foreground, divider);
   }
 
+  .border-top {
+    border-top: 1px solid mat-color($foreground, divider);
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid mat-color($foreground, divider);
+  }
+
+
   .border-0 {
     border-width: 0;
   }
@@ -33,6 +42,12 @@
   }
 
   // Colori
+
+  .bg-accent {
+    background-color: mat-color($accent);
+    color: white;
+  }
+
   .bg-red {
     background-color: $fm-red;
     color: white;

@@ -27,7 +27,7 @@ export class SidenavService {
     },
     {
       'name': 'Utenti',
-      'icon': 'people',
+      'icon': 'person',
       'link': '/admin-users'
     },
     {
@@ -44,6 +44,11 @@ export class SidenavService {
       'name': 'Tornei',
       'icon': 'emoji_events',
       'link': '/admin-tournaments'
+    },
+    {
+      'name': 'Giocatori',
+      'icon': 'directions_run',
+      'link': '/admin-players'
     }
   ];
 }

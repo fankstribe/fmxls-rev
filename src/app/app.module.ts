@@ -5,6 +5,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { HttpLoadingInterceptor } from './core/interceptors/http-loading.interceptor';
+import { HttpLoaderInterceptor } from './core/interceptors/htttp-loader.interceptor';
+
+import { NgHttpLoaderModule } from 'ng-http-loader'
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -21,14 +24,24 @@ import { DialogComponent } from '../shared/dialog/dialog.component';
 
     AppRoutingModule,
 
+    NgHttpLoaderModule.forRoot(),
+
     // Shared
     SharedModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoadingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoaderInterceptor,
       multi: true,
     },
   ],

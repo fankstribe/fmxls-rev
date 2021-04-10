@@ -1,9 +1,9 @@
-/* Route: /api/players */
+/* Route: /api/playersdbs */
 const { Router } = require('express')
 
 const { jwtValidator } = require('../middlewares/validate-jwt')
 
-const { createPlayersDB } = require('../controllers/players')
+const { createPlayersDB } = require('../controllers/playersdbs')
 
 const router = Router()
 

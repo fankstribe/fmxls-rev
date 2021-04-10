@@ -1,25 +1,27 @@
-const { response } = require('express')
+const { response } = require('express');
 
 const { searchFifa } = require('../helpers/scrape')
 
 const Player = require('../models/player');
+const Playerdbs = require('../models/playerdbs');
 
 const createPlayersDB = async(req, res = response) => {
 
-  const source = req.body
-  console.log(source)
-  const players = ''
-  const playersDB = ''
+  const source = new Playerdbs(req.body)
+  let playersDB
 
   try {
 
-    if (source === 'sofifa') {
+    await source.save()
 
-      playersDB = await searchFifa()
-
+    switch(req.body.source) {
+      case 'sofifa':
+       playersDB = await searchFifa()
+       console.log(req.body)
+       break
     }
 
-      players = await Player.insertMany(playersDB)
+    const players = await Player.insertMany(playersDB)
 
     res.json({
       ok: true,

@@ -1,5 +1,7 @@
 <div class="container-wrap">
-  <ng-progress></ng-progress>
+  <div *ngIf="loaderService.isLoading | async" class="loader-container">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </div>
   <mat-sidenav-container class="sidenav-container" autosize fullscreen>
     <mat-sidenav
       #sidenav

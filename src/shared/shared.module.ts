@@ -4,9 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
-import {NgProgressModule} from 'ngx-progressbar';
-import {NgProgressHttpModule} from 'ngx-progressbar/http';
-import {NgProgressRouterModule} from 'ngx-progressbar/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { CustomBreakPointsProvider } from './custom-breakpoints';
@@ -55,13 +52,6 @@ import { DropZoneDirective } from './directives/drop-zone.directive';
 
         FlexLayoutModule,
 
-        NgProgressModule.withConfig({
-          spinner: false,
-          trickleSpeed: 20,
-          speed: 100
-        }),
-        NgProgressHttpModule,
-        NgProgressRouterModule,
         NgxSpinnerModule,
 
         PipesModule,
@@ -102,9 +92,6 @@ import { DropZoneDirective } from './directives/drop-zone.directive';
 
         FlexLayoutModule,
 
-        NgProgressModule,
-        NgProgressHttpModule,
-        NgProgressRouterModule,
         NgxSpinnerModule,
 
         PipesModule,
