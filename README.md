@@ -13,14 +13,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Installation
 
-`git clone https://github.com/fankstribe/fmxls-rev.git
- cd fmxls-rev 
- npm install 
- cd backend
- npm install
- cd ..
- npm run dev
-`
+`git clone https://github.com/fankstribe/fmxls-rev.git`
+`cd fmxls-rev` 
+`npm install` 
+`cd backend`
+`npm install`
+`cd ..`
+`npm run dev`
 
 ## Update
 
