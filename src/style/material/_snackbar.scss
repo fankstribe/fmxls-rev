@@ -8,16 +8,19 @@
   $foreground: map-get($theme, foreground);
 
   .snack-custom.mat-snack-bar-container  {
-    background-color: mat-color($background);
-    color: mat-color($background, text);
+    background-color: mat-color($background, snack-bar);
+    color: mat-color($foreground, snack-bar);
+    font-weight: 500;
   }
 
   .snack-error-custom.mat-snack-bar-container  {
-    background-color: mat-color($background, snack-bar);
-    color: mat-color($foreground, snack-bar);
+    background-color: $fm-red-a700;
+    color: white;
+    font-weight: 500;
   }
 
   .mat-simple-snackbar-action button {
-    color: mat-color($background, default-contrast);
+    color: $fm-blue-grey-900;
+    font-weight: 700;
   }
 }

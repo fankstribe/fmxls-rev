@@ -10,7 +10,7 @@ export class SnackBarService {
     private zone: NgZone
   ) {}
 
-  showSuccessSnackbar(message: string) {
+  showSuccessSnackbar(message: any) {
     setTimeout(() => {
       const config = new MatSnackBarConfig();
       config.duration = 3000;

@@ -21,7 +21,6 @@
     border-bottom: 1px solid mat-color($foreground, divider);
   }
 
-
   .border-0 {
     border-width: 0;
   }
@@ -29,6 +28,34 @@
   // Testo
   .muted {
     color: mat-color($foreground, secondary-text);
+  }
+
+  .disabled {
+    color: mat-color($foreground, disabled-button);
+  }
+
+  .text-primary {
+    color: mat-color($foreground, text);
+  }
+
+  .secondary-text {
+    color: mat-color($foreground, secondary-text);
+  }
+
+  .text-red {
+    color: $fm-red;
+  }
+
+  .text-green {
+    color: $fm-green;
+  }
+
+  .text-deep-orange {
+    color: $fm-deep-orange;
+  }
+
+  .text-purple {
+    color: $fm-purple;
   }
 
   // Background
@@ -41,7 +68,7 @@
     background-color: mat-color($background, hover);
   }
 
-  // Colori
+  // Background
 
   .bg-accent {
     background-color: mat-color($accent);
@@ -62,15 +89,6 @@
   .tooltip {
     background-color: mat-color($background, tooltip);
     color: mat-color($accent, default-contrast, 500);
-  }
-
-  // Text
-  .text-primary {
-    color: mat-color($foreground, text);
-  }
-
-  .secondary-text {
-    color: mat-color($foreground, secondary-text);
   }
 
 }

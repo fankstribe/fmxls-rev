@@ -45,8 +45,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# .nodemon.js
+
 /backend/node_modules
-/backend/.env
 /backend/uploads/teams/*
 /backend/uploads/tournaments/*
 /backend/uploads/users/*

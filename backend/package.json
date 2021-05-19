@@ -21,6 +21,7 @@
     "puppeteer": "^8.0.0",
     "roundrobin": "^1.0.3",
     "shuffle-array": "^1.0.1",
+    "socket.io": "^2.3.0",
     "uuid": "^8.3.2"
   }
 }

@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose')
 
 const PlayerSchema = Schema({
+  playerId: Number,
   img: String,
   playerName: String,
   age: Number,

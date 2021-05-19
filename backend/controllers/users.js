@@ -1,35 +1,25 @@
-const { response } = require("express")
 const bcrypt = require("bcryptjs")
-
 const { deleteImage } = require('../helpers/save-image')
-
 const User = require("../models/user")
 const Team = require("../models/team")
 const Manager = require("../models/manager")
 const { tokenJWT } = require('../helpers/jwt')
 
 const getUsers = async (req, res) => {
-  // const from = Number(req.query.limit) || 0
-
   const users = await User.find({})
 
   res.json({
-    ok: true,
-    users
+    users,
+    status: 200
   })
 }
 
-const createUser = async (req, res = response) => {
+const createUser = async (req, res) => {
   const { email, password } = req.body
-
   try {
     const emailExists = await User.findOne({ email })
-
     if (emailExists) {
-      return res.status(400).json({
-        ok: false,
-        msg: "L'email è già utilizzata",
-      })
+      return res.status(402).send({ msg: "L'email è già utilizzata." })
     }
 
     const user = new User(req.body)
@@ -45,32 +35,22 @@ const createUser = async (req, res = response) => {
     const token = await tokenJWT(user.id)
 
     res.json({
-      ok: true,
       user,
-      token
+      token,
+      status: 200
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      ok: false,
-      msg: "Errore inatteso",
-    })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }
 
 const updateUser = async (req, res = response) => {
   const uid = req.params.id
-
   try {
     const userDB = await User.findById(uid)
-
     if (!userDB) {
-      return res.status(404).json({
-        ok: false,
-        msg: "Non esiste nessun utente con queste credenziali.",
-      })
+      return res.status(402).send({ msg: "Non esiste nessun utente con queste credenziali." })
     }
-
     // Aggiorna dati utente
     const { password, email, ...fields } = req.body
 
@@ -78,10 +58,7 @@ const updateUser = async (req, res = response) => {
       const emailExists = await User.findOne({ email })
 
       if (emailExists) {
-        return res.status(400).json({
-          ok: false,
-          msg: "Esiste già un utente con questa email.",
-        })
+        return res.status(400).send({ msg: "Esiste già un utente con questa email." })
       }
     }
     fields.email = email
@@ -90,46 +67,30 @@ const updateUser = async (req, res = response) => {
     })
 
     res.json({
-      ok: true,
       user: userUpdated,
+      status: 200
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      ok: false,
-      msg: "Errore inatteso",
-    })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }
 
 const deleteUser = async (req, res = response) => {
   const uid = req.params.id
-
   try {
     const userDB = await User.findById(uid)
     const pathView = `./uploads/users/${userDB.img}`
-
     if (!userDB) {
-      return res.status(404).json({
-        ok: false,
-        msg: "Non esiste nessun utente con queste credenziali.",
-      })
+      return res.status(402).send({ msg: "Non esiste nessun utente con queste credenziali." })
     }
-
     if (userDB.role === 'ADMIN_ROLE') {
-      return res.status(404).json({
-        ok: false,
-        msg: "Non è possibile eliminare un utente amministratore.",
-      })
+      return res.status(404).send({ msg: "Non è possibile eliminare un utente amministratore." })
     }
 
     const countDocs = await User.find().countDocuments()
 
     if (countDocs == 1) {
-      return res.status(404).json({
-        ok: false,
-        msg: "Non puoi eliminare l'ultimo utente.",
-      })
+      return res.status(404).send({ msg: "Non puoi eliminare l'ultimo utente." })
     }
 
     if (userDB.img) {
@@ -142,16 +103,12 @@ const deleteUser = async (req, res = response) => {
     await User.findByIdAndDelete(uid)
 
     res.json({
-      ok: true,
-      msg: 'Utente eliminato.',
-      countDocs
+      msg: "Utente eliminato.",
+      countDocs,
+      status: 200
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      ok: false,
-      msg: "Errore inatteso",
-    })
+      res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }
 

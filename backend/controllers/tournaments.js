@@ -73,11 +73,11 @@ const createTournament = async (req, res = response) => {
   const body = req.body;
 
   try {
-    const tournament = new Tournament(body);
-    const teams = tournament.teams;
+    const tournament = new Tournament(body)
+    const teams = tournament.teams
 
-    const firstRound = [];
-    const secondRound = [];
+    const firstRound = []
+    const secondRound = []
 
     const teamList = shuffle(teams);
     const numOfTeams = teamList.length;

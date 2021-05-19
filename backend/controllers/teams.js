@@ -1,53 +1,37 @@
-const { response } = require('express')
-
 const { deleteImage } = require('../helpers/save-image')
-
 const Team = require('../models/team')
 const User = require('../models/user')
 const Manager = require('../models/manager')
 
-const getTeams = async(req, res = response) => {
-
+const getTeams = async(req, res) => {
   const teams = await Team.find().populate("user", "name")
-
-  res.json({
-    ok: true,
+  return res.status(200).json({
+    msg: "Team trovati.",
     teams
   })
 }
 
-const createTeam = async(req, res = response) => {
-
+const createTeam = async(req, res) => {
   const team = new Team(req.body)
-
   try {
-
     const teamDB = await team.save()
-
-    res.json({
-      ok: true,
+    return res.status(200).json({
+      msg: "Team creato.",
       team: teamDB
     })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      ok: false,
-      msg: "Errore inatteso",
-    })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }
 
-const deleteTeam = async(req, res = response) => {
+const deleteTeam = async(req, res) => {
   const id = req.params.id
-
   try {
     const team = await Team.findById(id)
     const pathView = `./uploads/teams/${team.img}`
-
     if (!team) {
-      return res.status(404).json({
-        ok: true,
-        msg: 'Squadra non trovata',
+      return res.status(402).json({
+        msg: "Squadra non trovata.",
         id
       })
     }
@@ -65,44 +49,34 @@ const deleteTeam = async(req, res = response) => {
     }
 
     res.json({
-      ok: true,
-      msg: 'Squadra eliminata'
+      msg: "Squadra eliminata",
+      status: 200
     })
   } catch (error) {
-    res.status(500).json({
-      ok: false,
-      msg: 'Errore inatteso'
-    })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }
 
 const updateTeam = async(req, res = response) => {
   const id = req.params.id
-
   try {
     const team = await Team.findById(id)
-
     if (!team) {
-      return res.status(404).json({
-        ok: true,
-        msg: 'Squadra non trovata',
+      return res.status(402).json({
+        msg: "Squadra non trovata.",
         id
       })
     }
-
     const teamDB = { ...req.body }
 
     const updateTeam = await Team.findByIdAndUpdate(id, teamDB)
 
     res.json({
-      ok: true,
-      team: updateTeam
+      team: updateTeam,
+      status: 200
     })
   } catch (error) {
-    res.status(500).json({
-      ok: false,
-      msg: "Errore inatteso",
-    })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }
 

@@ -73,7 +73,7 @@ $mat-black-theme-foreground: (
   disabled-text:     $light-disabled-text,
   elevation:         black,
   hint-text:         $light-disabled-text,
-  secondary-text:    #bdc1c6,
+  secondary-text:    #797979,
   icon:              white,
   icons:             white,
   text:              white,
@@ -87,7 +87,7 @@ $mat-black-theme-background: (
   sidebar: #2A2B2E,
   status-bar: black,
   app-bar:    mat-color($my-black-theme-primary, 500),
-  toolbar-brand: #E91E63,
+  toolbar-brand: mat-color($my-black-theme-primary, 500),
   background: mat-color($my-black-theme-primary, 500),
   hover:      rgba(white, 0.08), // TODO(kara): check style with Material Design UX
   card:       #2A2B2E,

@@ -6,11 +6,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { BreakpointState, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 
-import { TeamService } from '../../../core/services/team.service';
+import { PlayerService } from '../../../core/services/player.service';
 import { DialogService } from '../../../core/services/dialog.service';
 import { SnackBarService } from '../../../core/services/snackbar.service';
 
-import { Team } from '../../../models/team';
+import { Player } from '../../../models/player';
 import { EditTeamDialogComponent } from '../edit-players-dialog/edit-team-dialog.component';
 import { AddTeamDialogComponent } from '../add-players-dialog/add-team-dialog.component';
 
@@ -22,18 +22,21 @@ import { AddTeamDialogComponent } from '../add-players-dialog/add-team-dialog.co
 export class AdminPlayersComponent implements OnInit, AfterViewInit {
   isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
 
-  dataSource = new MatTableDataSource<Team>();
+  dataSource = new MatTableDataSource<Player>();
 
   noItems = false;
-  noManager = 'assets/images/no_manager.png';
+  noPlayer = 'assets/images/no_player.png';
 
   isLoadingResults = true;
 
   displayedColumns: string[] = [
     'img',
-    'teamName',
-    'user',
-    'createdAt',
+    'playerName',
+    'position',
+    'age',
+    'overall',
+    'value',
+    'wage',
     'action'
   ];
 
@@ -41,7 +44,7 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
-    private teamService: TeamService,
+    private playerService: PlayerService,
     private d: MatDialog,
     private dialogService: DialogService,
     private breakpointObs: BreakpointObserver,
@@ -49,7 +52,7 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.teamsTableList();
+    this.playersTableList();
   }
 
   ngAfterViewInit() {
@@ -66,8 +69,8 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  teamsTableList() {
-    this.teamService.getTeams().subscribe(list => {
+  playersTableList() {
+    this.playerService.getPlayers().subscribe(list => {
       !list.length ? this.noItems = true : this.noItems = false;
       this.dataSource.data = list;
       this.isLoadingResults = false;
@@ -80,70 +83,70 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
   }
 
   add() {
-    const dialogConfig = new MatDialogConfig();
+    // const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = false;
-    dialogConfig.width = '500px';
-    dialogConfig.maxWidth = '100vw';
-    dialogConfig.maxHeight = '100%';
+    // dialogConfig.disableClose = false;
+    // dialogConfig.autoFocus = false;
+    // dialogConfig.width = '500px';
+    // dialogConfig.maxWidth = '100vw';
+    // dialogConfig.maxHeight = '100%';
 
-    const dialogRef = this.d.open(AddTeamDialogComponent, dialogConfig);
+    // const dialogRef = this.d.open(AddTeamDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
-      if (size.matches) {
-        dialogRef.updateSize('100%', '100%');
-      } else {
-        dialogRef.updateSize('500px');
-      }
-    });
+    // const smallDialogSub = this.isSmall.subscribe(size => {
+    //   if (size.matches) {
+    //     dialogRef.updateSize('100%', '100%');
+    //   } else {
+    //     dialogRef.updateSize('500px');
+    //   }
+    // });
 
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res) {
-        this.teamsTableList();
-        this.snackBar.showSuccessSnackbar('Nuova Squadra aggiunta!');
-      }
-      smallDialogSub.unsubscribe();
-    });
+    // dialogRef.afterClosed().subscribe((res) => {
+    //   if (res) {
+    //     this.teamsTableList();
+    //     this.snackBar.showSuccessSnackbar('Nuova Squadra aggiunta!');
+    //   }
+    //   smallDialogSub.unsubscribe();
+    // });
   }
 
   update(id: string) {
-    const dialogConfig = new MatDialogConfig();
+    // const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = false;
-    dialogConfig.width = '500px';
-    dialogConfig.maxWidth = '100vw';
-    dialogConfig.maxHeight = '100%';
-    dialogConfig.data = {data: this.dataSource.data[id]};
+    // dialogConfig.disableClose = false;
+    // dialogConfig.autoFocus = false;
+    // dialogConfig.width = '500px';
+    // dialogConfig.maxWidth = '100vw';
+    // dialogConfig.maxHeight = '100%';
+    // dialogConfig.data = {data: this.dataSource.data[id]};
 
-    const dialogRef = this.d.open(EditTeamDialogComponent, dialogConfig);
+    // const dialogRef = this.d.open(EditTeamDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
-      if (size.matches) {
-        dialogRef.updateSize('100%', '100%');
-      } else {
-        dialogRef.updateSize('500px');
-      }
-    });
+    // const smallDialogSub = this.isSmall.subscribe(size => {
+    //   if (size.matches) {
+    //     dialogRef.updateSize('100%', '100%');
+    //   } else {
+    //     dialogRef.updateSize('500px');
+    //   }
+    // });
 
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res) {
-        this.teamsTableList();
-        this.snackBar.showSuccessSnackbar('Squadra modificata!');
-      }
-      smallDialogSub.unsubscribe();
-    });
+    // dialogRef.afterClosed().subscribe((res) => {
+    //   if (res) {
+    //     this.teamsTableList();
+    //     this.snackBar.showSuccessSnackbar('Squadra modificata!');
+    //   }
+    //   smallDialogSub.unsubscribe();
+    // });
   }
 
   delete(_id: string) {
     const data = this.dataSource.data[_id];
-    const dialogRef = this.dialogService.confirmDialog('Vuoi davvero eliminare questa squadra?');
+    const dialogRef = this.dialogService.confirmDialog('Vuoi davvero eliminare questo giocatore?');
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.teamService.deleteTeam(data._id).subscribe(() => {
-          this.teamsTableList();
-          this.snackBar.showSuccessSnackbar(`${data.teamName} eliminato con successo!`);
+        this.playerService.deletePlayer(data._id).subscribe(() => {
+          this.playersTableList();
+          this.snackBar.showSuccessSnackbar(`${data.playerName} eliminato con successo!`);
         });
       }
     })

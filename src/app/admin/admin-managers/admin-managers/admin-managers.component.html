@@ -44,7 +44,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item (click)="update(dataSource.data.indexOf(managers._id))">
+          <button mat-menu-item (click)="update(dataSource.data.indexOf(managers))">
             <mat-icon class="material-icons-outlined">create</mat-icon>
             Modifica
           </button>
@@ -58,7 +58,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr class="element-row" mat-row *matRowDef="let managers; columns: displayedColumns;" (click)="update(dataSource.data.indexOf(managers))"></tr>
   </table>
-  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+  <mat-paginator [pageSize]="50" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
 
   <div [hidden]="!noItems" class="no-data-found-wrapper">
     <div class="no-data-found">

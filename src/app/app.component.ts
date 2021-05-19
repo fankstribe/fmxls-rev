@@ -1,6 +1,8 @@
+import { SocketService } from './core/services/socket.service';
 import { Component, OnInit } from '@angular/core';
 
 import { TitleService } from './core/services/title.service';
+import { SnackBarService } from './core/services/snackbar.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +14,52 @@ export class AppComponent implements OnInit {
 
   constructor(
     private titleService: TitleService,
+    private socketService: SocketService,
+    private snackBar: SnackBarService,
   ) {
 
   }
 
   ngOnInit() {
     this.titleService.trackingRouteEvent();
+    this.getCreateDatabaseEvent();
+    this.getUpdateDatabaseEvent();
+    this.socketService.onEvent('connect')
+      .subscribe(() => {
+        console.log('Connesso a socket')
+      })
+
+    this.socketService.onEvent('disconnect')
+      .subscribe(() => {
+        console.log('Disconnesso da socket')
+        localStorage.setItem('createStatus', 'false');
+        localStorage.setItem('updateStatus', 'false');
+      })
   }
 
+  getCreateDatabaseEvent() {
+    this.socketService.getEvent('database-created')
+      .subscribe((res: any) => {
+        if (res.data === 'error') {
+          this.snackBar.showErrorSnackbar('Qualcosa è andato storto, riprova!');
+          localStorage.setItem('createStatus', 'false')
+        } else {
+          this.snackBar.showSuccessSnackbar(`Database ${res.data[0].source} creato.`);
+          localStorage.setItem('createStatus', 'false')
+        }
+      })
+  }
+
+  getUpdateDatabaseEvent() {
+    this.socketService.getEvent('database-updated')
+    .subscribe((res: any) => {
+      if (res.data === 'error') {
+        this.snackBar.showErrorSnackbar('Qualcosa è andato storto, riprova!');
+        localStorage.setItem('updateStatus', 'false')
+      } else {
+        this.snackBar.showSuccessSnackbar('Database Aggiornato.');
+        localStorage.setItem('updateStatus', 'false')
+      }
+    })
+  }
 }

@@ -1,7 +1,17 @@
 const { Schema, model } = require('mongoose')
 
 const PlayerdbsSchema = Schema({
-  source: String
+  source: String,
+  countPlayers: String,
+  modifiedPlayers: String,
+  addedPlayers: String,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+  }
 })
 
 PlayerdbsSchema.method('toJSON', function() {

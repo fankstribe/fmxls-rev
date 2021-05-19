@@ -1,5 +1,3 @@
-const { response } = require("express")
-
 const Manager = require("../models/manager")
 const Team = require("../models/team")
 const User = require("../models/user")

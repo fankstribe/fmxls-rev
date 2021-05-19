@@ -2,8 +2,20 @@ require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
+const http = require('http')
 
 const { dbConnection } = require('./database/config')
+
+const userRoutes = require('./routes/users')
+const teamRoutes = require('./routes/teams')
+const managerRoutes = require('./routes/managers')
+const tournamentRoutes = require('./routes/tournaments')
+const matchRoutes = require('./routes/matches')
+const scoreRoutes = require('./routes/scores')
+const playerRoutes = require('./routes/players')
+const playerDbsRoutes = require('./routes/playersdbs')
+const authRoutes = require('./routes/auth')
+const uploadRoutes = require('./routes/uploads')
 
 // Inizializza servizio express
 const app = express()
@@ -17,18 +29,26 @@ app.use(express.json())
 dbConnection()
 
 // Rotte
-app.use('/api/users', require('./routes/users'))
-app.use('/api/teams', require('./routes/teams'))
-app.use('/api/managers', require('./routes/managers'))
-app.use('/api/tournaments', require('./routes/tournaments'))
-app.use('/api/matches', require('./routes/matches'))
-app.use('/api/scores', require('./routes/scores'))
-app.use('/api/players', require('./routes/players'))
-app.use('/api/playersdbs', require('./routes/playersdbs'))
+app.use('/api/users', userRoutes)
+app.use('/api/teams', teamRoutes)
+app.use('/api/managers', managerRoutes)
+app.use('/api/tournaments', tournamentRoutes)
+app.use('/api/matches', matchRoutes)
+app.use('/api/scores', scoreRoutes)
+app.use('/api/players', playerRoutes)
+app.use('/api/playersdbs', playerDbsRoutes)
 
-app.use('/api/login', require('./routes/auth'))
-app.use('/api/uploads', require('./routes/uploads'))
+app.use('/api/login', authRoutes)
+app.use('/api/uploads', uploadRoutes)
 
-app.listen(process.env.PORT, () => {
+const server = http.createServer(app)
+
+const io = require('socket.io')(server)
+global.io = io
+require('./socket')
+
+server.listen(process.env.PORT, () => {
   console.log('Servizio attivo su porta ' + process.env.PORT)
 })
+
+

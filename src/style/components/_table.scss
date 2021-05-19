@@ -48,6 +48,10 @@ tr.element-row {
   cursor: pointer;
 }
 
+tr.mat-row, tr.mat-footer-row {
+  height: 57px;
+}
+
  // FIXME - colore del bordo quando la tabella è
  // visualizzata in posizione sticky
 // .mat-table-sticky:first-child {

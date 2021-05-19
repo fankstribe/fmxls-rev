@@ -3,7 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TeamService } from '../../../core/services/team.service';
-import { Team } from '../../../models/team';
+
 import { SnackBarService } from '../../../core/services/snackbar.service';
 
 @Component({

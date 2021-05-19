@@ -72,5 +72,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr class="element-row" mat-row *matRowDef="let users; columns: displayedColumns;" (click)="update(dataSource.data.indexOf(users))"></tr>
   </table>
-  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+  <mat-paginator [pageSize]="50" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
 </div>

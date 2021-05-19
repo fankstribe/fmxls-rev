@@ -13,7 +13,7 @@ import { PlayerService } from '../../../core/services/player.service';
 })
 export class AddDatabaseDialogComponent implements OnInit {
   addDatabaseForm: FormGroup;
-
+  checkSubmit = false;
   formError = {
     source: '',
   };
@@ -63,13 +63,8 @@ export class AddDatabaseDialogComponent implements OnInit {
 
   onSubmitForm() {
     const source = this.addDatabaseForm.value.source;
-
-    console.log(source)
-
-    this.playerService.createPlayersDB(source).subscribe((res) => {
-      this.dialogRef.close(res);
-    }, err => {
-      this.dialogRef.close(false);
-    });
+    this.checkSubmit = true;
+    this.playerService.createPlayersDB(source).subscribe().unsubscribe();
+    this.dialogRef.close(this.checkSubmit);
   }
 }

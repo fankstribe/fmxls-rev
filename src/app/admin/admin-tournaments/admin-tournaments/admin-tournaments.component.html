@@ -89,7 +89,7 @@
       <tr class="element-row" mat-row *matRowDef="let tournaments; columns: displayedColumns;" (click)="update(dataSource.data.indexOf(tournaments))"></tr>
     </table>
 
-  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+  <mat-paginator [pageSize]="50" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
 
     <div [hidden]="!noItems" class="no-data-found-wrapper">
       <div class="no-data-found">

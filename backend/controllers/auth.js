@@ -1,63 +1,52 @@
-const { response } = require('express')
 const bcrypt = require("bcryptjs")
-
 const User = require("../models/user")
 const { tokenJWT } = require('../helpers/jwt')
 const { getMenuFrontend } = require('../helpers/menu-frontend')
 
-const login = async(req, res = response) => {
-
+const login = async(req, res) => {
   const { email, password } = req.body
-
   try {
     // Verifica email
     const userDB = await User.findOne({email})
-
     if (!userDB) {
-      return res.status(400).json({
-        ok: false,
-        msg: 'La mail inserita non esiste.'
+      return res.status(402).send({
+        msg: "La mail inserita " +
+                  req.body.email +
+                  " non è associata a nessun account."
       })
     }
-
     // Verifica password
     const validPassword = bcrypt.compareSync(password, userDB.password)
     if (!validPassword) {
-      return res.status(400).json({
-        ok: false,
-        msg: 'La password inserita non è corretta.'
-      })
+      return res.status(403).send({ msg: 'La password inserita non è corretta.' })
     }
 
     // Crea token
     const token = await tokenJWT(userDB.id)
 
     res.json({
-      ok: true,
+      msg: "Login avvenuto con successo!",
       token,
-      menu: getMenuFrontend(userDB.role)
+      menu: getMenuFrontend(userDB.role),
+      status: 200
     })
 
   } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      ok: false,
-      msg: "Errore inatteso",
-    })
+      res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }
 
-const tokenRefresh = async(req, res = response) => {
+const tokenRefresh = async(req, res) => {
   const uid = req.uid
 
   const token = await tokenJWT(uid)
   const user = await User.findById(uid)
 
   res.json({
-    ok: true,
     token,
     user,
-    menu: getMenuFrontend(user.role)
+    menu: getMenuFrontend(user.role),
+    status: 200
   })
 }
 

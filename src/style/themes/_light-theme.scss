@@ -74,7 +74,7 @@ $mat-light-theme-foreground: (
   disabled-text:     $dark-disabled-text,
   elevation:         black,
   hint-text:         $dark-disabled-text,
-  secondary-text:    #5f6368,
+  secondary-text:    #a2a8b1,
   icon:              rgba(black, 0.54),
   icons:             rgba(black, 0.54),
   text:              #3c4043,
@@ -87,7 +87,7 @@ $mat-light-theme-foreground: (
 $mat-light-theme-background: (
   sidebar: white,
   app-bar:    white,
-  toolbar-brand: #333333,
+  toolbar-brand: #fff,
   background: mat-color($my-white-theme-primary, 500),
   card:       white,
   dialog:     white,

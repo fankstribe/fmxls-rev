@@ -3,10 +3,11 @@ const { Router } = require('express')
 
 const { jwtValidator } = require('../middlewares/validate-jwt')
 
-const { createPlayersDB } = require('../controllers/players')
+const { getPlayers, deletePlayer } = require('../controllers/players')
 
 const router = Router()
 
-router.post('/', jwtValidator, createPlayersDB)
+router.get('/', jwtValidator, getPlayers)
+router.delete('/:id', jwtValidator, deletePlayer)
 
 module.exports = router
