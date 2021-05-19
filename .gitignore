@@ -51,3 +51,4 @@ Thumbs.db
 /backend/uploads/teams/*
 /backend/uploads/tournaments/*
 /backend/uploads/users/*
+/backend/.env
