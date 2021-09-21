@@ -9,19 +9,25 @@
       [mode]="sidenavMode"
       [opened]="sidenavOpened"
       class="sidenav"
+      position="start"
     >
       <mat-toolbar class="toolbar-brand">
-        <a class="brand" routerLink="/">
-          <img src="./assets/images/logo.png" alt="logo" class="brand-logo" />
-          <span class="brand-name">fmxls</span>
-        </a>
+        <div class="brand" routerLink="/"></div>
       </mat-toolbar>
       <app-sidenav (sidenavClose)="sidenav.close()"></app-sidenav>
     </mat-sidenav>
+    <mat-sidenav
+      #sidenavRight
+      autoFocus="false"
+      position="end"
+      class="side-notification"
+    >
+    <app-notification (sidenavRightClose)="sidenavRight.close()"></app-notification>
+    </mat-sidenav>
 
-    <mat-sidenav-content>
-      <div class="main-container">
-        <app-topnav [sidenav]="sidenav"></app-topnav>
+    <mat-sidenav-content (scroll)="onContentScroll($event)">
+      <div class="main-container inactive" #mainContainer>
+        <app-topnav [sidenavRight]="sidenavRight" [sidenav]="sidenav"></app-topnav>
         <div
           class="main-content"
           [@routeAnimations]="

@@ -1,6 +1,6 @@
 <div class="table-card border-radius">
   <div fxLayout fxLayoutAlign="start center" class="toolbar-actions">
-    <h3 fxHide.xs fxFlex="none" class="p-r-16 m-r-16 m-y-0">Cerca Utenti</h3>
+    <h3 fxHide fxShow.gt-xs fxFlex="none" class="p-r-16 m-r-16 m-y-0">Cerca Utenti</h3>
     <div class="toolbar-actions-search p-x-16" fxFlex="400px" fxFlex.lt-md="auto" fxLayout fxLayoutAlign="start center">
       <mat-icon>search</mat-icon>
       <input
@@ -49,7 +49,7 @@
     </ng-container>
     <ng-container matColumnDef="createdAt">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Registrazione</th>
-      <td class="cell" mat-cell *matCellDef="let users">{{users.createdAt | date: 'dd/MM/yyyy'}}</td>
+      <td class="cell" mat-cell *matCellDef="let users">{{users.createdAt | date}}</td>
     </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Modifica</th>

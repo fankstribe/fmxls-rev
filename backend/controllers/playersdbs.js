@@ -4,6 +4,8 @@ const { searchFifa, searchPesdb } = require('../helpers/scrape')
 
 const Player = require('../models/player');
 const Playerdbs = require('../models/playerdbs');
+const Notification = require('../models/notification')
+const User = require('../models/user')
 
 const createPlayersDB = async(req, res = response) => {
   let playersDB
@@ -46,7 +48,15 @@ const createPlayersDB = async(req, res = response) => {
 
     const infoDB = await Playerdbs.find()
 
+    const user = await User.find({role: 'ADMIN_ROLE'}, '_id')
+
+    const notificationUser = new Notification({user: user._id, desc: `Il database ${infoDB.source} è stato creato.`, type: 1,})
+
+    await notificationUser.save()
     await global.io.emit('database-created', { data: infoDB })
+    // await global.io.emit('notification', { data: infoDB })
+
+    console.log(infoDB.createdAt)
 
     res.json({
       msg: "Database giocatori creato",
@@ -54,6 +64,7 @@ const createPlayersDB = async(req, res = response) => {
     });
 
   } catch (error) {
+    console.log(error)
     res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }

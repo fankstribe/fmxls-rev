@@ -1,0 +1,25 @@
+<div fxLayoutAlign="space-between center" class="notification-title">
+  <h2 class="m-0 semi-bold">Notifiche</h2>
+  <button
+    mat-icon-button
+    (click)="onSidenavRightClose()"
+  >
+    <mat-icon class="material-icons-outlined">close</mat-icon>
+  </button>
+</div>
+<div class="notification-container">
+  <a matRipple class="notification-item hover border-bottom" fxLayoutAlign="start center" href="#">
+    <mat-icon class="m-r-16 material-icons-outlined">update</mat-icon>
+    <div fxFlex="auto">
+      <div>Nuovo database aggiunto</div>
+      <div class="muted" style="font-size: 12px;">1 h</div>
+    </div>
+  </a>
+  <a matRipple class="notification-item hover border-bottom" fxLayoutAlign="start center" href="#">
+    <mat-icon class="m-r-16 material-icons-outlined">add</mat-icon>
+    <div fxFlex="auto">
+      <div>Nuovo utente iscritto</div>
+      <div class="muted" style="font-size: 12px;">50 min</div>
+    </div>
+  </a>
+</div>

@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class ThemeService {
   themes: Array<any> = [
     { value: 'light', name: 'Chiaro', cssClass: 'light-theme' },
-    { value: 'black', name: 'Scuro', cssClass: 'black-theme' }
+    { value: 'black', name: 'Scuro', cssClass: 'black-theme' },
+    { value: 'fmxls-light', name: 'FMXLS-Chiaro', cssClass: 'fmxls-light-theme' }
   ];
 
   adminTheme: Array<any> = [

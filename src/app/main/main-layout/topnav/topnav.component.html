@@ -1,4 +1,4 @@
-<mat-toolbar class="toolbar">
+<mat-toolbar class="toolbar" color="primary">
 
     <button
       class="m-r-4"
@@ -8,6 +8,12 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="spacer"></span>
+    <button
+      mat-icon-button
+      (click)="sidenavRight.toggle()"
+    >
+      <mat-icon class="material-icons-outlined">notifications</mat-icon>
+    </button>
     <button
       mat-icon-button
       [matMenuTriggerFor]="themeSwitch"

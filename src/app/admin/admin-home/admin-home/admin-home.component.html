@@ -38,24 +38,24 @@
           <h3 class="m-b-0 m-t-0 muted">Fonte</h3>
           <div fxLayoutAlign="start center" fxLayoutGap="8px" class="m-t-12">
             <mat-icon matTooltip="Data Creazione" matTooltipClass="tooltip" *ngIf="createdAt"  class="text-purple material-icons-outlined">add</mat-icon>
-            <p *ngIf="createdAt" class="m-b-0">Creato: <span>{{ createdAt | date: 'dd/MM/yyyy' }}</span></p>
+            <p *ngIf="createdAt" class="m-b-0">Creato: <span>{{ createdAt | date }}</span></p>
           </div>
           <div fxLayoutAlign="start center" fxLayoutGap="8px" class="m-t-12">
             <mat-icon matTooltip="Ultimo Aggiornamento" matTooltipClass="tooltip" *ngIf="updatedAt"  class="text-green material-icons-outlined">updated</mat-icon>
-            <p *ngIf="updatedAt" class="m-b-0">Aggiornato: <span>{{ updatedAt | date: 'dd/MM/yyyy' }}</span></p>
+            <p *ngIf="updatedAt" class="m-b-0">Aggiornato: <span>{{ updatedAt | date }}</span></p>
           </div>
         </div>
         <div fxFlex="50%" class="p-t-16 p-b-24 p-l-16 p-r-16">
-          <h1 *ngIf="countPlayers" class="m-b-0 bold">{{ countPlayers }}</h1>
+          <h1 *ngIf="countPlayers" class="m-b-0 bold">{{ countPlayers | number}}</h1>
           <h1 *ngIf="!countPlayers" class="m-b-0 bold">0</h1>
           <h3 class="m-b-0 m-t-0 muted">Giocatori</h3>
           <div fxLayoutAlign="start center" fxLayoutGap="8px" class="m-t-12">
             <mat-icon matTooltip="Ultimo Aggiornamento" matTooltipClass="tooltip" *ngIf="updatedAt"  class="text-purple material-icons-outlined">upgrade</mat-icon>
-            <p *ngIf="updatedAt" class="m-b-0">Nuovi: <span>{{ addedPlayers }}</span></p>
+            <p *ngIf="updatedAt" class="m-b-0">Nuovi: <span>{{ addedPlayers | number}}</span></p>
           </div>
           <div fxLayoutAlign="start center" fxLayoutGap="8px" class="m-t-12">
             <mat-icon matTooltip="Ultimo aggiornamento" matTooltipClass="tooltip" *ngIf="updatedAt"  class="text-deep-orange material-icons-outlined">refresh</mat-icon>
-            <p *ngIf="updatedAt" class="m-b-0">Aggiornati: <span>{{ modifiedPlayers }}</span></p>
+            <p *ngIf="updatedAt" class="m-b-0">Aggiornati: <span>{{ modifiedPlayers | number}}</span></p>
           </div>
         </div>
       </div>

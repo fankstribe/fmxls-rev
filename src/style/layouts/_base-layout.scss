@@ -8,29 +8,20 @@
     height: 100vh;
 
     .sidenav {
-      width: 280px;
+      width: 265px;
       border-right: none;
 
       .mat-toolbar {
         padding: 0 1.5rem;
+        justify-content: center;
       }
 
       .brand {
-        color: inherit;
-        white-space: nowrap;
-        font-size: 24px;
-
-        .brand-logo {
-          width: 35px;
-          height: 35px;
-          margin-right: 10px;
-          vertical-align: middle;
-        }
-
-        .brand-name {
-          font-weight: 700;
-          vertical-align: middle;
-        }
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 135px;
+        height: 50px;
+        margin: 0 auto;
       }
       .team-panel .divider {
         padding-top: 15px;
@@ -38,6 +29,11 @@
         margin: 0.75rem 0;
         margin-left: 1rem;
       }
+    }
+
+    .side-notification {
+      width: 260px;
+      border-left: none;
     }
 
     .mat-drawer:not(.mat-drawer-side) {

@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
@@ -7,6 +8,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { TopnavComponent } from './main-layout/topnav/topnav.component';
 import { SidenavComponent } from './main-layout/sidenav/sidenav.component';
 import { TeamPanelComponent } from './main-layout/sidenav/team-panel/team-panel.component';
+import { NotificationComponent } from '../../shared/components/notification/notification.component';
 
 @NgModule({
   imports: [
@@ -17,7 +19,8 @@ import { TeamPanelComponent } from './main-layout/sidenav/team-panel/team-panel.
     MainLayoutComponent,
     TopnavComponent,
     SidenavComponent,
-    TeamPanelComponent
+    TeamPanelComponent,
+    NotificationComponent
   ]
 })
 export class MainModule {}

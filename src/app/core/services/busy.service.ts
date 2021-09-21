@@ -10,12 +10,14 @@ export class BusyService {
 
   busy() {
     this.busyReqCount++;
-    this.spinnerService.show(undefined, {
-      bdColor: 'rgba(225,225,225, .8)',
-      color: '#202124',
-      type: 'ball-scale',
-      size: "medium"
-    });
+    // setTimeout(() => {
+      this.spinnerService.show(undefined, {
+        bdColor: '#673ab7',
+        color: '#4caf50',
+        type: 'ball-scale',
+        size: 'medium',
+      });
+    // }, 2000);
   }
 
   idle() {

@@ -1,8 +1,8 @@
 import {
   Component,
   Input,
-  EventEmitter,
-  OnInit
+  OnInit,
+  Inject
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,8 @@ import { User } from '../../../models/user';
   styleUrls: ['./topnav.component.scss']
 })
 export class TopnavComponent implements OnInit {
-  @Input() sidenav;
+  @Input() sidenav: any;
+  @Input() sidenavRight: any;
 
   themes: Array<any> = [];
   selectedTheme: any;
@@ -36,6 +37,7 @@ export class TopnavComponent implements OnInit {
 
   ngOnInit() {
     this.themeService.updateTheme();
+
   }
 
   setTheme(theme: any) {

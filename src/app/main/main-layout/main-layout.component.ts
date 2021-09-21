@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  AfterViewChecked,
+  ElementRef,
+  ViewChild,
+  Renderer2,
+} from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 
 import { AnimationsService } from '../../core/services/animations/animations.service';
@@ -17,7 +25,13 @@ export class MainLayoutComponent implements OnInit, AfterViewChecked {
   sidenavOpened: boolean = true;
   sidenavMode: string = 'side';
 
+  scrollInterval = undefined;
+  lastScroll = false;
+
+  @ViewChild('mainContainer') elementRef: ElementRef;
+
   constructor(
+    private renderer: Renderer2,
     private changeDetector: ChangeDetectorRef,
     private mediaOb: MediaObserver,
     private animationService: AnimationsService,
@@ -32,10 +46,7 @@ export class MainLayoutComponent implements OnInit, AfterViewChecked {
 
     this.sidenavService.loadMainMenu();
 
-    this.animationService.updateRouteAnimationType(
-      true,
-      true
-    );
+    this.animationService.updateRouteAnimationType(true, true);
   }
 
   ngAfterViewChecked() {
@@ -55,4 +66,12 @@ export class MainLayoutComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  onContentScroll(event) {
+    const scrollPos = event.target.scrollTop === 0;
+    if (scrollPos) {
+      this.renderer.addClass(this.elementRef.nativeElement, 'inactive');
+    } else {
+      this.renderer.removeClass(this.elementRef.nativeElement, 'inactive');
+    }
+  }
 }

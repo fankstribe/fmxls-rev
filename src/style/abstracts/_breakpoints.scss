@@ -3,7 +3,8 @@ $breakpoints: (
   small: 600px,
   medium: 768px,
   tablet: 960px,
-  desktop: 1024px
+  desktop: 1024px,
+  xdesktop: 1200px
 );
 
 @function bp($name, $breakpoints: $breakpoints) {

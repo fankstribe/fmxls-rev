@@ -1,4 +1,4 @@
-@import '../abstracts/breakpoints';
+@import "../abstracts/breakpoints";
 
 .auth-wrapper {
   @include bp-gt(small) {
@@ -7,9 +7,10 @@
     position: relative;
     min-height: 100vh;
 
-    &::before, &::after {
+    &::before,
+    &::after {
       flex-grow: 1;
-      content: '';
+      content: "";
       display: block;
     }
 
@@ -42,7 +43,7 @@
 .auth-card {
   flex-grow: 1;
   padding: 24px 24px 36px;
-  overflow: hidden;
+  overflow-x: auto;
   height: 100vh;
 
   @include bp-gt(xsmall) {
@@ -51,19 +52,12 @@
   @include bp-gt(small) {
     height: auto;
   }
-
   .auth-logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: 600;
-
-    img {
-      width: 50px;
-      height: 50px;
-    }
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 140px;
+    height: 57px;
+    margin: 0 auto;
   }
 
   .additional-link {

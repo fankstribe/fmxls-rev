@@ -79,7 +79,6 @@ export class EditTeamDialogComponent implements OnInit {
     this.fileUploadService.updateImage(file, 'teams', this.teamToUpdate._id)
       .then(img => {
         this.teamToUpdate.img = img
-        console.log(this.teamToUpdate._id);
       }).catch(err => {
         // FIXME - non viene visualizzato il messaggio errore estensione
         // this.snackBar.showSuccessSnackbar('Questo file non è consentito.');

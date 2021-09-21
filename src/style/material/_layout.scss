@@ -1,43 +1,87 @@
-@import '.~@angular/material/theming';
+@import ".~@angular/material/theming";
+@import "../abstracts/breakpoints";
 
 @mixin fmxls-layout-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
-  $is-dark: map-get($theme, is-dark);
+ $primary: map-get($theme, primary);
+ $accent: map-get($theme, accent);
+ $warn: map-get($theme, warn);
+ $background: map-get($theme, background);
+ $foreground: map-get($theme, foreground);
+ $is-dark: map-get($theme, is-dark);
 
-  // Sidebar
-  .sidenav {
-    background-color: mat-color($background, sidebar);
+ // Sidebar
+ .sidenav {
+  background-color: mat-color($background, sidebar);
+ }
+
+ .list .list-item {
+  color: mat-color($foreground, text);
+
+  &.active,
+  &:hover {
+   background: rgba(mat-color($accent, default), 0.15);
+   color: lighten(mat-color($accent, default), 0);
   }
+ }
 
-  .list .list-item {
-    color: mat-color($foreground, text);
+ .team-panel .divider {
+  border-bottom: 1px solid mat-color($foreground, divider);
+ }
 
-    &.active, &:hover {
-      background: rgba(mat-color($accent, default), 0.15);
-      color: lighten(mat-color($accent, default), 0);
-    }
+ // Notification
+ .side-notification {
+  background-color: mat-color($background, sidebar);
+ }
+
+ .notification-title {
+  background-color: mat-color($background, toolbar);
+  color: mat-color($foreground, text);
+ }
+
+ .notification-container {
+  .notification-item {
+   color: mat-color($foreground, text);
   }
+ }
 
-  .team-panel .divider {
-    border-bottom: 1px solid mat-color($foreground, divider);
+ // Auth
+ .auth-wrapper {
+  background: mat-color($background, background);
+ }
+
+ .mat-sidenav-content {
+  background: mat-color($background, background);
+ }
+
+ .toolbar-brand {
+  background: mat-color($background, toolbar-brand);
+ }
+
+ .toolbar {
+  background: mat-color($background, toolbar-active) !important;
+  transition: all .2s ease-in-out;
+ }
+
+ .toolbar {
+  box-shadow: 0 1px 5px rgb(0 0 0 / 25%);
+ }
+
+ .main-container.inactive .toolbar {
+  box-shadow: none !important;
+  @include bp-gt(tablet) {
+   background: mat-color($background, background) !important;
   }
+  transition: all 0.2s ease-in-out;
+ }
 
-  // Auth
-  .auth-wrapper {
-    background: mat-color($background, background);
+ .auth-logo,
+ .brand {
+  @if $is-dark {
+   background-image: url("../../assets/images/logo-white.png");
   }
-
-  .mat-sidenav-content {
-    background: mat-color($background, background);
+ @else
+  {
+   background-image: url("../../assets/images/logo.png");
   }
-
-  .toolbar-brand {
-    background: mat-color($background, toolbar-brand);
-  }
-
-
+ }
 }

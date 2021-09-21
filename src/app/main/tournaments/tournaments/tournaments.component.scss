@@ -22,7 +22,7 @@
       top: 0;
       right: 0;
       position: absolute;
-      opacity: .40;
+      opacity: .15;
       background-color: rgba(0,0,0,1);
     }
 
@@ -83,8 +83,8 @@
         display: flex;
 
         span {
-          font-size: 22px;
-          font-weight: bold;
+          font-size: 32px;
+          font-weight: 700;
           color: #fff;
         }
       }

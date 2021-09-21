@@ -29,7 +29,7 @@ $fmxls-typography: mat-typography-config(
 @include mat-core($fmxls-typography);
 
 // Themes
-@import "themes/light-theme", "themes/black-theme";
+@import "themes/light-theme", "themes/black-theme", "themes/light-fmxls-theme";
 
 @mixin custom-components-theme($theme) {
   @include fmxls-utils-theme($theme);
@@ -42,11 +42,16 @@ $fmxls-typography: mat-typography-config(
 }
 
 .light-theme {
-  @include angular-material-theme($fmxls-white-theme);
-  @include custom-components-theme($fmxls-white-theme);
+  @include angular-material-theme($my-white-theme);
+  @include custom-components-theme($my-white-theme);
 }
 
 .black-theme {
-  @include angular-material-theme($fmxls-black-theme);
-  @include custom-components-theme($fmxls-black-theme);
+  @include angular-material-theme($my-black-theme);
+  @include custom-components-theme($my-black-theme);
+}
+
+.fmxls-light-theme {
+  @include angular-material-theme($fmxls-light-theme);
+  @include custom-components-theme($fmxls-light-theme);
 }

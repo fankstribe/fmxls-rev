@@ -88,7 +88,7 @@
   // Tooltip
   .tooltip {
     background-color: mat-color($background, tooltip);
-    color: mat-color($accent, default-contrast, 500);
+    color: mat-color($primary, 500);
   }
 
 }

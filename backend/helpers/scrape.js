@@ -30,7 +30,7 @@ const searchFifa = async () => {
 
   try {
 
-    for (let pagination = 0; pagination < 17200; pagination += 60) {
+    for (let pagination = 0; pagination < 14000; pagination += 60) {
       let url = pagination === 0 ? website : `${website}&offset=${pagination}`;
 
       await page.goto(url, {waitUntil: 'networkidle2', timeout: 0});
@@ -76,7 +76,7 @@ async function extractedSofifaEvaluateCall(page) {
         let imageId = (playerId && img.getAttribute("id"));
         data.push({
           playerId: (playerId && img.getAttribute("id")),
-          img: `https://www.fifaindex.com/static/FIFA21/images/players/10/${imageId}.webp`,
+          img: `https://fifastatic.fifaindex.com/FIFA21/images/players/10/${imageId}.png`,
           playerName: (playerName && playerName.innerText),
           age: (age && age.innerText),
           position: (position && position.innerText),

@@ -7,8 +7,6 @@ import { TeamService } from '../../../core/services/team.service';
 import { SnackBarService } from '../../../core/services/snackbar.service';
 
 import { Team } from '../../../models/team';
-import { Tournament } from '../../../models/tournament';
-
 
 @Component({
   selector: 'app-add-tournament-dialog',

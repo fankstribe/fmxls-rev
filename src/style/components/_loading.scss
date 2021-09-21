@@ -64,3 +64,13 @@
 //     -webkit-transform: scale(1);
 //   }
 // }
+#spinner {
+  opacity: 0;
+  transition: background-color 3s;
+}
+
+#spinner.backdrop {
+  background-color: $fm-purple !important;
+  transition: background-color 3s;
+}
+

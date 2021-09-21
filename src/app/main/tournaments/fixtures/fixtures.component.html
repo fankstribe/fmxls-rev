@@ -22,19 +22,19 @@
               <div class="teams">
                 <div class="teams-content" fxLayoutAlign="center center">
                   <div class="team-logo bg-hover">
-                    <img [src]="match.homeTeam.img | images: 'teams'" />
+                    <img [src]="match.homeTeam ? (match.homeTeam?.img | images: 'teams') : 'assets/images/bye.png'" />
                   </div>
                   <div class="team-name">
-                    {{ match.homeTeam.teamName }}
+                    {{ match.homeTeam?.teamName || 'Riposo' }}
                   </div>
                   <div class="score"></div>
                 </div>
                 <div class="teams-content m-t-24" fxLayoutAlign="center center">
                   <div class="team-logo bg-hover">
-                    <img [src]="match.awayTeam.img | images: 'teams'" />
+                    <img [src]="match.awayTeam ? (match.awayTeam?.img | images: 'teams') : 'assets/images/bye.png'" />
                   </div>
                   <div class="team-name">
-                    {{ match.awayTeam.teamName }}
+                    {{ match.awayTeam?.teamName || 'Riposo'}}
                   </div>
                   <div class="score"></div>
                 </div>

@@ -6,80 +6,81 @@
   margin: auto;
 
   .tournament-title {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
     text-align: center;
     margin-right: 45px;
   }
 
   .match-container {
+    max-width: calc(calc((100vw - 2 * 2.5rem)) + 0px);
     padding: 4px 4px 0;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
     @include bp-gt(medium) {
       padding: 8px 16px 0;
     }
     .team-container {
-      min-width: 25%;
-
-      @include bp-gt(medium) {
-        place-self: center stretch;
-      }
-
       .team-logo {
-        width: 2.75rem;
-        height: 2.75rem;
-        object-fit: cover;
-        border-radius: 4px;
+        width: 48px;
 
-        @include bp-gt(medium) {
-          width: 4rem;
-          height: 4rem;
+        @include bp-gt(xdesktop) {
+          width: 70px;
         }
 
-        img {
-          max-width: 100%;
+        .wrap-logo {
+          border-radius: 50%;
+          padding: 15%;
+
+          .t-logo {
+            padding-bottom: 100%;
+            display: flex;
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            .pic-image {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+          }
         }
       }
 
       .team-name {
-        margin-top: 10px;
-        text-align: center;
-        font-weight: 500;
-        max-width: 80%;
+        max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-weight: 500;
 
-        @include bp-gt(medium) {
+        @include bp-gt(xdesktop) {
           font-size: 16px;
-          margin-top: 0;
-          max-width: 100%;
-        }
-      }
-
-      @include bp-gt(medium) {
-        .team-name.home {
-          margin-right: 16px;
-        }
-
-        .team-name.away {
-          margin-left: 16px;
         }
       }
     }
 
     .score-container {
       .score {
-        display: block;
-        font-size: 36px;
-        line-height: 36px;
+        max-width: 6ch;
+        font-size: 28px;
+        line-height: 35px;
         text-align: center;
         white-space: nowrap;
         font-weight: 700;
       }
 
       .match-state {
-        overflow: hidden;
-        text-align: center;
-        margin-top: 18px;
+        font-weight: 500;
+        line-height: 22px;
       }
     }
   }

@@ -1,4 +1,5 @@
 const { response } = require("express");
+const mongoose = require("mongoose")
 
 const { deleteImage } = require("../helpers/save-image");
 
@@ -71,10 +72,14 @@ const getTournament = async (req, res = response) => {
 
 const createTournament = async (req, res = response) => {
   const body = req.body;
+  const oddUid = mongoose.Types.ObjectId()
 
   try {
     const tournament = new Tournament(body)
     const teams = tournament.teams
+    const lengthOdd = teams.length % 2 === 1
+
+    if (lengthOdd) teams.push(oddUid)
 
     const firstRound = []
     const secondRound = []
@@ -112,6 +117,8 @@ const createTournament = async (req, res = response) => {
     }
 
     const fixture = firstRound.concat(secondRound);
+
+    lengthOdd ? fixture.filter(r => r.homeTeam !== oddUid && r.awayTeam !== oddUid) : fixture
 
     const fixtureData = [...fixture];
 

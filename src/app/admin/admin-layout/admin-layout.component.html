@@ -11,16 +11,13 @@
       class="sidenav"
     >
       <mat-toolbar class="toolbar-brand">
-        <a class="brand" routerLink="/admin-home">
-          <img src="./assets/images/logo.png" alt="logo" class="brand-logo" />
-          <span class="brand-name">fmxls</span>
-        </a>
+        <div class="brand" routerLink="/admin-home"></div>
       </mat-toolbar>
       <app-admin-sidenav (sidenavClose)="sidenav.close()"></app-admin-sidenav>
     </mat-sidenav>
 
-    <mat-sidenav-content>
-      <div class="main-container" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
+    <mat-sidenav-content (scroll)="onContentScroll($event)">
+      <div class="main-container inactive" #adminContainer [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
         <app-admin-topnav [sidenav]="sidenav"></app-admin-topnav>
         <div class="main-content">
           <div fxLayout fxLayoutAlign="start center" class="page-header m-b-32">

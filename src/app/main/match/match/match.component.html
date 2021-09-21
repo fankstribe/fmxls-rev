@@ -1,7 +1,10 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <div fxLayout fxLayoutAlign="start center" class="m-b-12 w-100">
     <div class="m-r-8">
-      <button routerLink="/tournaments/fixtures/{{ match?.tournament._id }}" mat-icon-button >
+      <button
+        routerLink="/tournaments/fixtures/{{ match?.tournament._id }}"
+        mat-icon-button
+      >
         <mat-icon>arrow_back</mat-icon>
       </button>
     </div>
@@ -16,52 +19,80 @@
   </div>
 
   <div
-    gdColumns="2fr 1fr 2fr"
+    gdColumns.gt-xs="minmax(0,1fr) minmax(5.4375em,auto) minmax(0,1fr)"
+    gdColumns="minmax(0,7.5em) minmax(5.4375em,auto) minmax(0,7.5em)"
     gdGap="0"
-    gdGap.gt-xs="0 64px"
-    gdGap.gt-md="0 96px"
+    gdGap.md="0 43px"
+    gdGap.gt-md="0 60px"
+    gdGap.sm="0 33px"
+    gdGap="0 12px"
     class="match-container"
     [ngClass]="routeAnimationsElements"
   >
-    <div class="team-container">
-      <a
-        href=""
-        fxLayout="column"
-        fxLayout.gt-xs="row-reverse"
-        fxLayoutAlign="center center"
-      >
-        <div class="team-logo">
-          <img [src]="match?.homeTeam.img | images: 'teams'" />
+    <a
+      href=""
+      class="team-container"
+      fxLayoutAlign="center center"
+      fxLayoutAlign.sm="end center"
+      gdColumns.sm="minmax(0,1fr) min-content"
+      gdGap.gt-xs="0 20px"
+      gdGap="10px 0"
+      gdAreas.gt-xs="teamName icon"
+      gdAreas="icon | teamName"
+    >
+      <div class="team-logo" gdArea="icon">
+        <div class="wrap-logo">
+          <div class="t-logo">
+            <picture class="pic-image">
+              <img [src]="match?.homeTeam.img | images: 'teams'" />
+            </picture>
+          </div>
         </div>
-        <span class="team-name home text-primary">{{
-          match?.homeTeam.teamName
-        }}</span>
-      </a>
-    </div>
+      </div>
+      <span class="team-name home text-primary" gdArea="teamName">{{
+        match?.homeTeam.teamName
+      }}</span>
+    </a>
+
     <div
       fxLayout="column"
-      fxLayoutAlign="space-evenly center"
+      fxLayoutAlign="center center"
       class="score-container"
     >
-      <span class="score">2 : 0</span>
-      <span fxLayout="column" class="match-state secondary-text"
-        >Terminata</span
+      <p
+        gdColumns="2ch 1ch 2ch"
+        class="score m-b-0"
       >
+        <span>2</span>
+        <span>:</span>
+        <span>0</span>
+      </p>
+      <span class="match-state secondary-text">
+        Terminata
+      </span>
     </div>
-    <div class="team-container">
-      <a
-        href=""
-        fxLayout="column"
-        fxLayout.gt-xs="row"
-        fxLayoutAlign="stretch center"
-      >
-        <div class="team-logo">
-          <img [src]="match?.awayTeam.img | images: 'teams'" />
+    <a
+      href=""
+      class="team-container"
+      fxLayoutAlign="center center"
+      gdColumns.sm="min-content minmax(0,1fr)"
+      gdGap.gt-xs="0 20px"
+      gdGap="10px 0"
+      gdAreas.gt-xs="icon teamName"
+      gdAreas="icon | teamName"
+    >
+      <div class="team-logo" gdArea="icon">
+        <div class="wrap-logo">
+          <div class="t-logo">
+            <picture class="pic-image">
+              <img [src]="match?.awayTeam.img | images: 'teams'" />
+            </picture>
+          </div>
         </div>
-        <span class="team-name away text-primary">{{
-          match?.awayTeam.teamName
-        }}</span>
-      </a>
-    </div>
+      </div>
+      <span class="team-name away text-primary" gdArea="teamName">{{
+        match?.awayTeam.teamName
+      }}</span>
+    </a>
   </div>
 </div>
