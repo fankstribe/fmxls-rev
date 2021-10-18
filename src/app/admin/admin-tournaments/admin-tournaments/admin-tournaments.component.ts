@@ -23,9 +23,7 @@ import { EditMatchesDialogComponent } from '../edit-matches-dialog/edit-matches-
 export class AdminTournamentsComponent implements OnInit, AfterViewInit {
   isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
   dataSource = new MatTableDataSource<Tournament>();
-
   noItems = false;
-
   isLoadingResults = true;
 
   displayedColumns: string[] = [
@@ -39,8 +37,8 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
     'action'
   ];
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private tournamentService: TournamentService,

@@ -9,11 +9,12 @@ const PlayerSchema = Schema({
   overall: Number,
   value: String,
   wage: String,
-  source: String
-  // team: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Team'
-  // },
+  source: String,
+  team: {
+    type: Schema.Types.ObjectId,
+    ref: 'Team',
+    default: null
+  },
   // score: {
   //   type: Schema.Types.ObjectId,
   //   ref: 'Score'

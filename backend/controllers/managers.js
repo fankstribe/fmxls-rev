@@ -69,13 +69,18 @@ const updateManager = async(req, res = response) => {
     const managerDB = await Promise.all([
       Team.findByIdAndUpdate(teamDB.team, {$unset: {user: ''}}),
       Team.findByIdAndUpdate(teamId, {user: teamDB.user}),
-      Manager.findByIdAndUpdate(id, {team: teamId})
+      Manager.findByIdAndUpdate(id, {team: teamId}, {
+        new: true
+      })
+      .populate("team", "teamName")
+      .populate("user", "name")
+
     ])
 
 
     res.json({
         ok: true,
-        manager: managerDB,
+        manager: managerDB[2],
       })
 
   } catch (error) {

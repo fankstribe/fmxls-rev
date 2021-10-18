@@ -5,8 +5,8 @@ export class Manager {
 
   constructor(
     public _id: string,
-    public user: User,
-    public team: Team,
+    public user?: User,
+    public team?: Team,
     public createdAt?: Date
   ) {}
 }

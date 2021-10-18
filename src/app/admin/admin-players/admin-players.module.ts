@@ -6,8 +6,8 @@ import { AdminPlayersRoutingModule } from './admin-players.routing.module';
 import { SharedModule } from '../../../shared/shared.module';
 
 import { AdminPlayersComponent } from './admin-players/admin-players.component';
-import { EditTeamDialogComponent } from "./edit-players-dialog/edit-team-dialog.component";
-import { AddTeamDialogComponent } from './add-players-dialog/add-team-dialog.component';
+import { EditPlayerDialogComponent } from "./edit-player-dialog/edit-player-dialog.component";
+import { AddPlayerDialogComponent } from './add-players-dialog/add-player-dialog.component';
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import { AddTeamDialogComponent } from './add-players-dialog/add-team-dialog.com
   ],
   declarations: [
     AdminPlayersComponent,
-    AddTeamDialogComponent,
-    EditTeamDialogComponent
+    AddPlayerDialogComponent,
+    EditPlayerDialogComponent
   ]
 })
 export class AdminPlayersModule {}

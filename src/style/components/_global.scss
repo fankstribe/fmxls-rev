@@ -79,3 +79,9 @@ a {
   text-align: center;
   vertical-align: baseline;
 }
+
+button.action-fab {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}

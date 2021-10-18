@@ -1,4 +1,4 @@
-<form [formGroup]="addTeamForm" (ngSubmit)="onSubmitForm()">
+<form [formGroup]="addPlayerForm" (ngSubmit)="onSubmitForm()">
   <div fxLayoutAlign="start center"  class="mat-dialog-title">
     <img class="img-user">
     <h2 class="m-b-0" fxFlex="auto">Crea Squadra</h2>
@@ -17,7 +17,7 @@
         autocorrect="off"
         formControlName="teamName"
       />
-      <mat-error *ngIf="formError.teamName">
+      <mat-error *ngIf="formError.playerName">
         {{ formError.teamName }}
       </mat-error>
     </mat-form-field>
@@ -30,7 +30,7 @@
       mat-button
       type="submit"
       color="accent"
-      [disabled]="!addTeamForm.valid"
+      [disabled]="!addPlayerForm.valid"
     >
       Salva
     </button>

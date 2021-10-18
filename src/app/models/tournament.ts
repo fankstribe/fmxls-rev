@@ -5,7 +5,7 @@ export class Tournament {
 
   constructor(
     public tournamentName: string,
-    public _id: string,
+    public _id: number,
     public img: string,
     public status: boolean,
     public format: string,

@@ -1,0 +1,107 @@
+<div fxLayoutAlign="start center" class="mat-dialog-title">
+  <button appDropZone (click)="file.click()" class="header-img cursor-pointer">
+    <img [src]="playerToUpdate.img" />
+    <div class="img-upload">
+      <mat-icon>camera_alt</mat-icon>
+    </div>
+    <input [hidden]="true" type="file" id="file" #file />
+  </button>
+  <h2 class="m-b-0" fxFlex="auto">{{ playerToUpdate.playerName }}</h2>
+  <button mat-dialog-close mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider style="margin: 0 -1.5rem"></mat-divider>
+<form [formGroup]="editPlayerForm" (ngSubmit)="onSubmitForm()">
+  <mat-dialog-content>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Nome Giocatore</mat-label>
+      <input cdkFocusInitial matInput formControlName="playerName" />
+      <mat-error *ngIf="formError.playerName">
+        {{ formError.playerName }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Posizione</mat-label>
+      <mat-select formControlName="position">
+        <mat-option
+          *ngFor="let position of selectedPosition"
+          [value]="position"
+        >
+          {{ position }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width m-t-24" appearance="fill">
+      <mat-label>Squadra</mat-label>
+      <mat-select [compareWith]="compareSelectedObj" formControlName="teamName">
+        <mat-option *ngFor="let team of selectedTeams" [value]="team.teamId">
+          {{ team.teamName }}
+        </mat-option>
+      </mat-select>
+      <!-- <mat-error *ngIf="formError.teamName">
+        {{ formError.teamName }}
+      </mat-error> -->
+    </mat-form-field>
+    <div
+      fxLayout="row"
+      fxLayout.lt-sm="column"
+      fxLayoutGap="16px"
+      fxLayoutGap.lt-sm="0"
+    >
+      <mat-form-field class="full-width m-t-24" appearance="fill">
+        <mat-label>Età</mat-label>
+        <input matInput maxlength="2" formControlName="age" />
+        <mat-error *ngIf="formError.age">
+          {{ formError.age }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width m-t-24" appearance="fill">
+        <mat-label>Potenziale</mat-label>
+        <input
+          matInput
+          maxlength="2"
+          formControlName="overall"
+        />
+        <mat-error *ngIf="formError.overall">
+          {{ formError.overall }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.lt-sm="column"
+      fxLayoutGap="16px"
+      fxLayoutGap.lt-sm="0"
+    >
+      <mat-form-field class="full-width m-t-24" appearance="fill">
+        <mat-label>Valore</mat-label>
+        <input matInput formControlName="value" />
+        <!-- <mat-error *ngIf="formError.value">
+          {{ formError.value }}
+        </mat-error> -->
+      </mat-form-field>
+      <mat-form-field class="full-width m-t-24" appearance="fill">
+        <mat-label>Stipendio</mat-label>
+        <input
+          matInput
+          formControlName="wage"
+        />
+        <!-- <mat-error *ngIf="formError.wage">
+          {{ formError.wage }}
+        </mat-error> -->
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Annulla</button>
+    <button
+      mat-button
+      type="submit"
+      color="accent"
+      [disabled]="!editPlayerForm.valid"
+    >
+      Salva
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -32,7 +32,7 @@ export class UserService {
     return this.user.role;
   }
 
-  get uid(): string {
+  get uid(): any {
     return this.user.uid || '';
   }
 

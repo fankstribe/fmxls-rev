@@ -87,8 +87,12 @@ export class EditTeamDialogComponent implements OnInit {
   }
 
   onSubmitForm() {
-    this.teamService.updateTeam(this.teamToUpdate._id, this.editTeamForm.value.teamName).subscribe((data) => {
-      this.dialogRef.close(data);
+    const data: Team = {
+      _id: this.teamToUpdate._id,
+      teamName: this.editTeamForm.value.teamName,
+    }
+    this.teamService.updateTeam(data).subscribe((res) => {
+      this.dialogRef.close(res);
     }, (err) => {
       this.dialogRef.close(false);
     });

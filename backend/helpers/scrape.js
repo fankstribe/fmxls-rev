@@ -30,7 +30,7 @@ const searchFifa = async () => {
 
   try {
 
-    for (let pagination = 0; pagination < 14000; pagination += 60) {
+    for (let pagination = 0; pagination < 6080; pagination += 60) {
       let url = pagination === 0 ? website : `${website}&offset=${pagination}`;
 
       await page.goto(url, {waitUntil: 'networkidle2', timeout: 0});
@@ -94,7 +94,7 @@ async function extractedSofifaEvaluateCall(page) {
 const searchPesdb = async () => {
 
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: [
       "--start-maximized",
       "--disable-web-security",

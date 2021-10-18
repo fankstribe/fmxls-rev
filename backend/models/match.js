@@ -18,9 +18,9 @@ const MatchSchema = Schema({
     type: Boolean,
     default: false
   },
-  scores: {
+  goals: {
     type: Schema.Types.ObjectId,
-    ref: 'Score'
+    ref: 'Goal'
   }
 })
 

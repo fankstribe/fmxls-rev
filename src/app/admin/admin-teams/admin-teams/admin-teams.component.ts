@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -37,8 +37,9 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
     'action'
   ];
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatTable) table: MatTable<Team>;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private teamService: TeamService,
@@ -100,7 +101,7 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.teamsTableList();
+        this.addRowData(res.team);
         this.snackBar.showSuccessSnackbar('Nuova Squadra aggiunta!');
       }
       smallDialogSub.unsubscribe();
@@ -129,24 +130,51 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.teamsTableList();
+        this.updateRowData(res.team)
         this.snackBar.showSuccessSnackbar('Squadra modificata!');
       }
       smallDialogSub.unsubscribe();
     });
   }
 
-  delete(_id: string) {
+  delete(_id: number) {
     const data = this.dataSource.data[_id];
     const dialogRef = this.dialogService.confirmDialog('Vuoi davvero eliminare questa squadra?');
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.teamService.deleteTeam(data._id).subscribe(() => {
-          this.teamsTableList();
+          this.deleteRowData(data._id);
           this.snackBar.showSuccessSnackbar(`${data.teamName} eliminato con successo!`);
         });
       }
     })
+  }
+
+  addRowData(team: Team): void {
+    this.dataSource.data.push(team);
+    this.refreshTable();
+  }
+
+  deleteRowData(_id: number): void {
+    const i = this.dataSource.data.findIndex(el => el._id === _id);
+    if (i !== -1) {
+      this.dataSource.data.splice(i, 1);
+      this.refreshTable();
+    }
+  }
+
+
+  updateRowData(team: Team): void {
+    const i = this.dataSource.data.findIndex(el => el._id === team._id);
+    if (i !== -1) {
+      this.dataSource.data[i] = team;
+      this.refreshTable();
+    }
+  }
+
+  refreshTable() {
+    this.dataSource.sort = this.sort;
+    this.table.renderRows();
   }
 
 }

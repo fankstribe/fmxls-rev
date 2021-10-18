@@ -2,6 +2,7 @@ const { deleteImage } = require('../helpers/save-image')
 const Team = require('../models/team')
 const User = require('../models/user')
 const Manager = require('../models/manager')
+const Player = require('../models/player')
 
 const getTeams = async(req, res) => {
   const teams = await Team.find().populate("user", "name")
@@ -28,6 +29,7 @@ const deleteTeam = async(req, res) => {
   const id = req.params.id
   try {
     const team = await Team.findById(id)
+    const player = await Player.find({team: id})
     const pathView = `./uploads/teams/${team.img}`
     if (!team) {
       return res.status(402).json({
@@ -46,6 +48,10 @@ const deleteTeam = async(req, res) => {
       await  Team.findByIdAndDelete(id)
     } else {
       await Team.findByIdAndDelete(id)
+    }
+
+    if (player) {
+      await Player.updateMany({team: id}, {team: null})
     }
 
     res.json({
@@ -69,7 +75,9 @@ const updateTeam = async(req, res = response) => {
     }
     const teamDB = { ...req.body }
 
-    const updateTeam = await Team.findByIdAndUpdate(id, teamDB)
+    const updateTeam = await Team.findByIdAndUpdate(id, teamDB, {
+      new: true
+    })
 
     res.json({
       team: updateTeam,

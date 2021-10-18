@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -21,11 +21,8 @@ import { AddManagerDialogComponent } from '../add-manager-dialog/add-manager-dia
 })
 export class AdminManagersComponent implements OnInit, AfterViewInit {
   isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
-
   dataSource = new MatTableDataSource<Manager>();
-
   noItems = false;
-
   isLoadingResults = true;
 
   displayedColumns: string[] = [
@@ -35,6 +32,7 @@ export class AdminManagersComponent implements OnInit, AfterViewInit {
     'action'
   ];
 
+  @ViewChild(MatTable) table: MatTable<Manager>;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -127,7 +125,7 @@ export class AdminManagersComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.managersTableList();
+        this.updateRowData(res);
         this.snackBar.showSuccessSnackbar('Squadra modificata!');
       }
       smallDialogSub.unsubscribe();
@@ -147,5 +145,32 @@ export class AdminManagersComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
+  addRowData(manager: Manager): void {
+    this.dataSource.data.push(manager);
+    this.refreshTable();
+  }
+
+  updateRowData(manager: Manager): void {
+    const i = this.dataSource.data.findIndex(el => el._id === manager._id);
+    if (i !== -1) {
+      this.dataSource.data[i] = manager;
+      this.refreshTable();
+    }
+  }
+
+  deleteRowData(_id: string): void {
+    const i = this.dataSource.data.findIndex(el => el._id === _id);
+    if (i !== -1) {
+      this.dataSource.data.splice(i, 1);
+      this.refreshTable();
+    }
+  }
+
+  refreshTable() {
+    this.dataSource.sort = this.sort;
+    this.table.renderRows();
+  }
+
 
 }

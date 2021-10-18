@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -20,9 +20,7 @@ import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.co
 })
 export class AdminUsersComponent implements OnInit, AfterViewInit {
   isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
-
   dataSource = new MatTableDataSource<User>();
-
   isLoadingResults = true;
 
   displayedColumns: string[] = [
@@ -34,8 +32,9 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
     'action'
   ];
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatTable) table: MatTable<User>;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private userService: UserService,
@@ -95,7 +94,7 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.usersTableList();
+        this.updateRowData(res.user);
         this.snackBar.showSuccessSnackbar('Utente modificato!');
       }
       smallDialogSub.unsubscribe();
@@ -114,11 +113,32 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.userService.deleteUser(data.uid).subscribe(() => {
-          this.usersTableList();
+          this.deleteRowData(data.uid);
           this.snackBar.showSuccessSnackbar(`L'utente ${data.name} è stato eliminato con successo!`);
         });
       }
     })
+  }
+
+  updateRowData(user: User): void {
+    const i = this.dataSource.data.findIndex(el => el.uid === user.uid);
+    if (i !== -1) {
+      this.dataSource.data[i] = user;
+      this.refreshTable();
+    }
+  }
+
+  deleteRowData(uid: number): void {
+    const i = this.dataSource.data.findIndex(el => el.uid === uid);
+    if (i !== -1) {
+      this.dataSource.data.splice(i, 1);
+      this.refreshTable();
+    }
+  }
+
+  refreshTable() {
+    this.dataSource.sort = this.sort;
+    this.table.renderRows();
   }
 
 }

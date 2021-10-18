@@ -3,23 +3,23 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TeamService } from '../../../core/services/team.service';
-import { Team } from '../../../models/team';
+import { Player } from '../../../models/player';
 import { SnackBarService } from '../../../core/services/snackbar.service';
 
 @Component({
-  selector: 'app-add-team-dialog',
-  templateUrl: './add-team-dialog.component.html',
-  styleUrls: ['./add-team-dialog.component.scss']
+  selector: 'app-add-player-dialog',
+  templateUrl: './add-player-dialog.component.html',
+  styleUrls: ['./add-player-dialog.component.scss']
 })
-export class AddTeamDialogComponent implements OnInit {
-  addTeamForm: FormGroup;
+export class AddPlayerDialogComponent implements OnInit {
+  addPlayerForm: FormGroup;
 
   formError = {
-    teamName: '',
+    playerName: '',
   };
 
   validationMessages = {
-    teamName: {
+    playerName: {
       required: 'Il nome è obbligatorio.',
       minlength: 'Il nome deve avere almeno 3 caratteri.',
       maxlength: 'Il nome non può superare i 25 caratteri',
@@ -30,7 +30,7 @@ export class AddTeamDialogComponent implements OnInit {
     private teamService: TeamService,
     private snackBar: SnackBarService,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<AddTeamDialogComponent>,
+    private dialogRef: MatDialogRef<AddPlayerDialogComponent>,
   ) {}
 
   ngOnInit() {
@@ -38,8 +38,8 @@ export class AddTeamDialogComponent implements OnInit {
   }
 
   createForm() {
-    this.addTeamForm = this.formBuilder.group({
-      teamName: ['',
+    this.addPlayerForm = this.formBuilder.group({
+      playerName: ['',
         [
           Validators.required,
           Validators.minLength(3),
@@ -47,15 +47,15 @@ export class AddTeamDialogComponent implements OnInit {
         ]
       ]
     });
-    this.addTeamForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.addPlayerForm.valueChanges.subscribe(data => this.onValueChanged(data));
   }
 
   onValueChanged(data?: any) {
-    if (!this.addTeamForm) {
+    if (!this.addPlayerForm) {
       return;
     }
 
-    const form = this.addTeamForm;
+    const form = this.addPlayerForm;
 
     for (const field of Object.keys(this.formError)) {
       this.formError[field] = '';
@@ -70,7 +70,7 @@ export class AddTeamDialogComponent implements OnInit {
   }
 
   onSubmitForm() {
-    const teamName = this.addTeamForm.value.teamName;
+    const teamName = this.addPlayerForm.value.teamName;
 
     this.teamService.createTeam(teamName).subscribe((res) => {
       this.dialogRef.close(res);

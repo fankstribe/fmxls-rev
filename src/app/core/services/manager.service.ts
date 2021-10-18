@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { Manager } from '../../models/manager';
+import { loadManagers } from 'src/app/interfaces/load-managers';
 
 
 const base_url = environment.base_url
@@ -67,9 +68,21 @@ export class ManagerService {
   }
 
   // Lato Admin
-  updateManager(_id: string, team: string) {
-    const url = `${base_url}/managers/${_id}`;
-    return this.http.put(url, { team }, this.headers);
+  updateManager(manager: Manager) {
+    const url = `${base_url}/managers/${manager._id}`;
+    return this.http.put<any>(url, manager, this.headers)
+    .pipe(
+      map((res) => {
+        const data = {
+          _id: res.manager._id,
+          user: res.manager.user.name,
+          team: res.manager.team.teamName,
+          teamId: res.manager.team._id,
+          createdAt: res.manager.createdAt
+        }
+        return data;
+      })
+    );
   }
 
    // Lato Admin

@@ -11,7 +11,7 @@ export class User {
     public birthDate?: Date,
     public img?: string,
     public role?: 'ADMIN_ROLE' | 'USER_ROLE',
-    public uid?: string,
+    public uid?: number,
     public assignedTeam?: boolean,
     public createdAt?: Date
   ) {}

@@ -84,7 +84,11 @@ export class EditManagerDialogComponent implements OnInit {
   }
 
   onSubmitForm() {
-    this.managerService.updateManager(this.managerToUpdate._id, this.editManagerForm.value.teamName).subscribe((res) => {
+    const data: Manager = {
+      _id: this.managerToUpdate._id,
+      team: this.editManagerForm.value.teamName
+    }
+    this.managerService.updateManager(data).subscribe((res) => {
       this.dialogRef.close(res);
     }, err => {
       this.dialogRef.close(false);

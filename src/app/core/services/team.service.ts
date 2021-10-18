@@ -55,13 +55,13 @@ export class TeamService {
   }
 
    // Lato Admin
-  updateTeam(_id: string, teamName: string) {
-    const url = `${base_url}/teams/${_id}`;
-    return this.http.put(url, { teamName }, this.headers);
+  updateTeam(team: Team) {
+    const url = `${base_url}/teams/${team._id}`;
+    return this.http.put(url, team, this.headers);
   }
 
   // Lato Admin
-  deleteTeam(_id: string) {
+  deleteTeam(_id: number) {
     const url = `${base_url}/teams/${_id}`;
     return this.http.delete(url, this.headers);
   }

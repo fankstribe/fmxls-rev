@@ -17,7 +17,7 @@ export class FileUploadService {
   async updateImage(
     file: File,
     type: 'users' | 'teams' | 'tournaments',
-    id: string
+    id: number
   ) {
 
     try {

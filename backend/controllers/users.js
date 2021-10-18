@@ -1,16 +1,16 @@
 const bcrypt = require("bcryptjs")
-const { deleteImage } = require('../helpers/save-image')
+const { deleteImage } = require("../helpers/save-image")
 const User = require("../models/user")
 const Team = require("../models/team")
 const Manager = require("../models/manager")
-const { tokenJWT } = require('../helpers/jwt')
+const { tokenJWT } = require("../helpers/jwt")
 
 const getUsers = async (req, res) => {
   const users = await User.find({})
 
   res.json({
     users,
-    status: 200
+    status: 200,
   })
 }
 
@@ -37,7 +37,7 @@ const createUser = async (req, res) => {
     res.json({
       user,
       token,
-      status: 200
+      status: 200,
     })
   } catch (error) {
     res.status(500).send({ msg: "Qualcosa non ha funzionato." })
@@ -49,7 +49,9 @@ const updateUser = async (req, res = response) => {
   try {
     const userDB = await User.findById(uid)
     if (!userDB) {
-      return res.status(402).send({ msg: "Non esiste nessun utente con queste credenziali." })
+      return res
+        .status(402)
+        .send({ msg: "Non esiste nessun utente con queste credenziali." })
     }
     // Aggiorna dati utente
     const { password, email, ...fields } = req.body
@@ -58,7 +60,9 @@ const updateUser = async (req, res = response) => {
       const emailExists = await User.findOne({ email })
 
       if (emailExists) {
-        return res.status(400).send({ msg: "Esiste già un utente con questa email." })
+        return res
+          .status(400)
+          .send({ msg: "Esiste già un utente con questa email." })
       }
     }
     fields.email = email
@@ -68,7 +72,7 @@ const updateUser = async (req, res = response) => {
 
     res.json({
       user: userUpdated,
-      status: 200
+      status: 200,
     })
   } catch (error) {
     res.status(500).send({ msg: "Qualcosa non ha funzionato." })
@@ -81,34 +85,40 @@ const deleteUser = async (req, res = response) => {
     const userDB = await User.findById(uid)
     const pathView = `./uploads/users/${userDB.img}`
     if (!userDB) {
-      return res.status(402).send({ msg: "Non esiste nessun utente con queste credenziali." })
+      return res
+        .status(402)
+        .send({ msg: "Non esiste nessun utente con queste credenziali." })
     }
-    if (userDB.role === 'ADMIN_ROLE') {
-      return res.status(404).send({ msg: "Non è possibile eliminare un utente amministratore." })
+    if (userDB.role === "ADMIN_ROLE") {
+      return res
+        .status(404)
+        .send({ msg: "Non è possibile eliminare un utente amministratore." })
     }
 
     const countDocs = await User.find().countDocuments()
 
     if (countDocs == 1) {
-      return res.status(404).send({ msg: "Non puoi eliminare l'ultimo utente." })
+      return res
+        .status(404)
+        .send({ msg: "Non puoi eliminare l'ultimo utente." })
     }
 
     if (userDB.img) {
       await deleteImage(pathView)
     }
 
-    await Team.findOneAndUpdate({user: uid}, {$unset: {user: ''}})
-    await Manager.deleteOne({user: uid})
+    await Team.findOneAndUpdate({ user: uid }, { $unset: { user: "" } })
+    await Manager.deleteOne({ user: uid })
 
     await User.findByIdAndDelete(uid)
 
     res.json({
       msg: "Utente eliminato.",
       countDocs,
-      status: 200
+      status: 200,
     })
   } catch (error) {
-      res.status(500).send({ msg: "Qualcosa non ha funzionato." })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
   }
 }
 

@@ -53,13 +53,13 @@ export class TournamentService {
   }
 
   // Lato Admin
-  updateTournament(_id: string, tournamentName: string) {
+  updateTournament(_id: number, tournamentName: string) {
     const url = `${base_url}/tournaments/${_id}`;
     return this.http.put(url, { tournamentName }, this.headers);
   }
 
   // Lato Admin
-  updateState(_id: string, status: boolean) {
+  updateState(_id: number, status: boolean) {
     const url = `${base_url}/tournaments/${_id}`;
     return this.http.put(url, { status }, this.headers);
   }

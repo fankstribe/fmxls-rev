@@ -21,9 +21,12 @@ import { AddPlayerDialogComponent } from '../add-players-dialog/add-player-dialo
 })
 export class AdminPlayersComponent implements OnInit, AfterViewInit {
   isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
+
   dataSource = new MatTableDataSource<Player>();
+
   noItems = false;
   noPlayer = 'assets/images/no_player.png';
+
   isLoadingResults = true;
 
   displayedColumns: string[] = [
@@ -39,8 +42,8 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
   ];
 
   @ViewChild(MatTable) table: MatTable<Player>;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private playerService: PlayerService,
@@ -78,10 +81,12 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
   }
 
   playersTableList() {
+
     this.playerService.getPlayers().subscribe(list => {
       !list.length ? this.noItems = true : this.noItems = false;
       this.dataSource.data = list;
       this.isLoadingResults = false;
+
     })
   }
 
@@ -153,21 +158,20 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.updateRowData(res.player);
+        this.table.renderRows();
         this.snackBar.showSuccessSnackbar('Giocatore modificato!');
       }
       smallDialogSub.unsubscribe();
     });
   }
 
-  delete(_id: number) {
+  delete(_id: string) {
     const data = this.dataSource.data[_id];
-    console.log(_id)
     const dialogRef = this.dialogService.confirmDialog('Vuoi davvero eliminare questo giocatore?');
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.playerService.deletePlayer(data._id).subscribe(() => {
-          this.deleteRowData(data._id)
+          this.playersTableList();
           this.snackBar.showSuccessSnackbar(`${data.playerName} eliminato con successo!`);
         });
       }
@@ -193,31 +197,14 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.playerService.updatePlayer(data).subscribe(() => {
-          this.updateRowData(data);
+          this.playersTableList();
           this.snackBar.showSuccessSnackbar('Il giocatore è stato svincolato con successo!');
         });
       }
     })
   }
 
-  updateRowData(player: Player): void {
-    const i = this.dataSource.data.findIndex(el => el._id === player._id);
-    if (i !== -1) {
-      this.dataSource.data[i] = player;
-      this.refreshTable();
-    }
-  }
-
-  deleteRowData(_id: number): void {
-    const i = this.dataSource.data.findIndex(el => el._id === _id);
-    if (i !== -1) {
-      this.dataSource.data.splice(i, 1);
-      this.refreshTable();
-    }
-  }
-
   refreshTable() {
-    this.dataSource.sort = this.sort;
     this.table.renderRows();
   }
 
