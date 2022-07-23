@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 $black-fmxls-theme-primary: (
   50: #e0f9f6,
   100: #b3f0ea,
@@ -89,19 +90,19 @@ $mat-black-theme-background: (
   sidebar: #1f2431,
   toolbar: #181C28,
   status-bar: black,
-  app-bar: mat-color($my-black-theme-primary, 500),
+  app-bar: mat.get-color-from-palette($my-black-theme-primary, 500),
   toolbar-brand: #1f2431,
   background: #181C28,
   hover: #292e3d,
   card: #2E3748,
   dialog: #2E3748,
   disabled-button: rgba(white, 0.12),
-  raised-button: map-get($mat-grey, 800),
+  raised-button: map-get(mat.$grey-palette, 800),
   focused-button: $light-focused,
-  selected-button: map_get($mat-grey, 900),
-  selected-disabled-button: map_get($mat-grey, 800),
+  selected-button: map_get(mat.$grey-palette, 900),
+  selected-disabled-button: map_get(mat.$grey-palette, 800),
   disabled-button-toggle: black,
-  unselected-chip: map_get($mat-grey, 700),
+  unselected-chip: map_get(mat.$grey-palette, 700),
   disabled-list-option: black,
   snack-bar: white,
   tooltip: white,
@@ -111,7 +112,7 @@ $mat-black-theme-background: (
 @function fmxls-mat-black-theme(
   $primary,
   $accent,
-  $warn: mat-palette($mat-red)
+  $warn: mat.define-palette(mat.$red-palette)
 ) {
   @return (
     primary: $primary,
@@ -123,9 +124,9 @@ $mat-black-theme-background: (
   );
 }
 
-$custom-black-theme-primary: mat-palette($black-fmxls-theme-primary);
-$custom-black-theme-accent: mat-palette($black-fmxls-theme-accent);
-$custom-black-theme-warn: mat-palette($mat-red);
+$custom-black-theme-primary: mat.define-palette($black-fmxls-theme-primary);
+$custom-black-theme-accent: mat.define-palette($black-fmxls-theme-accent);
+$custom-black-theme-warn: mat.define-palette(mat.$red-palette);
 
 $fmxls-black-theme: fmxls-mat-black-theme(
   $custom-black-theme-primary,

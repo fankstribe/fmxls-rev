@@ -1,8 +1,9 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
 
 @mixin theme-setup($theme, $colors) {
-  @include angular-material-theme($theme);
+  @include mat.all-component-themes($theme);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 

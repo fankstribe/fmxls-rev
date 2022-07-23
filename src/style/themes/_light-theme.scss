@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 $my-white-theme-primary: (
   50: #ffe1eb,
   100: #ffb3cc,
@@ -64,7 +65,7 @@ $my-white-theme-accent: (
   ),
 );
 
-$mat-light-theme-foreground: (
+mat.$light-theme-foreground-palette: (
   base: black,
   divider: #d6dbe6,
   dividers: #d6dbe6,
@@ -86,7 +87,7 @@ $mat-light-theme-foreground: (
   snack-bar: white,
 );
 
-$mat-light-theme-background: (
+mat.$light-theme-background-palette: (
   sidebar: #03001f,
   toolbar: #f0f4f6,
   toolbar-brand: #03001f,
@@ -97,30 +98,30 @@ $mat-light-theme-background: (
   disabled-button: rgba(black, 0.12),
   raised-button: white,
   focused-button: $dark-focused,
-  selected-button: map_get($mat-grey, 300),
-  selected-disabled-button: map_get($mat-grey, 400),
-  disabled-button-toggle: map_get($mat-grey, 200),
-  unselected-chip: map_get($mat-grey, 300),
-  disabled-list-option: map_get($mat-grey, 200),
+  selected-button: map_get(mat.$grey-palette, 300),
+  selected-disabled-button: map_get(mat.$grey-palette, 400),
+  disabled-button-toggle: map_get(mat.$grey-palette, 200),
+  unselected-chip: map_get(mat.$grey-palette, 300),
+  disabled-list-option: map_get(mat.$grey-palette, 200),
   snack-bar: #202124,
   tooltip: #202124,
   input: #d9e1ec,
 );
 
-@function my-mat-light-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+@function my-mat-light-theme($primary, $accent, $warn: mat.define-palette(mat.$red-palette)) {
   @return (
     primary: $primary,
     accent: $accent,
     warn: $warn,
     is-dark: false,
-    foreground: $mat-light-theme-foreground,
-    background: $mat-light-theme-background
+    foreground: mat.$light-theme-foreground-palette,
+    background: mat.$light-theme-background-palette
   );
 }
 
-$custom-white-theme-primary: mat-palette($my-white-theme-primary);
-$custom-white-theme-accent: mat-palette($my-white-theme-accent);
-$custom-white-theme-warn: mat-palette($mat-red);
+$custom-white-theme-primary: mat.define-palette($my-white-theme-primary);
+$custom-white-theme-accent: mat.define-palette($my-white-theme-accent);
+$custom-white-theme-warn: mat.define-palette(mat.$red-palette);
 
 $my-white-theme: my-mat-light-theme(
   $custom-white-theme-primary,

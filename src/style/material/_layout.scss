@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import ".~@angular/material/theming";
 @import "../abstracts/breakpoints";
 
@@ -11,58 +12,58 @@
 
   // Sidebar
   .sidenav {
-    background-color: mat-color($background, sidebar);
-    border-right: 1px solid mat-color($foreground, divider);
+    background-color: mat.get-color-from-palette($background, sidebar);
+    border-right: 1px solid mat.get-color-from-palette($foreground, divider);
   }
 
   .list .list-item {
-    color: mat-color($foreground, text-menu);
+    color: mat.get-color-from-palette($foreground, text-menu);
     font-weight: 500;
 
     &.active,
     &:hover {
-      background: rgba(mat-color($primary, default), 0.15);
-      color: lighten(mat-color($primary, default), 0);
+      background: rgba(mat.get-color-from-palette($primary, default), 0.15);
+      color: lighten(mat.get-color-from-palette($primary, default), 0);
     }
 
     .mat-ripple-element {
-      background-color: mat-color($primary, 200, 0.3);
+      background-color: mat.get-color-from-palette($primary, 200, 0.3);
     }
   }
 
   // Notification
   .side-notification {
-    background-color: mat-color($background, sidebar);
+    background-color: mat.get-color-from-palette($background, sidebar);
   }
 
   .notification-title {
-    background-color: mat-color($background, toolbar);
-    color: mat-color($foreground, text);
+    background-color: mat.get-color-from-palette($background, toolbar);
+    color: mat.get-color-from-palette($foreground, text);
   }
 
   .notification-container {
     .notification-item {
-      color: mat-color($foreground, text);
+      color: mat.get-color-from-palette($foreground, text);
     }
   }
 
   // Auth
   .auth-wrapper {
-    background: mat-color($background, background);
+    background: mat.get-color-from-palette($background, background);
   }
 
   .mat-sidenav-content {
-    background: mat-color($background, background);
+    background: mat.get-color-from-palette($background, background);
   }
 
   .toolbar-brand {
-    background: mat-color($background, toolbar-brand);
+    background: mat.get-color-from-palette($background, toolbar-brand);
   }
 
   .toolbar {
-    background: mat-color($background, toolbar) !important;
+    background: mat.get-color-from-palette($background, toolbar) !important;
     box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
-    color: mat-color($foreground, icon) !important;
+    color: mat.get-color-from-palette($foreground, icon) !important;
   }
 
   .auth-logo,

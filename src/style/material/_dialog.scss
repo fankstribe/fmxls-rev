@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '.~@angular/material/theming';
 
 @mixin fmxls-dialog-theme($theme) {
@@ -8,7 +9,7 @@
   $foreground: map-get($theme, foreground);
 
   .mat-dialog-title .header-img img {
-    background-color: mat-color($background, hover);
+    background-color: mat.get-color-from-palette($background, hover);
   }
 
 }

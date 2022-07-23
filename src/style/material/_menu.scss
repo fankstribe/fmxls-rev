@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
 @mixin fmxls-menu-theme($theme) {
@@ -8,19 +9,19 @@
   $foreground: map-get($theme, foreground);
 
   .mat-menu-panel {
-    color: mat-color($foreground, text);
+    color: mat.get-color-from-palette($foreground, text);
 
     &.dropdown .dropdown-menu-content .dropdown-menu-item {
-      color: mat-color($foreground, text);
-      border-bottom: 1px solid mat-color($foreground, divider);
+      color: mat.get-color-from-palette($foreground, text);
+      border-bottom: 1px solid mat.get-color-from-palette($foreground, divider);
 
       &:hover, &:focus {
-        background: mat-color($background, hover);
+        background: mat.get-color-from-palette($background, hover);
       }
     }
   }
 
   .fm-menu .menu-wrap .line {
-    background-color: mat-color($foreground, icon);;
+    background-color: mat.get-color-from-palette($foreground, icon);;
   }
 }

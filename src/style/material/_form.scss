@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '.~@angular/material/theming';
 
 @mixin fmxls-form-theme($theme) {
@@ -11,41 +12,41 @@
   .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
   .mat-form-field.mat-focused .mat-form-field-label
   {
-    color: mat-color($primary);
+    color: mat.get-color-from-palette($primary);
   }
 
   .mat-form-field.mat-focused .mat-form-field-ripple {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
   }
 
   .mat-primary .mat-option.mat-selected:not(.mat-option-disabled)
   {
-    color: mat-color($foreground, text);
+    color: mat.get-color-from-palette($foreground, text);
   }
 
   .mat-form-field.mat-form-field-invalid .mat-form-field-label,
   .mat-form-field.mat-form-field-invalid .mat-form-field-ripple
    {
-    color: mat-color($warn);
+    color: mat.get-color-from-palette($warn);
   }
 
   .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
-    background-color: mat-color($warn);
+    background-color: mat.get-color-from-palette($warn);
   }
 
   .mat-input-element {
-    caret-color: mat-color($foreground, text);
+    caret-color: mat.get-color-from-palette($foreground, text);
   }
 
   .mat-pseudo-checkbox-checked {
-    background: mat-color($primary) !important;
+    background: mat.get-color-from-palette($primary) !important;
   }
 
   .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: mat-color($foreground, divider);
+    color: mat.get-color-from-palette($foreground, divider);
   }
 
   .mat-form-field-appearance-outline .mat-form-field-outline {
-    background-color: mat-color($background, input);
+    background-color: mat.get-color-from-palette($background, input);
   }
 }

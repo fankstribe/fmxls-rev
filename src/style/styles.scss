@@ -1,4 +1,5 @@
 // Functions and helpers
+@use '~@angular/material' as mat;
 @import "abstracts/abstracts";
 
 // Base
@@ -13,7 +14,6 @@
 // Material theme
 @import "material/material";
 
-@import "~@angular/material/theming";
 
 // Custom typography
 // h1 = headline
@@ -21,23 +21,23 @@
 // h3 = subheading-2
 // h4 = subheading-1
 // h5-h6 = vedi _reset
-$fmxls-typography: mat-typography-config(
+$fmxls-typography: mat.define-typography-config(
   $font-family: "Poppins, arial, sans-serif",
-  $body-1: mat-typography-level(14px, 1.5, 400),
+  $body-1: mat.define-typography-level(14px, 1.5, 400),
   $headline:
-    mat-typography-level(3.052rem, 1.5rem, 600, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(3.052rem, 1.5rem, 600, '"Poppins", arial, sans-serif'),
   $title:
-    mat-typography-level(2.3rem, 1.5rem, 600, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(2.3rem, 1.5rem, 600, '"Poppins", arial, sans-serif'),
   $subheading-2:
-    mat-typography-level(1.953rem, 1.5, 600, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(1.953rem, 1.5, 600, '"Poppins", arial, sans-serif'),
   $subheading-1:
-    mat-typography-level(1.4rem, 1.5, 600, '"Poppins", arial, sans-serif'),
-  $button: mat-typography-level(14px, 24px, 500, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(1.4rem, 1.5, 600, '"Poppins", arial, sans-serif'),
+  $button: mat.define-typography-level(14px, 24px, 500, '"Poppins", arial, sans-serif'),
   $input:
-    mat-typography-level(inherit, 1.125, 400, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(inherit, 1.125, 400, '"Poppins", arial, sans-serif'),
 );
 
-@include mat-core($fmxls-typography);
+@include mat.core($fmxls-typography);
 
 // Themes
 @import "themes/light-theme", "themes/black-theme", "themes/light-fmxls-theme",
@@ -55,21 +55,21 @@ $fmxls-typography: mat-typography-config(
 }
 
 .light-theme {
-  @include angular-material-theme($my-white-theme);
+  @include mat.all-component-themes($my-white-theme);
   @include custom-components-theme($my-white-theme);
 }
 
 .black-theme {
-  @include angular-material-theme($my-black-theme);
+  @include mat.all-component-themes($my-black-theme);
   @include custom-components-theme($my-black-theme);
 }
 
 .fmxls-light-theme {
-  @include angular-material-theme($fmxls-light-theme);
+  @include mat.all-component-themes($fmxls-light-theme);
   @include custom-components-theme($fmxls-light-theme);
 }
 
 .fmxls-black-theme {
-  @include angular-material-theme($fmxls-black-theme);
+  @include mat.all-component-themes($fmxls-black-theme);
   @include custom-components-theme($fmxls-black-theme);
 }

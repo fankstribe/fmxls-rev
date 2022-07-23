@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import ".~@angular/material/theming";
 @import "../abstracts/breakpoints";
 
@@ -9,14 +10,14 @@
   $foreground: map-get($theme, foreground);
 
   .table-card {
-    background-color: mat-color($background, card);
+    background-color: mat.get-color-from-palette($background, card);
     box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
   }
 
   .toolbar-actions {
-    background: mat-color($background, input);
+    background: mat.get-color-from-palette($background, input);
     h5 {
-      border-right: 1px solid mat-color($foreground, divider);
+      border-right: 1px solid mat.get-color-from-palette($foreground, divider);
     }
 
     .toolbar-actions-search {
@@ -30,20 +31,20 @@
 
   .mat-table .mat-cell img,
   .mat-table .mat-header-cell img {
-    background-color: mat-color($background, hover);
+    background-color: mat.get-color-from-palette($background, hover);
   }
 
   .mat-table .mat-header-cell {
-    color: mat-color($foreground, text);
+    color: mat.get-color-from-palette($foreground, text);
   }
 
   td.mat-cell,
   th.mat-header-cell {
-    border-bottom-color: mat-color($background, background);
+    border-bottom-color: mat.get-color-from-palette($background, background);
   }
 
   .mat-cell {
-    color: mat-color($foreground, text);
+    color: mat.get-color-from-palette($foreground, text);
   }
 
   .mat-sort-header-content {

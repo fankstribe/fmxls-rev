@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '.~@angular/material/theming';
 
 @mixin fmxls-button-theme($theme) {
@@ -9,7 +10,7 @@
 
   .mat-flat-button.mat-primary,
   .mat-mini-fab.mat-primary {
-    color: mat-color($foreground, button-text);
+    color: mat.get-color-from-palette($foreground, button-text);
   }
 
   // a,

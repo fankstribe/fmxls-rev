@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import ".~@angular/material/theming";
 
 @mixin fmxls-utils-theme($theme) {
@@ -10,15 +11,15 @@
 
   // Bordo
   .border {
-    border: 1px solid mat-color($foreground, divider);
+    border: 1px solid mat.get-color-from-palette($foreground, divider);
   }
 
   .border-top {
-    border-top: 1px solid mat-color($foreground, divider);
+    border-top: 1px solid mat.get-color-from-palette($foreground, divider);
   }
 
   .border-bottom {
-    border-bottom: 1px solid mat-color($foreground, divider);
+    border-bottom: 1px solid mat.get-color-from-palette($foreground, divider);
   }
 
   .border-0 {
@@ -27,30 +28,30 @@
 
   // Testo
   .title {
-    color: mat-color($foreground, title) !important;
+    color: mat.get-color-from-palette($foreground, title) !important;
   }
 
   .disabled {
-    color: mat-color($foreground, disabled-button);
+    color: mat.get-color-from-palette($foreground, disabled-button);
   }
 
   .text-primary {
-    color: mat-color($foreground, text) !important;
+    color: mat.get-color-from-palette($foreground, text) !important;
   }
 
   .text-accent {
-    color: mat-color($accent) !important;
+    color: mat.get-color-from-palette($accent) !important;
   }
 
   .secondary-text {
-    color: mat-color($foreground, secondary-text);
+    color: mat.get-color-from-palette($foreground, secondary-text);
   }
   .text-menu {
-    color: mat-color($foreground, text-menu);
+    color: mat.get-color-from-palette($foreground, text-menu);
   }
 
   .text-inverse {
-    color: mat-color($foreground, text-inverse);
+    color: mat.get-color-from-palette($foreground, text-inverse);
   }
 
   .text-red {
@@ -75,17 +76,17 @@
 
   // Background
   .hover:hover {
-    background-color: mat-color($background, hover);
+    background-color: mat.get-color-from-palette($background, hover);
     transition: 0.3s all;
   }
   .bg-hover {
-    background-color: mat-color($background, hover);
+    background-color: mat.get-color-from-palette($background, hover);
   }
 
   // Background
 
   .bg-accent {
-    background-color: mat-color($accent);
+    background-color: mat.get-color-from-palette($accent);
     color: white;
   }
 
@@ -101,7 +102,7 @@
 
   // Tooltip
   .tooltip {
-    background-color: mat-color($background, tooltip);
-    color: mat-color($foreground, text-inverse);
+    background-color: mat.get-color-from-palette($background, tooltip);
+    color: mat.get-color-from-palette($foreground, text-inverse);
   }
 }

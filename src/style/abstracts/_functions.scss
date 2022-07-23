@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
 
@@ -12,8 +13,8 @@
     accent: $accent,
     warn: $warn,
     is-dark: true,
-    foreground: $mat-dark-theme-foreground,
-    background: $mat-dark-theme-background
+    foreground: mat.$dark-theme-foreground-palette,
+    background: mat.$dark-theme-background-palette
   );
 }
 
