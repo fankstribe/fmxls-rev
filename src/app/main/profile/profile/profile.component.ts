@@ -48,10 +48,10 @@ export class ProfileComponent implements OnInit {
   onEditName() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '330px';
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = '500px';
     dialogConfig.maxWidth = '100vw';
-    dialogConfig.maxHeight = '100vh';
+    dialogConfig.maxHeight = '100%';
     dialogConfig.data = this.user
 
     const dialogRef = this.d.open(EditNameDialogComponent, dialogConfig);
@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
-        dialogRef.updateSize('330px');
+        dialogRef.updateSize('500px');
       }
     });
 
@@ -79,10 +79,10 @@ export class ProfileComponent implements OnInit {
   onEditEmail() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '330px';
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = '500px';
     dialogConfig.maxWidth = '100vw';
-    dialogConfig.maxHeight = '100vh';
+    dialogConfig.maxHeight = '100%';
     dialogConfig.data = this.user
 
     const dialogRef = this.d.open(EditEmailDialogComponent, dialogConfig);
@@ -91,7 +91,7 @@ export class ProfileComponent implements OnInit {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
-        dialogRef.updateSize('330px');
+        dialogRef.updateSize('500px');
       }
     });
 
@@ -108,10 +108,10 @@ export class ProfileComponent implements OnInit {
   onEditBirthDate() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '330px';
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = '500px';
     dialogConfig.maxWidth = '100vw';
-    dialogConfig.maxHeight = '100vh';
+    dialogConfig.maxHeight = '100%';
     dialogConfig.data = this.user
 
     const dialogRef = this.d.open(EditBirthDateDialogComponent, dialogConfig);
@@ -120,7 +120,7 @@ export class ProfileComponent implements OnInit {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
-        dialogRef.updateSize('330px');
+        dialogRef.updateSize('500px');
       }
     });
 

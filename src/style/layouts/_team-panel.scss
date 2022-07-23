@@ -1,8 +1,10 @@
+@import "../abstracts/breakpoints";
+
 .team-panel {
   text-align: center;
   width: 100%;
-  padding: 16px 0;
-  margin-bottom: 10px;
+  padding: 16px;
+  margin: 10px 0px 10px 0px;
 
   .img-profile {
     margin: 0 auto 16px;
@@ -18,8 +20,8 @@
   }
 
   .team-name {
-    font-size: 24px;
-    font-weight: 500;
+    @include bp-lt(medium) {
+      font-size: 20px;
+    }
   }
-
 }

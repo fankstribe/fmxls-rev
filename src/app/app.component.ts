@@ -1,7 +1,7 @@
 import { SocketService } from './core/services/socket.service';
 import { Component, OnInit } from '@angular/core';
 
-import { TitleService } from './core/services/title.service';
+import { AppService } from './core/services/app.service';
 import { SnackBarService } from './core/services/snackbar.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   spinnerName = 'page-spinner';
 
   constructor(
-    private titleService: TitleService,
+    private appService: AppService,
     private socketService: SocketService,
     private snackBar: SnackBarService,
   ) {
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.trackingRouteEvent();
+    this.appService.trackingRouteEvent();
     this.getCreateDatabaseEvent();
     this.getUpdateDatabaseEvent();
     this.socketService.onEvent('connect')

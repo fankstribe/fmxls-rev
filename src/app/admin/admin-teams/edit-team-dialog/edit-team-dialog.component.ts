@@ -92,6 +92,7 @@ export class EditTeamDialogComponent implements OnInit {
       teamName: this.editTeamForm.value.teamName,
     }
     this.teamService.updateTeam(data).subscribe((res) => {
+
       this.dialogRef.close(res);
     }, (err) => {
       this.dialogRef.close(false);

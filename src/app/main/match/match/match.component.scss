@@ -6,7 +6,6 @@
   margin: auto;
 
   .tournament-title {
-    font-size: 18px;
     text-align: center;
     margin-right: 45px;
   }
@@ -21,6 +20,7 @@
       padding: 8px 16px 0;
     }
     .team-container {
+      place-items: center;
       .team-logo {
         width: 48px;
 

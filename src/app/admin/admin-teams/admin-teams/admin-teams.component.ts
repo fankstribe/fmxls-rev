@@ -1,9 +1,13 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { BreakpointState, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import {
+  BreakpointState,
+  BreakpointObserver,
+  Breakpoints,
+} from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 
 import { TeamService } from '../../../core/services/team.service';
@@ -13,28 +17,29 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
 import { Team } from '../../../models/team';
 import { EditTeamDialogComponent } from '../edit-team-dialog/edit-team-dialog.component';
 import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.component';
+import { AppService } from '../../../core/services/app.service';
+import { CommonChild, eventSubscriber } from '../../../interfaces/common-child.interface';
 
 @Component({
   selector: 'app-admin-teams',
   templateUrl: './admin-teams.component.html',
-  styleUrls: ['./admin-teams.component.scss']
+  styleUrls: ['./admin-teams.component.scss'],
 })
-export class AdminTeamsComponent implements OnInit, AfterViewInit {
-  isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
-
+export class AdminTeamsComponent implements OnInit, AfterViewInit, CommonChild, OnDestroy {
+  isSmall: Observable<BreakpointState> = this.breakpointObs.observe([
+    Breakpoints.XSmall,
+  ]);
   dataSource = new MatTableDataSource<Team>();
-
   noItems = false;
   noManager = 'assets/images/no_manager.png';
-
-  isLoadingResults = true;
+  itemsCount: number;
 
   displayedColumns: string[] = [
     'img',
     'teamName',
     'user',
     'createdAt',
-    'action'
+    'action',
   ];
 
   @ViewChild(MatTable) table: MatTable<Team>;
@@ -46,8 +51,12 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
     private d: MatDialog,
     private dialogService: DialogService,
     private breakpointObs: BreakpointObserver,
-    private snackBar: SnackBarService
-  ) {}
+    private snackBar: SnackBarService,
+    private appService: AppService
+  ) {
+    this.add = this.add.bind(this);
+    eventSubscriber(appService.openSubscription, this.add);
+  }
 
   ngOnInit() {
     this.teamsTableList();
@@ -55,7 +64,10 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (item: any, property: string): string => {
+    this.dataSource.sortingDataAccessor = (
+      item: any,
+      property: string
+    ): string => {
       if (property === 'teamName') {
         return item.teamName.toLocaleLowerCase();
       } else if (property === 'user') {
@@ -63,16 +75,16 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
       } else {
         return item[property];
       }
-    }
+    };
     this.dataSource.paginator = this.paginator;
   }
 
   teamsTableList() {
-    this.teamService.getTeams().subscribe(list => {
-      !list.length ? this.noItems = true : this.noItems = false;
+    this.teamService.getTeams().subscribe((list) => {
+      !list.length ? (this.noItems = true) : (this.noItems = false);
       this.dataSource.data = list;
-      this.isLoadingResults = false;
-    })
+      this.itemsCount = list.length;
+    });
   }
 
   doFilter($event: any) {
@@ -91,7 +103,7 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
 
     const dialogRef = this.d.open(AddTeamDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
+    const smallDialogSub = this.isSmall.subscribe((size) => {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
@@ -116,11 +128,11 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
     dialogConfig.width = '500px';
     dialogConfig.maxWidth = '100vw';
     dialogConfig.maxHeight = '100%';
-    dialogConfig.data = {data: this.dataSource.data[id]};
+    dialogConfig.data = { data: this.dataSource.data[id] };
 
     const dialogRef = this.d.open(EditTeamDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
+    const smallDialogSub = this.isSmall.subscribe((size) => {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
@@ -130,7 +142,7 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.updateRowData(res.team)
+        this.updateRowData(res);
         this.snackBar.showSuccessSnackbar('Squadra modificata!');
       }
       smallDialogSub.unsubscribe();
@@ -139,15 +151,19 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
 
   delete(_id: number) {
     const data = this.dataSource.data[_id];
-    const dialogRef = this.dialogService.confirmDialog('Vuoi davvero eliminare questa squadra?');
-    dialogRef.afterClosed().subscribe(res => {
+    const dialogRef = this.dialogService.confirmDialog(
+      'Vuoi davvero eliminare questa squadra?'
+    );
+    dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.teamService.deleteTeam(data._id).subscribe(() => {
           this.deleteRowData(data._id);
-          this.snackBar.showSuccessSnackbar(`${data.teamName} eliminato con successo!`);
+          this.snackBar.showSuccessSnackbar(
+            `${data.teamName} eliminato con successo!`
+          );
         });
       }
-    })
+    });
   }
 
   addRowData(team: Team): void {
@@ -156,16 +172,16 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
   }
 
   deleteRowData(_id: number): void {
-    const i = this.dataSource.data.findIndex(el => el._id === _id);
+    const i = this.dataSource.data.findIndex((el) => el._id === _id);
     if (i !== -1) {
       this.dataSource.data.splice(i, 1);
       this.refreshTable();
     }
   }
 
-
   updateRowData(team: Team): void {
-    const i = this.dataSource.data.findIndex(el => el._id === team._id);
+
+    const i = this.dataSource.data.findIndex((el) => el._id === team._id);
     if (i !== -1) {
       this.dataSource.data[i] = team;
       this.refreshTable();
@@ -177,4 +193,7 @@ export class AdminTeamsComponent implements OnInit, AfterViewInit {
     this.table.renderRows();
   }
 
+  ngOnDestroy() {
+    eventSubscriber(this.appService.openSubscription, this.add, true);
+  }
 }

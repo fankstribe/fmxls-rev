@@ -7,7 +7,8 @@ export class ThemeService {
   themes: Array<any> = [
     { value: 'light', name: 'Chiaro', cssClass: 'light-theme' },
     { value: 'black', name: 'Scuro', cssClass: 'black-theme' },
-    { value: 'fmxls-light', name: 'FMXLS-Chiaro', cssClass: 'fmxls-light-theme' }
+    { value: 'fmxls-light', name: 'FMXLS-Chiaro', cssClass: 'fmxls-light-theme' },
+    { value: 'fmxls-black', name: 'FMXLS-Scuro', cssClass: 'fmxls-black-theme' }
   ];
 
   adminTheme: Array<any> = [

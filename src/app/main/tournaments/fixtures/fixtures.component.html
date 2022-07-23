@@ -5,7 +5,7 @@
   gdGap.lt-sm="16px 0px"
 >
   <ng-container *ngFor="let fixture of matchesItem; let i = index">
-    <p class="matchday-title" gdColumn="1/12">Giornata {{ i + 1 }}</p>
+    <h5 class="m-b-12 title" gdColumn="1/12">Giornata {{ i + 1 }}</h5>
     <ng-container *ngFor="let match of fixture">
       <div
         class="fixture-page"
@@ -15,26 +15,38 @@
       >
         <mat-card
           class="m-b-0 cursor-pointer hover"
-          routerLink="/match/{{match._id}}"
+          routerLink="/match/{{ match._id }}"
         >
           <div fxLayout="column">
             <div fxLayoutAlign="space-between">
               <div class="teams">
                 <div class="teams-content" fxLayoutAlign="center center">
                   <div class="team-logo bg-hover">
-                    <img [src]="match.homeTeam ? (match.homeTeam?.img | images: 'teams') : 'assets/images/bye.png'" />
+                    <img
+                      [src]="
+                        match.homeTeam
+                          ? (match.homeTeam?.img | images: 'teams')
+                          : 'assets/images/bye.png'
+                      "
+                    />
                   </div>
                   <div class="team-name">
-                    {{ match.homeTeam?.teamName || 'Riposo' }}
+                    {{ match.homeTeam?.teamName || "Riposo" }}
                   </div>
                   <div class="score"></div>
                 </div>
                 <div class="teams-content m-t-24" fxLayoutAlign="center center">
                   <div class="team-logo bg-hover">
-                    <img [src]="match.awayTeam ? (match.awayTeam?.img | images: 'teams') : 'assets/images/bye.png'" />
+                    <img
+                      [src]="
+                        match.awayTeam
+                          ? (match.awayTeam?.img | images: 'teams')
+                          : 'assets/images/bye.png'
+                      "
+                    />
                   </div>
                   <div class="team-name">
-                    {{ match.awayTeam?.teamName || 'Riposo'}}
+                    {{ match.awayTeam?.teamName || "Riposo" }}
                   </div>
                   <div class="score"></div>
                 </div>

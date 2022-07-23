@@ -8,12 +8,10 @@
     height: 100vh;
 
     .sidenav {
-      width: 265px;
-      border-right: none;
+      width: 260px;
 
       .mat-toolbar {
         padding: 0 1.5rem;
-        justify-content: center;
       }
 
       .brand {
@@ -21,7 +19,7 @@
         background-size: contain;
         width: 135px;
         height: 50px;
-        margin: 0 auto;
+        margin: 10px 0 0 0;
       }
       .team-panel .divider {
         padding-top: 15px;

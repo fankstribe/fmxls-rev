@@ -1,6 +1,6 @@
 <div class="container-wrap">
   <div *ngIf="loaderService.isLoading | async" class="loader-container">
-    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar color="primary" mode="indeterminate"></mat-progress-bar>
   </div>
   <mat-sidenav-container class="sidenav-container" autosize fullscreen>
     <mat-sidenav
@@ -25,8 +25,8 @@
     <app-notification (sidenavRightClose)="sidenavRight.close()"></app-notification>
     </mat-sidenav>
 
-    <mat-sidenav-content (scroll)="onContentScroll($event)">
-      <div class="main-container inactive" #mainContainer>
+    <mat-sidenav-content>
+      <div class="main-container">
         <app-topnav [sidenavRight]="sidenavRight" [sidenav]="sidenav"></app-topnav>
         <div
           class="main-content"

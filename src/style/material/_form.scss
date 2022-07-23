@@ -11,11 +11,11 @@
   .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
   .mat-form-field.mat-focused .mat-form-field-label
   {
-    color: mat-color($accent);
+    color: mat-color($primary);
   }
 
   .mat-form-field.mat-focused .mat-form-field-ripple {
-    background-color: mat-color($accent);
+    background-color: mat-color($primary);
   }
 
   .mat-primary .mat-option.mat-selected:not(.mat-option-disabled)
@@ -38,11 +38,14 @@
   }
 
   .mat-pseudo-checkbox-checked {
-    background: mat-color($accent) !important;
+    background: mat-color($primary) !important;
   }
 
   .mat-form-field-appearance-outline .mat-form-field-outline {
     color: mat-color($foreground, divider);
   }
 
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: mat-color($background, input);
+  }
 }

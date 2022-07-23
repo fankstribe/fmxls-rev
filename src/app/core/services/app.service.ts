@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Subject } from "rxjs";
 import { filter, map, mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TitleService {
+export class AppService {
   title: string;
+  openSubscription = new Subject();
 
   constructor(
     private router: Router,
@@ -33,5 +35,9 @@ export class TitleService {
       .subscribe(title => {
         this.title = title;
       });
+  }
+
+  openDialog() {
+    this.openSubscription.next();
   }
 }

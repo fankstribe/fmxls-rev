@@ -8,9 +8,9 @@
     <img class="bg-hover" [src]="tournamentImg | images: 'tournaments'" />
     <div class="header-tabs-content">
       <div class="tournament-name">
-        <span>{{tournamentName}}</span>
+        <h3 class="m-b-0 title text-white">{{tournamentName}}</h3>
       </div>
-      <nav class="border-0" mat-tab-nav-bar color="accent">
+      <nav class="border-0" mat-tab-nav-bar color="primary">
         <a mat-tab-link
           *ngFor="let link of navLinks"
           [routerLink]="link.link"

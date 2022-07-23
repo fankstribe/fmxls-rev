@@ -1,12 +1,11 @@
 <mat-card class="auth-card m-b-0">
   <div class="auth-logo"></div>
   <div class="text-center p-t-12">
-    <h2>Registrati</h2>
+    <h4>Registrati</h4>
   </div>
   <mat-card-content>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmitForm()">
       <mat-form-field
-        appearance="outline"
         class="full-width"
         [ngClass]="routeAnimationsElements"
       >
@@ -24,7 +23,6 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field
-        appearance="outline"
         class="full-width"
         [ngClass]="routeAnimationsElements"
       >
@@ -42,7 +40,6 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field
-        appearance="outline"
         class="full-width"
         [ngClass]="routeAnimationsElements"
       >
@@ -62,7 +59,6 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field
-        appearance="outline"
         class="full-width"
         [ngClass]="routeAnimationsElements"
       >
@@ -86,7 +82,6 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field
-        appearance="outline"
         class="full-width"
         [ngClass]="routeAnimationsElements"
       >
@@ -113,7 +108,7 @@
           <button
             mat-flat-button
             type="submit"
-            color="accent"
+            color="primary"
             [disabled]="!signupForm.valid"
             [ngClass]="routeAnimationsElements"
           >

@@ -12,9 +12,9 @@ export class BusyService {
     this.busyReqCount++;
     // setTimeout(() => {
       this.spinnerService.show(undefined, {
-        bdColor: '#11171d',
+        bdColor: 'rgba(241, 243, 244, 0.7)',
         color: '#fff',
-        type: 'ball-scale-pulse',
+        type: '',
         size: 'medium',
       });
     // }, 2000);

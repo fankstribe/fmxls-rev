@@ -1,24 +1,28 @@
 <form [formGroup]="nameForm" (ngSubmit)="onSubmitForm()">
-  <div mat-dialog-title>Modifica Nome</div>
-  <div mat-dialog-content>
-    <div fxLayout fxFlex="100">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Nome</mat-label>
-        <input
-          matInput
-          name="name"
-          autocomplete="name"
-          autocorrect="off"
-          formControlName="name"
-        />
-        <mat-error *ngIf="formError.name">
-          {{ formError.name }}
-        </mat-error>
-      </mat-form-field>
-    </div>
+  <div fxLayoutAlign="start center"  class="mat-dialog-title">
+    <img class="img-user">
+    <h4 class="m-b-0 title" fxFlex="auto">Modifica Nome</h4>
+    <button mat-dialog-close mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  <div mat-dialog-actions align="end">
+  <mat-dialog-content>
+    <mat-form-field class="full-width m-t-24">
+      <mat-label>Nome</mat-label>
+      <input
+        matInput
+        name="name"
+        autocomplete="name"
+        autocorrect="off"
+        formControlName="name"
+      />
+      <mat-error *ngIf="formError.name">
+        {{ formError.name }}
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
     <button mat-button type="button" mat-dialog-close>Annulla</button>
-    <button mat-button type="submit" color="accent" [disabled]="!nameForm.valid">Salva</button>
-  </div>
+    <button mat-button type="submit" color="primary" [disabled]="!nameForm.valid">Salva</button>
+  </mat-dialog-actions>
 </form>

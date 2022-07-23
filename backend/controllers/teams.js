@@ -78,6 +78,7 @@ const updateTeam = async(req, res = response) => {
     const updateTeam = await Team.findByIdAndUpdate(id, teamDB, {
       new: true
     })
+    .populate("user", "name")
 
     res.json({
       team: updateTeam,

@@ -19,4 +19,8 @@
       }
     }
   }
+
+  .fm-menu .menu-wrap .line {
+    background-color: mat-color($foreground, icon);;
+  }
 }

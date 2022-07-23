@@ -1,5 +1,5 @@
-@import '.~@angular/material/theming';
-@import '../abstracts/breakpoints';
+@import ".~@angular/material/theming";
+@import "../abstracts/breakpoints";
 
 @mixin fmxls-table-theme($theme) {
   $primary: map-get($theme, primary);
@@ -10,36 +10,21 @@
 
   .table-card {
     background-color: mat-color($background, card);
-    @include mat-elevation(2);
-
-    .toolbar-actions {
-      background-color: mat-color($primary, 700);
-
-      h3 {
-        border-right: 1px solid mat-color($foreground, divider);
-      }
-
-      .toolbar-actions-search {
-        background-color: mat-color($background, card);
-
-        input {
-          border-width: 0;
-          outline: none;
-          background-color: transparent;
-          color: inherit;
-        }
-
-      }
-    }
+    box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
   }
 
-  tr.element-row:hover {
-    @include bp-gt(desktop) {
-    background: mat-color($background, hover);
-
-    .mat-table-sticky {
-      background: none;
+  .toolbar-actions {
+    background: mat-color($background, input);
+    h5 {
+      border-right: 1px solid mat-color($foreground, divider);
     }
+
+    .toolbar-actions-search {
+      input {
+        border-width: 0;
+        outline: none;
+        background-color: transparent;
+      }
     }
   }
 
@@ -48,4 +33,20 @@
     background-color: mat-color($background, hover);
   }
 
+  .mat-table .mat-header-cell {
+    color: mat-color($foreground, text);
+  }
+
+  td.mat-cell,
+  th.mat-header-cell {
+    border-bottom-color: mat-color($background, background);
+  }
+
+  .mat-cell {
+    color: mat-color($foreground, text);
+  }
+
+  .mat-sort-header-content {
+    font-weight: 600;
+  }
 }

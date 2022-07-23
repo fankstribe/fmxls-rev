@@ -1,20 +1,13 @@
 <div class="table-card border-radius">
   <div fxLayout fxLayoutAlign="start center" class="m-t-4 toolbar-actions">
-    <mat-icon
-      fxHide
-      fxShow.gt-xs
-      class="sidemenu-icon material-icons-outlined text-accent m-r-8"
-      >face</mat-icon
-    >
+    <mat-icon fxHide fxShow.gt-xs class="sidemenu-icon material-icons-outlined text-accent m-r-8">admin_panel_settings</mat-icon>
     <h5
-      matTooltip="Totale Manager"
+      matTooltip="Totale Squadre"
       matTooltipClass="tooltip"
-      fxHide
-      fxShow.gt-xs
-      fxFlex="none"
+      fxHide fxShow.gt-xs fxFlex="none"
       class="p-r-16 m-r-16 m-y-0"
     >
-      {{ itemsCount }}
+      {{itemsCount}}
     </h5>
     <div
       class="toolbar-actions-search p-x-16"
@@ -44,41 +37,46 @@
     </button>
   </div>
 
-  <table
+  <mat-table
     #table
     [hidden]="noItems"
-    mat-table
+
     class="full-width"
     [dataSource]="dataSource"
     matSort
     matSortActive="createdAt"
     matSortDirection="desc"
   >
-    <ng-container matColumnDef="user" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Manager</th>
-      <td
-        class="cell semi-bold title cell-truncate-text"
-        mat-cell
-        *matCellDef="let managers"
-      >
-        {{ managers.user }}
+    <ng-container matColumnDef="img">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let teams">
+        <img [src]="teams.img | images: 'teams'" alt="" class="img-profile" />
       </td>
     </ng-container>
-    <ng-container matColumnDef="team">
+    <ng-container matColumnDef="teamName" >
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Squadra</th>
-      <td class="cell" mat-cell *matCellDef="let managers">
-        {{ managers.team }}
+      <td class="cell semi-bold text-primary cell-truncate-text" mat-cell *matCellDef="let teams">
+        {{ teams.teamName }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Manager</th>
+      <td class="cell" mat-cell *matCellDef="let teams">
+        <span *ngIf="teams.user">{{ teams.user }}</span>
+        <span *ngIf="!teams?.user"
+          ><img src="assets/images/no_manager.png" alt="" class="img-profile"
+        /></span>
       </td>
     </ng-container>
     <ng-container matColumnDef="createdAt">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Creazione</th>
-      <td class="cell" mat-cell *matCellDef="let managers">
-        {{ managers.createdAt | date }}
+      <td class="cell" mat-cell *matCellDef="let teams">
+        {{ teams.createdAt | date }}
       </td>
     </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Modifica</th>
-      <td class="cell" mat-cell *matCellDef="let managers">
+      <td class="cell" mat-cell *matCellDef="let teams">
         <button
           mat-icon-button
           [matMenuTriggerFor]="menu"
@@ -89,14 +87,14 @@
         <mat-menu #menu="matMenu" xPosition="before">
           <button
             mat-menu-item
-            (click)="update(dataSource.data.indexOf(managers))"
+            (click)="update(dataSource.data.indexOf(teams))"
           >
             <mat-icon class="material-icons-outlined">create</mat-icon>
             Modifica
           </button>
           <button
             mat-menu-item
-            (click)="delete(dataSource.data.indexOf(managers))"
+            (click)="delete(dataSource.data.indexOf(teams))"
           >
             <mat-icon class="material-icons-outlined">delete</mat-icon>
             Elimina
@@ -104,15 +102,16 @@
         </mat-menu>
       </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky"></tr>
     <tr
       class="element-row"
       mat-row
-      *matRowDef="let managers; columns: displayedColumns"
-      (click)="update(dataSource.data.indexOf(managers))"
+      *matRowDef="let teams; columns: displayedColumns"
+      (click)="update(dataSource.data.indexOf(teams))"
     ></tr>
-  </table>
+  </mat-table>
   <mat-paginator
+    showFirstLastButtons
     [pageSize]="50"
     [pageSizeOptions]="[5, 10, 25, 50, 100]"
   ></mat-paginator>

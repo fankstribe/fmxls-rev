@@ -24,7 +24,7 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Player>();
   noItems = false;
   noPlayer = 'assets/images/no_player.png';
-  isLoadingResults = true;
+  itemsCount: number
 
   displayedColumns: string[] = [
     'img',
@@ -53,6 +53,7 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.playersTableList();
+
   }
 
   ngAfterViewInit() {
@@ -81,7 +82,7 @@ export class AdminPlayersComponent implements OnInit, AfterViewInit {
     this.playerService.getPlayers().subscribe(list => {
       !list.length ? this.noItems = true : this.noItems = false;
       this.dataSource.data = list;
-      this.isLoadingResults = false;
+      this.itemsCount = list.length;
     })
   }
 

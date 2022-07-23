@@ -4,16 +4,46 @@
   gdGap="16px 32px"
   gdGap.lt-sm="16px 0"
 >
-  <div
-    gdColumn="span 12"
-  >
+  <div gdColumn="span 12">
     <mat-card class="p-0">
       <div fxLayoutAlign="center center" class="border-bottom p-24">
-        <h3 fxFlex="auto" class="m-0">Database</h3>
-        <button mat-icon-button [disabled]="dbName || checkCreateStatus" (click)="addDatabase()" matTooltip="Carica DB" matTooltipClass="tooltip"><mat-icon class="material-icons-outlined">add</mat-icon></button>
-        <button mat-icon-button [disabled]="!dbName || checkUpdateStatus" (click)="updateDatabase()" matTooltip="Aggiorna DB" matTooltipClass="tooltip"><mat-icon class="material-icons-outlined">update</mat-icon></button>
-        <button mat-icon-button [disabled]="!dbName || checkUpdateStatus" (click)="deleteDatabase()" matTooltip="Elimina DB" matTooltipClass="tooltip"><mat-icon [ngClass]="dbName ? 'text-red' : 'disabled'" class="material-icons-outlined">delete</mat-icon></button>
-        <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+        <h4 fxFlex="auto" class="m-0 title">Database</h4>
+        <button
+          mat-icon-button
+          [disabled]="dbName || checkCreateStatus"
+          (click)="addDatabase()"
+          matTooltip="Carica DB"
+          matTooltipClass="tooltip"
+        >
+          <mat-icon class="material-icons-outlined">add</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [disabled]="!dbName || checkUpdateStatus"
+          (click)="updateDatabase()"
+          matTooltip="Aggiorna DB"
+          matTooltipClass="tooltip"
+        >
+          <mat-icon class="material-icons-outlined">update</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [disabled]="!dbName || checkUpdateStatus"
+          (click)="deleteDatabase()"
+          matTooltip="Elimina DB"
+          matTooltipClass="tooltip"
+        >
+          <mat-icon
+            [ngClass]="dbName ? 'text-red' : 'disabled'"
+            class="material-icons-outlined"
+            >delete</mat-icon
+          >
+        </button>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          (click)="$event.stopPropagation()"
+        >
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
@@ -32,30 +62,76 @@
         </mat-menu>
       </div>
       <div fxLayout fxLayout.lt-sm="column" class="p-24">
-        <div fxLayout="column" fxFlex="50%" class="p-t-16 p-b-24 p-l-16 p-r-16">
-          <h1 *ngIf="dbName" class="m-b-0 bold">{{ dbName | uppercase }}</h1>
-          <h1 *ngIf="!dbName" class="m-b-0 bold">Vuoto</h1>
-          <h3 class="m-b-0 m-t-0 muted">Fonte</h3>
-          <div fxLayoutAlign="start center" fxLayoutGap="8px" class="m-t-12">
-            <mat-icon matTooltip="Data Creazione" matTooltipClass="tooltip" *ngIf="createdAt"  class="text-purple material-icons-outlined">add</mat-icon>
-            <p *ngIf="createdAt" class="m-b-0">Creato: <span>{{ createdAt | date }}</span></p>
+        <div
+          fxFlex.xs="100"
+          fxFlex="50"
+          fxLayout.xs="column"
+          class="p-t-16 p-b-24 p-l-16 p-r-16"
+        >
+          <h2 *ngIf="dbName" class="title text-accent">
+            {{ dbName | uppercase }}
+          </h2>
+          <h2 *ngIf="!dbName" class="title text-primary">Vuoto</h2>
+          <h5>Fonte</h5>
+          <div fxLayoutAlign="start center" class="m-b-4" fxLayoutGap="8px">
+            <mat-icon
+              matTooltip="Data Creazione"
+              matTooltipClass="tooltip"
+              *ngIf="createdAt"
+              class="text-purple material-icons-outlined"
+              >fiber_new</mat-icon
+            >
+            <p *ngIf="createdAt" class="m-b-0">
+              Creato: <span>{{ createdAt | date }}</span>
+            </p>
           </div>
-          <div fxLayoutAlign="start center" fxLayoutGap="8px" class="m-t-12">
-            <mat-icon matTooltip="Ultimo Aggiornamento" matTooltipClass="tooltip" *ngIf="updatedAt"  class="text-green material-icons-outlined">updated</mat-icon>
-            <p *ngIf="updatedAt" class="m-b-0">Aggiornato: <span>{{ updatedAt | date }}</span></p>
+          <div fxLayoutAlign="start center" fxLayoutGap="8px">
+            <mat-icon
+              matTooltip="Ultimo Aggiornamento"
+              matTooltipClass="tooltip"
+              *ngIf="updatedAt"
+              class="text-green material-icons-outlined"
+              >updated</mat-icon
+            >
+            <p *ngIf="updatedAt" class="m-b-0">
+              Aggiornato: <span>{{ updatedAt | date }}</span>
+            </p>
           </div>
         </div>
-        <div fxFlex="50%" class="p-t-16 p-b-24 p-l-16 p-r-16">
-          <h1 *ngIf="countPlayers" class="m-b-0 bold">{{ countPlayers | number}}</h1>
-          <h1 *ngIf="!countPlayers" class="m-b-0 bold">0</h1>
-          <h3 class="m-b-0 m-t-0 muted">Giocatori</h3>
-          <div fxLayoutAlign="start center" fxLayoutGap="8px" class="m-t-12">
-            <mat-icon matTooltip="Ultimo Aggiornamento" matTooltipClass="tooltip" *ngIf="updatedAt"  class="text-purple material-icons-outlined">upgrade</mat-icon>
-            <p *ngIf="updatedAt" class="m-b-0">Nuovi: <span>{{ addedPlayers | number}}</span></p>
+        <div
+          fxFlex.xs="100"
+          fxFlex="50"
+          fxLayout.xs="column"
+          class="p-t-16 p-b-24 p-l-16 p-r-16"
+        >
+          <h2 *ngIf="countPlayers" class="title text-accent">
+            {{ countPlayers | number }}
+          </h2>
+          <h2 *ngIf="!countPlayers" class="title text-primary">0</h2>
+          <h5>Giocatori</h5>
+          <div fxLayoutAlign="start center" class="m-b-4" fxLayoutGap="8px">
+            <mat-icon
+              matTooltip="Ultimo Aggiornamento"
+              matTooltipClass="tooltip"
+              *ngIf="updatedAt"
+              class="text-purple material-icons-outlined"
+              >upgrade</mat-icon
+            >
+            <p *ngIf="updatedAt" class="m-b-0">
+              Nuovi: <span>{{ addedPlayers | number }}</span>
+            </p>
           </div>
-          <div fxLayoutAlign="start center" fxLayoutGap="8px" class="m-t-12">
-            <mat-icon matTooltip="Ultimo aggiornamento" matTooltipClass="tooltip" *ngIf="updatedAt"  class="text-deep-orange material-icons-outlined">refresh</mat-icon>
-            <p *ngIf="updatedAt" class="m-b-0">Aggiornati: <span>{{ modifiedPlayers | number}}</span></p>
+          <div fxLayoutAlign="start center" fxLayoutGap="8px">
+            <mat-icon
+              matTooltip="Ultimo aggiornamento"
+              matTooltipClass="tooltip"
+              *ngIf="updatedAt"
+              class="text-deep-orange material-icons-outlined"
+              >refresh</mat-icon
+            >
+            <p *ngIf="updatedAt" class="m-b-0">
+              Aggiornati: <span>{{ modifiedPlayers | number }}</span>
+            </p>
           </div>
         </div>
       </div>

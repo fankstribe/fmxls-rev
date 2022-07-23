@@ -87,7 +87,7 @@ export class AddTournamentDialogComponent implements OnInit {
       format: this.addTournamentForm.value.format
     }
     this.tournamentService.createTournament(data).subscribe((res) => {
-      this.dialogRef.close(res);
+      this.dialogRef.close(data);
     }, err => {
       this.dialogRef.close(false);
     });

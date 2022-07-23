@@ -1,105 +1,181 @@
 <div class="table-card border-radius">
-  <div fxLayout fxLayoutAlign="start center" class="toolbar-actions">
-    <h3 fxHide fxShow.gt-xs fxFlex="none" class="p-r-16 m-r-16 m-y-0">Cerca Torneo</h3>
-    <div class="toolbar-actions-search p-x-16" fxFlex="400px" fxFlex.lt-md="auto" fxLayout fxLayoutAlign="start center">
+  <div fxLayout fxLayoutAlign="start center" class="m-t-4 toolbar-actions">
+    <mat-icon fxHide fxShow.gt-xs class="sidemenu-icon material-icons-outlined text-accent m-r-8">emoji_events</mat-icon>
+    <h5
+      matTooltip="Totale Tornei"
+      matTooltipClass="tooltip"
+      fxHide fxShow.gt-xs fxFlex="none"
+      class="p-r-16 m-r-16 m-y-0"
+    >
+      {{itemsCount}}
+    </h5>
+    <div
+      class="toolbar-actions-search p-x-16"
+      fxFlex="400px"
+      fxFlex.lt-md="auto"
+      fxLayout
+      fxLayoutAlign="start center"
+    >
       <mat-icon>search</mat-icon>
       <input
         class="p-x-16 p-y-12 full-width"
         placeholder="Cerca..."
         type="text"
         (keyup)="doFilter($event)"
-      >
+      />
     </div>
     <span fxFlex></span>
     <button
       fxFlex="none"
       mat-mini-fab
       class="mat-elevation-z0 m-l-16"
-      color="accent"
+      color="primary"
       type="button"
       (click)="add()"
     >
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <mat-progress-bar *ngIf="isLoadingResults" color="accent" mode="indeterminate" bufferValue="75" value="50"></mat-progress-bar>
 
-    <table [hidden]="noItems" mat-table class="full-width" [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
-      <ng-container matColumnDef="img">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let tournaments">
-          <img [src]="tournaments.img | images: 'tournaments'" alt="" class="img-profile">
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="tournamentName" sticky>
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Torneo</th>
-        <td class="cell cell-truncate-text" mat-cell *matCellDef="let tournaments">{{tournaments.tournamentName}}</td>
-      </ng-container>
-      <ng-container matColumnDef="teams">
-        <th mat-header-cell *matHeaderCellDef>Nr. Squadre</th>
-        <td class="cell" mat-cell *matCellDef="let tournaments">{{tournaments.teams.length}}</td>
-      </ng-container>
-      <ng-container matColumnDef="format">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
-        <td class="cell" mat-cell *matCellDef="let tournaments">
-          <span *ngIf="tournaments.format === 'double_round_robin'">Girone all'italiana</span>
-          <span *ngIf="tournaments.format === 'eliminazione'">Eliminazione</span>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="status">
-        <th mat-header-cell matTooltip="Attiva/Disattiva Torneo" matTooltipClass="tooltip" *matHeaderCellDef mat-sort-header>*Stato</th>
-        <td class="cell" mat-cell *matCellDef="let tournaments" (click)="$event.stopPropagation()">
-          <mat-slide-toggle
-            [(ngModel)]="tournaments.status"
-            (change)="onUpdateState(tournaments)"
-          ></mat-slide-toggle>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Creazione</th>
-        <td class="cell" mat-cell *matCellDef="let tournaments">{{tournaments.createdAt | date}}</td>
-      </ng-container>
-      <ng-container matColumnDef="fixtures">
-        <th mat-header-cell *matHeaderCellDef>Incontri</th>
-        <td class="cell" mat-cell *matCellDef="let tournaments" (click)="$event.stopPropagation()">
-          <button mat-icon-button (click)="updateMatches(dataSource.data.indexOf(tournaments))">
-            <mat-icon class="material-icons-outlined">today</mat-icon>
+  <table
+    [hidden]="noItems"
+    mat-table
+    class="full-width"
+    [dataSource]="dataSource"
+    matSort
+    matSortActive="createdAt"
+    matSortDirection="desc"
+  >
+    <ng-container matColumnDef="img">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let tournaments">
+        <img
+          [src]="tournaments.img | images: 'tournaments'"
+          alt=""
+          class="img-profile"
+        />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="tournamentName" sticky>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Torneo</th>
+      <td
+        class="cell semi-bold cell-truncate-text"
+        mat-cell
+        *matCellDef="let tournaments"
+      >
+        {{ tournaments.tournamentName }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="teams">
+      <th mat-header-cell *matHeaderCellDef>Nr. Squadre</th>
+      <td class="cell" mat-cell *matCellDef="let tournaments">
+        {{ tournaments.teams.length }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="format">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+      <td class="cell" mat-cell *matCellDef="let tournaments">
+        <span *ngIf="tournaments.format === 'double_round_robin'"
+          >Girone all'italiana</span
+        >
+        <span *ngIf="tournaments.format === 'eliminazione'">Eliminazione</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th
+        mat-header-cell
+        matTooltip="Attiva/Disattiva Torneo"
+        matTooltipClass="tooltip"
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        *Stato
+      </th>
+      <td
+        class="cell"
+        mat-cell
+        *matCellDef="let tournaments"
+        (click)="$event.stopPropagation()"
+      >
+        <mat-slide-toggle
+          color="primary"
+          [(ngModel)]="tournaments.status"
+          (change)="onUpdateState(tournaments)"
+        ></mat-slide-toggle>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Data Creazione</th>
+      <td class="cell" mat-cell *matCellDef="let tournaments">
+        {{ tournaments.createdAt | date }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="fixtures">
+      <th mat-header-cell *matHeaderCellDef>Incontri</th>
+      <td
+        class="cell"
+        mat-cell
+        *matCellDef="let tournaments"
+        (click)="$event.stopPropagation()"
+      >
+        <button
+          mat-icon-button
+          (click)="updateMatches(dataSource.data.indexOf(tournaments))"
+        >
+          <mat-icon class="material-icons-outlined">today</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Modifica</th>
+      <td class="cell" mat-cell *matCellDef="let tournaments">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          (click)="$event.stopPropagation()"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button
+            mat-menu-item
+            (click)="update(dataSource.data.indexOf(tournaments))"
+          >
+            <mat-icon class="material-icons-outlined">create</mat-icon>
+            Modifica
           </button>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>Modifica</th>
-        <td class="cell" mat-cell *matCellDef="let tournaments">
-          <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
-            <mat-icon>more_vert</mat-icon>
+          <button
+            mat-menu-item
+            (click)="delete(dataSource.data.indexOf(tournaments))"
+          >
+            <mat-icon class="material-icons-outlined">delete</mat-icon>
+            Elimina
           </button>
-          <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item (click)="update(dataSource.data.indexOf(tournaments))">
-              <mat-icon class="material-icons-outlined">create</mat-icon>
-              Modifica
-            </button>
-            <button mat-menu-item (click)="delete(dataSource.data.indexOf(tournaments))">
-              <mat-icon class="material-icons-outlined">delete</mat-icon>
-              Elimina
-            </button>
-          </mat-menu>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr class="element-row" mat-row *matRowDef="let tournaments; columns: displayedColumns;" (click)="update(dataSource.data.indexOf(tournaments))"></tr>
-    </table>
+        </mat-menu>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      class="element-row"
+      mat-row
+      *matRowDef="let tournaments; columns: displayedColumns"
+      (click)="update(dataSource.data.indexOf(tournaments))"
+    ></tr>
+  </table>
 
-  <mat-paginator [pageSize]="50" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+  <mat-paginator
+    [pageSize]="50"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+  ></mat-paginator>
 
-    <div [hidden]="!noItems" class="no-data-found-wrapper">
-      <div class="no-data-found">
-        <div class="no-data-found-container">
-          <div class="no-data-found-img">
-            <img src="assets/images/no_data.png" />
-          </div>
-          <div class="no-data-found-text">Nessun dato presente</div>
+  <div [hidden]="!noItems" class="no-data-found-wrapper">
+    <div class="no-data-found">
+      <div class="no-data-found-container">
+        <div class="no-data-found-img">
+          <img src="assets/images/no_data.png" />
         </div>
+        <div class="no-data-found-text">Nessun dato presente</div>
       </div>
     </div>
-
+  </div>
 </div>

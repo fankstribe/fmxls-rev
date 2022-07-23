@@ -1,51 +1,18 @@
-$my-black-theme-primary: (
-  50: #e4eaf6,
-  100: #bccae9,
-  200: #8fa6db,
-  300: #6282cd,
-  400: #4068c2,
-  500: #1e4db7,
-  600: #1a46b0,
-  700: #163da7,
-  800: #12349f,
-  900: #0a2590,
-  A100: #bec8ff,
-  A200: #8b9dff,
-  A400: #5872ff,
-  A700: #3f5dff,
-  contrast: (
-    50: #000000,
-    100: #000000,
-    200: #000000,
-    300: #000000,
-    400: #ffffff,
-    500: #ffffff,
-    600: #ffffff,
-    700: #ffffff,
-    800: #ffffff,
-    900: #ffffff,
-    A100: #000000,
-    A200: #000000,
-    A400: #ffffff,
-    A700: #ffffff,
-  ),
-);
-
-$my-black-theme-accent: (
-  50: #e7f9f0,
-  100: #c4efd9,
-  200: #9ce5bf,
-  300: #74dba5,
-  400: #57d392,
-  500: #39cb7f,
-  600: #33c677,
-  700: #2cbe6c,
-  800: #24b862,
-  900: #17ac4f,
-  A100: #e0ffea,
-  A200: #adffc9,
-  A400: #7affa7,
-  A700: #60ff96,
+$black-fmxls-theme-primary: (
+  50: #e0f9f6,
+  100: #b3f0ea,
+  200: #80e7dc,
+  300: #4dddcd,
+  400: #26d5c3,
+  500: #00ceb8,
+  600: #00c9b1,
+  700: #00c2a8,
+  800: #00bca0,
+  900: #00b091,
+  A100: #dafff7,
+  A200: #a7ffed,
+  A400: #74ffe2,
+  A700: #5affdd,
   contrast: (
     50: #000000,
     100: #000000,
@@ -64,21 +31,54 @@ $my-black-theme-accent: (
   ),
 );
 
+$black-fmxls-theme-accent: (
+  50: #fcfdff,
+  100: #f7fbff,
+  200: #f2f9ff,
+  300: #edf6ff,
+  400: #e9f4ff,
+  500: #e5f2ff,
+  600: #e2f0ff,
+  700: #deeeff,
+  800: #daecff,
+  900: #d3e8ff,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffffff,
+  A700: #ffffff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
 $mat-black-theme-foreground: (
   base: white,
-  divider: #4a4754,
-  dividers: #4a4754,
+  divider: #3a465b,
+  dividers: $light-dividers,
   disabled: $light-disabled-text,
   disabled-button: rgba(white, 0.3),
   disabled-text: $light-disabled-text,
   elevation: black,
   hint-text: $light-disabled-text,
   secondary-text: #797979,
-  icon: rgb(255 255 255 / 60%),
-  icons: rgb(255 255 255 / 60%),
-  text: #adb0bb,
-  text-inverse: #adb0bb,
-  title: #e6e5e8,
+  icon: #677897,
+  icons: #677897,
+  text: #b9c4d4,
+  text-inverse: black,
+  title: white,
   slider-min: white,
   slider-off: rgba(white, 0.3),
   slider-off-active: rgba(white, 0.3),
@@ -86,13 +86,15 @@ $mat-black-theme-foreground: (
 );
 
 $mat-black-theme-background: (
-  sidebar: #282c34,
-  toolbar: #282c34,
-  toolbar-brand: #282c34,
-  background: #282c34,
-  card: #282c34,
-  dialog: #282c34,
-  hover: #1d1929,
+  sidebar: #1f2431,
+  toolbar: #181C28,
+  status-bar: black,
+  app-bar: mat-color($my-black-theme-primary, 500),
+  toolbar-brand: #1f2431,
+  background: #181C28,
+  hover: #292e3d,
+  card: #2E3748,
+  dialog: #2E3748,
   disabled-button: rgba(white, 0.12),
   raised-button: map-get($mat-grey, 800),
   focused-button: $light-focused,
@@ -103,10 +105,14 @@ $mat-black-theme-background: (
   disabled-list-option: black,
   snack-bar: white,
   tooltip: white,
-  input: #282c34,
+  input: #181C28
 );
 
-@function my-mat-black-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+@function fmxls-mat-black-theme(
+  $primary,
+  $accent,
+  $warn: mat-palette($mat-red)
+) {
   @return (
     primary: $primary,
     accent: $accent,
@@ -117,11 +123,11 @@ $mat-black-theme-background: (
   );
 }
 
-$custom-black-theme-primary: mat-palette($my-black-theme-primary);
-$custom-black-theme-accent: mat-palette($my-black-theme-accent);
+$custom-black-theme-primary: mat-palette($black-fmxls-theme-primary);
+$custom-black-theme-accent: mat-palette($black-fmxls-theme-accent);
 $custom-black-theme-warn: mat-palette($mat-red);
 
-$my-black-theme: my-mat-black-theme(
+$fmxls-black-theme: fmxls-mat-black-theme(
   $custom-black-theme-primary,
   $custom-black-theme-accent,
   $custom-black-theme-warn

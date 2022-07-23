@@ -41,6 +41,10 @@
     text-align: center;
     word-break: break-word;
     word-wrap: break-word;
+
+    @include bp-lt(medium) {
+      font-size: 28px;
+    }
   }
 
   .profile-header-subtitle {

@@ -1,18 +1,13 @@
 <mat-toolbar class="toolbar">
-
-  <button
-    class="m-r-4"
-    mat-icon-button
-    (click)="sidenav.toggle()"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
+  <div class="fm-menu" matRipple (click)="[sidenav.toggle(), buttonToggle()]">
+    <div class="menu-wrap" [class.open]="open">
+      <div class="line half start"></div>
+      <div class="line"></div>
+      <div class="line half end"></div>
+    </div>
+  </div>
   <span class="spacer"></span>
-  <button
-    mat-icon-button
-    [matMenuTriggerFor]="themeSwitch"
-    class="m-x-4"
-  >
+  <button mat-icon-button [matMenuTriggerFor]="themeSwitch" class="m-x-4">
     <mat-icon>wb_sunny</mat-icon>
   </button>
   <mat-menu #themeSwitch="matMenu" xPosition="before">
@@ -23,7 +18,7 @@
           [value]="theme"
           (click)="setTheme(theme)"
         >
-          {{theme.name}}
+          {{ theme.name }}
         </mat-radio-button>
       </mat-radio-group>
     </div>
@@ -48,20 +43,28 @@
         <img class="img-profile" [src]="user.imageUrl" />
       </div>
       <div class="dropdown-menu-header-info">
-        <div class="header-name">{{user.name}}</div>
-        <div class="header-email muted">{{user.email}}</div>
+        <h4 class="header-name title m-b-0">{{ user.name }}</h4>
+        <div class="header-email secondary-text">{{ user.email }}</div>
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="dropdown-menu-content">
       <a routerLink="/" matRipple class="dropdown-menu-item">
-        <mat-icon class="dropdown-menu-icons material-icons-outlined">home</mat-icon>
+        <mat-icon class="dropdown-menu-icons material-icons-outlined"
+          >home</mat-icon
+        >
         <div fxFlex="auto">Vai al sito</div>
-        <mat-icon class="dropdown-menu-icons-chevron-right material-icons-outlined" fxFlex="none">chevron_right</mat-icon>
+        <mat-icon
+          class="dropdown-menu-icons-chevron-right material-icons-outlined"
+          fxFlex="none"
+          >chevron_right</mat-icon
+        >
       </a>
     </div>
     <div class="dropdown-menu-footer">
-      <a mat-stroked-button (click)="logout()" color="accent">Esci dal tuo account</a>
+      <a mat-stroked-button (click)="logout()" color="primary"
+        >Esci dal tuo account</a
+      >
     </div>
   </mat-menu>
 </mat-toolbar>

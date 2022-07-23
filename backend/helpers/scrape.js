@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 
 const searchFifa = async () => {
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: [
       "--start-maximized",
       "--disable-web-security",

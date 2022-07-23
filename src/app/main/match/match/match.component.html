@@ -14,7 +14,7 @@
       class="tournament-title"
       [ngClass]="routeAnimationsElements"
     >
-      <span>{{ match?.tournament.tournamentName }}</span>
+      <h5 class="m-b-0 title">{{ match?.tournament.tournamentName }}</h5>
     </div>
   </div>
 
@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <span class="team-name home text-primary" gdArea="teamName">{{
+      <span class="team-name home title" gdArea="teamName">{{
         match?.homeTeam.teamName
       }}</span>
     </a>
@@ -63,9 +63,9 @@
         gdColumns="2ch 1ch 2ch"
         class="score m-b-0"
       >
-        <span>2</span>
-        <span>:</span>
-        <span>0</span>
+        <span class="title">2</span>
+        <span class="title">:</span>
+        <span class="title">0</span>
       </p>
       <span class="match-state secondary-text">
         Terminata
@@ -90,12 +90,12 @@
           </div>
         </div>
       </div>
-      <span class="team-name away text-primary" gdArea="teamName">{{
+      <span class="team-name away title" gdArea="teamName">{{
         match?.awayTeam.teamName
       }}</span>
     </a>
   </div>
 </div>
-<button mat-fab color="accent" class="action-fab">
+<button mat-fab color="primary" class="action-fab">
   <mat-icon class="material-icons-outlined">mode_edit</mat-icon>
 </button>

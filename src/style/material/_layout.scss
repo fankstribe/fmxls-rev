@@ -12,20 +12,22 @@
   // Sidebar
   .sidenav {
     background-color: mat-color($background, sidebar);
+    border-right: 1px solid mat-color($foreground, divider);
   }
 
   .list .list-item {
-    color: mat-color($foreground, text);
+    color: mat-color($foreground, text-menu);
+    font-weight: 500;
 
     &.active,
     &:hover {
-      background: rgba(mat-color($accent, default), 0.15);
-      color: lighten(mat-color($accent, default), 0);
+      background: rgba(mat-color($primary, default), 0.15);
+      color: lighten(mat-color($primary, default), 0);
     }
-  }
 
-  .team-panel .divider {
-    border-bottom: 1px solid mat-color($foreground, divider);
+    .mat-ripple-element {
+      background-color: mat-color($primary, 200, 0.3);
+    }
   }
 
   // Notification
@@ -58,19 +60,9 @@
   }
 
   .toolbar {
-    background: mat-color($background, toolbar-active) !important;
-    box-shadow: 0 1px 5px rgb(0 0 0 / 25%);
-    transition: all 0.2s ease-in-out;
-    color: mat-color($foreground, text-inverse) !important;
-  }
-
-  .main-container.inactive .toolbar {
-    box-shadow: none !important;
-    @include bp-gt(tablet) {
-      background: mat-color($background, background) !important;
-      color: mat-color($foreground, text) !important;
-    }
-    transition: all 0.2s ease-in-out;
+    background: mat-color($background, toolbar) !important;
+    box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
+    color: mat-color($foreground, icon) !important;
   }
 
   .auth-logo,
@@ -78,7 +70,7 @@
     @if $is-dark {
       background-image: url("../../assets/images/logo-white.png");
     } @else {
-      background-image: url("../../assets/images/logo.png");
+      background-image: url("../../assets/images/fmxls-logo-main.png");
     }
   }
 }

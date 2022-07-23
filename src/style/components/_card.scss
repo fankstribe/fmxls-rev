@@ -1,17 +1,18 @@
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 
 .mat-card {
   margin-bottom: 16px;
+  border-radius: 16px !important;
   box-shadow: none !important;
-  border-radius: 10px !important;
 
   .card-title {
+    font-family: "Questrial", arial, sans-serif;
+    font-weight: 600;
     padding-right: 16px;
     padding-left: 16px;
     padding-top: 16px;
     padding-bottom: 8px;
     font-size: 1.125rem;
-    font-weight: 400;
     letter-spacing: 0;
     line-height: 1.5rem;
     word-break: break-word;
@@ -30,7 +31,7 @@
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
-    font-size: .875rem;
+    font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.25rem;
     word-break: break-word;

@@ -25,9 +25,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSlideToggleModule, MAT_SLIDE_TOGGLE_DEFAULT_OPTIONS} from '@angular/material/slide-toggle';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatRadioModule} from '@angular/material/radio';
+import {MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS} from '@angular/material/radio';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -39,6 +39,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { DropZoneDirective } from './directives/drop-zone.directive';
 
@@ -126,7 +128,20 @@ import { DropZoneDirective } from './directives/drop-zone.directive';
     ],
     providers: [
       CustomBreakPointsProvider,
-      { provide: MAT_DATE_LOCALE, useValue: 'it-IT' }
+      {
+        provide: MAT_DATE_LOCALE,
+        useValue: 'it-IT'
+      },
+      { provide: MAT_RADIO_DEFAULT_OPTIONS,
+        useValue: {
+          color: 'primary'
+        }
+      },
+      { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+        useValue: {
+          appearance: 'outline'
+        }
+      }
     ],
     declarations: [
       DropZoneDirective

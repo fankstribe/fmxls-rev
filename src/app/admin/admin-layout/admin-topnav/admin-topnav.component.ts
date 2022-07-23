@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 
 import { ThemeService } from '../../../core/services/theme.service';
 import { UserService } from '../../../core/services/user.service';
@@ -12,13 +13,14 @@ import { User } from '../../../models/user';
 })
 export class AdminTopnavComponent implements OnInit {
   @Input() sidenav;
-
+  open = false;
   themes: Array<any> = [];
   selectedTheme: any;
 
   user: User;
 
   constructor(
+    private mediaOb: MediaObserver,
     private themeService: ThemeService,
     private userService: UserService
   ) {
@@ -38,6 +40,16 @@ export class AdminTopnavComponent implements OnInit {
 
   logout() {
     this.userService.logout();
+  }
+
+  buttonToggle() {
+    if (this.mediaOb.isActive('gt-sm')) {
+      if (this.open) {
+        this.open = false;
+      } else {
+        this.open = true;
+      }
+    }
   }
 
 }

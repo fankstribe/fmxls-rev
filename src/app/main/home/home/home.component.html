@@ -1,5 +1,7 @@
 <div fxLayout fxLayoutAlign="start center" class="page-header m-b-32">
-  <div fxFlex="1 1 auto" class="page-header-title">Competizioni</div>
+  <div fxFlex="1 1 auto" class="page-header-title">
+    <h4 class="m-b-0 title">Competizioni</h4>
+  </div>
 </div>
 <div
   gdColumn="1/span 12"
@@ -32,7 +34,7 @@
             </div>
             <div fxLayout="column" fxLayoutAlign="center">
               <span class="tournament-title">{{tournament.tournamentName}}</span>
-              <span class="tournament-info muted">{{tournament.teams.length}} Squadre - {{tournament.matches.length}} Incontri</span>
+              <span class="tournament-info secondary-text">{{tournament.teams.length}} Squadre - {{tournament.matches.length}} Incontri</span>
               <div><span class="badge bg-red">In Corso</span></div>
             </div>
           </div>

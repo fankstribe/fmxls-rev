@@ -17,15 +17,15 @@
       #file
     />
   </button>
-  <h2 class="m-b-0" fxFlex="auto">{{ teamToUpdate.teamName }}</h2>
+  <h4 class="m-b-0 title" fxFlex="auto">{{ teamToUpdate.teamName }}</h4>
   <button mat-dialog-close mat-icon-button>
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+<mat-divider style="margin: 0 -1.5rem"></mat-divider>
 <form [formGroup]="editTeamForm" (ngSubmit)="onSubmitForm()">
   <mat-dialog-content>
-    <mat-form-field class="full-width m-t-24" appearance="fill">
+    <mat-form-field class="full-width m-t-24">
       <mat-label>Nome Squadra</mat-label>
       <input
         cdkFocusInitial
@@ -40,13 +40,11 @@
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close type="button">
-      Annulla
-    </button>
+    <button mat-button mat-dialog-close type="button">Annulla</button>
     <button
       mat-button
       type="submit"
-      color="accent"
+      color="primary"
       [disabled]="!editTeamForm.valid"
     >
       Salva

@@ -1,9 +1,19 @@
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  ViewChild,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { BreakpointState, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import {
+  BreakpointState,
+  BreakpointObserver,
+  Breakpoints,
+} from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 
 import { TournamentService } from '../../../core/services/tournament.service';
@@ -14,17 +24,21 @@ import { Tournament } from '../../../models/tournament';
 import { EditTournamentDialogComponent } from '../edit-tournament-dialog/edit-tournament-dialog.component';
 import { AddTournamentDialogComponent } from '../add-tournament-dialog/add-tournament-dialog.component';
 import { EditMatchesDialogComponent } from '../edit-matches-dialog/edit-matches-dialog.component';
+import { AppService } from '../../../core/services/app.service';
+import { CommonChild, eventSubscriber } from '../../../interfaces/common-child.interface';
 
 @Component({
   selector: 'app-admin-tournaments',
   templateUrl: './admin-tournaments.component.html',
-  styleUrls: ['./admin-tournaments.component.scss']
+  styleUrls: ['./admin-tournaments.component.scss'],
 })
-export class AdminTournamentsComponent implements OnInit, AfterViewInit {
-  isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
+export class AdminTournamentsComponent implements OnInit, AfterViewInit, CommonChild, OnDestroy {
+  isSmall: Observable<BreakpointState> = this.breakpointObs.observe([
+    Breakpoints.XSmall,
+  ]);
   dataSource = new MatTableDataSource<Tournament>();
   noItems = false;
-  isLoadingResults = true;
+  itemsCount: number;
 
   displayedColumns: string[] = [
     'img',
@@ -34,7 +48,7 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
     'status',
     'createdAt',
     'fixtures',
-    'action'
+    'action',
   ];
 
   @ViewChild(MatSort) sort: MatSort;
@@ -45,8 +59,12 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
     private d: MatDialog,
     private dialogService: DialogService,
     private breakpointObs: BreakpointObserver,
-    private snackBar: SnackBarService
-  ) {}
+    private snackBar: SnackBarService,
+    private appService: AppService
+  ) {
+    this.add = this.add.bind(this);
+    eventSubscriber(appService.openSubscription, this.add);
+  }
 
   ngOnInit() {
     this.tournamentsTableList();
@@ -54,7 +72,10 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (item: any, property: string): string => {
+    this.dataSource.sortingDataAccessor = (
+      item: any,
+      property: string
+    ): string => {
       if (property === 'tournamentName') {
         return item.tournamentName.toLocaleLowerCase();
       } else if (property === 'format') {
@@ -62,16 +83,16 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
       } else {
         return item[property];
       }
-    }
+    };
     this.dataSource.paginator = this.paginator;
   }
 
   tournamentsTableList() {
-    this.tournamentService.getTournaments().subscribe(list => {
-      !list.length ? this.noItems = true : this.noItems = false;
+    this.tournamentService.getTournaments().subscribe((list) => {
+      !list.length ? (this.noItems = true) : (this.noItems = false);
       this.dataSource.data = list;
-      this.isLoadingResults = false;
-    })
+      this.itemsCount = list.length;
+    });
   }
 
   doFilter($event: any) {
@@ -90,7 +111,7 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
 
     const dialogRef = this.d.open(AddTournamentDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
+    const smallDialogSub = this.isSmall.subscribe((size) => {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
@@ -115,12 +136,12 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
     dialogConfig.width = '500px';
     dialogConfig.maxWidth = '100vw';
     dialogConfig.maxHeight = '100%';
-    dialogConfig.data = {data: this.dataSource.data[id]};
-    console.log(this.dataSource.data[id])
+    dialogConfig.data = { data: this.dataSource.data[id] };
+    console.log(this.dataSource.data[id]);
 
     const dialogRef = this.d.open(EditTournamentDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
+    const smallDialogSub = this.isSmall.subscribe((size) => {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
@@ -139,23 +160,27 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
 
   delete(_id: string) {
     const data = this.dataSource.data[_id];
-    const dialogRef = this.dialogService.confirmDialog('Vuoi davvero eliminare questo torneo?');
-    dialogRef.afterClosed().subscribe(res => {
+    const dialogRef = this.dialogService.confirmDialog(
+      'Vuoi davvero eliminare questo torneo?'
+    );
+    dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.tournamentService.deleteTournament(data._id).subscribe(() => {
           this.tournamentsTableList();
-          this.snackBar.showSuccessSnackbar(`${data.tournamentName} eliminato con successo!`);
+          this.snackBar.showSuccessSnackbar(
+            `${data.tournamentName} eliminato con successo!`
+          );
         });
       }
-    })
+    });
   }
 
   onUpdateState(tournament: Tournament) {
     const id = tournament._id;
     const status = tournament.status;
-    this.tournamentService.updateState(id, status).subscribe(res => {
+    this.tournamentService.updateState(id, status).subscribe((res) => {
       this.snackBar.showSuccessSnackbar(`Stato modificato!`);
-    })
+    });
   }
 
   updateMatches(id: string) {
@@ -167,11 +192,11 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
     dialogConfig.maxWidth = '640px';
     dialogConfig.maxHeight = '800px';
     dialogConfig.height = '80%';
-    dialogConfig.data = {data: this.dataSource.data[id]};
+    dialogConfig.data = { data: this.dataSource.data[id] };
 
     const dialogRef = this.d.open(EditMatchesDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
+    const smallDialogSub = this.isSmall.subscribe((size) => {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
@@ -188,4 +213,7 @@ export class AdminTournamentsComponent implements OnInit, AfterViewInit {
     });
   }
 
+  ngOnDestroy() {
+    eventSubscriber(this.appService.openSubscription, this.add, true);
+  }
 }

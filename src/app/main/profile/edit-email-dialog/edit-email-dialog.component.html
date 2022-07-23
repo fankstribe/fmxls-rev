@@ -1,24 +1,29 @@
 <form [formGroup]="emailForm" (ngSubmit)="onSubmitForm()">
-  <div mat-dialog-title>Modifica Email</div>
-  <div mat-dialog-content>
-    <div fxLayout fxFlex="100">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          name="email"
-          autocomplete="email"
-          autocorrect="off"
-          formControlName="email"
-        />
-        <mat-error *ngIf="formError.email">
-          {{ formError.email }}
-        </mat-error>
-      </mat-form-field>
-    </div>
+  <div fxLayoutAlign="start center"  class="mat-dialog-title">
+    <img class="img-user">
+    <h4 class="m-b-0 title" fxFlex="auto">Modifica Email</h4>
+    <button mat-dialog-close mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  <div mat-dialog-actions align="end">
+  <mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+  <mat-dialog-content>
+    <mat-form-field class="full-width m-t-24">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        name="email"
+        autocomplete="email"
+        autocorrect="off"
+        formControlName="email"
+      />
+      <mat-error *ngIf="formError.email">
+        {{ formError.email }}
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
     <button mat-button type="button" mat-dialog-close>Annulla</button>
-    <button mat-button type="submit" color="accent" [disabled]="!emailForm.valid">Salva</button>
-  </div>
+    <button mat-button type="submit" color="primary" [disabled]="!emailForm.valid">Salva</button>
+  </mat-dialog-actions>
 </form>

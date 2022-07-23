@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,17 +13,19 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
 import { Manager } from '../../../models/manager';
 import { EditManagerDialogComponent } from '../edit-manager-dialog/edit-manager-dialog.component';
 import { AddManagerDialogComponent } from '../add-manager-dialog/add-manager-dialog.component';
+import { CommonChild, eventSubscriber } from '../../../interfaces/common-child.interface';
+import { AppService } from '../../../core/services/app.service';
 
 @Component({
   selector: 'app-admin-managers',
   templateUrl: './admin-managers.component.html',
   styleUrls: ['./admin-managers.component.scss']
 })
-export class AdminManagersComponent implements OnInit, AfterViewInit {
+export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChild, OnDestroy {
   isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
   dataSource = new MatTableDataSource<Manager>();
   noItems = false;
-  isLoadingResults = true;
+  itemsCount: number
 
   displayedColumns: string[] = [
     'user',
@@ -41,8 +43,12 @@ export class AdminManagersComponent implements OnInit, AfterViewInit {
     private d: MatDialog,
     private dialogService: DialogService,
     private breakpointObs: BreakpointObserver,
-    private snackBar: SnackBarService
-  ) {}
+    private snackBar: SnackBarService,
+    private appService: AppService
+  ) {
+    this.add = this.add.bind(this);
+    eventSubscriber(appService.openSubscription, this.add);
+  }
 
   ngOnInit() {
     this.managersTableList();
@@ -66,7 +72,7 @@ export class AdminManagersComponent implements OnInit, AfterViewInit {
     this.managerService.getManagers().subscribe(list => {
       !list.length ? this.noItems = true : this.noItems = false;
       this.dataSource.data = list;
-      this.isLoadingResults = false;
+      this.itemsCount = list.length;
     })
   }
 
@@ -172,5 +178,7 @@ export class AdminManagersComponent implements OnInit, AfterViewInit {
     this.table.renderRows();
   }
 
-
+  ngOnDestroy() {
+    eventSubscriber(this.appService.openSubscription, this.add, true);
+  }
 }

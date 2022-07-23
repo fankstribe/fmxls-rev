@@ -3,16 +3,13 @@ import {
   OnInit,
   ChangeDetectorRef,
   AfterViewChecked,
-  ElementRef,
-  ViewChild,
-  Renderer2,
 } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 
 import { routeAnimations } from '../../core/services/animations/route.animations';
 
 import { AnimationsService } from '../../core/services/animations/animations.service';
-import { TitleService } from './../../core/services/title.service';
+import { AppService } from '../../core/services/app.service';
 import { LoaderService } from '../../core/services/loader.service';
 
 @Component({
@@ -25,14 +22,11 @@ export class AdminLayoutComponent implements OnInit, AfterViewChecked {
   sidenavOpened: boolean = true;
   sidenavMode: string = 'side';
 
-  @ViewChild('adminContainer') elementRef: ElementRef;
-
   constructor(
-    private renderer: Renderer2,
     private changeDetector: ChangeDetectorRef,
     private mediaOb: MediaObserver,
     private animationService: AnimationsService,
-    private titleService: TitleService,
+    private appService: AppService,
     public loaderService: LoaderService
   ) {}
 
@@ -49,7 +43,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewChecked {
   }
 
   get title() {
-    return this.titleService.title;
+    return this.appService.title;
   }
 
   toggleView() {
@@ -61,15 +55,6 @@ export class AdminLayoutComponent implements OnInit, AfterViewChecked {
     } else if (this.mediaOb.isActive('lt-sm')) {
       this.sidenavMode = 'over';
       this.sidenavOpened = false;
-    }
-  }
-
-  onContentScroll(event) {
-    const scrollPos = event.target.scrollTop === 0;
-    if (scrollPos) {
-      this.renderer.addClass(this.elementRef.nativeElement, 'inactive');
-    } else {
-      this.renderer.removeClass(this.elementRef.nativeElement, 'inactive');
     }
   }
 }

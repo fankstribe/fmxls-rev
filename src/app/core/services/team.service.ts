@@ -57,7 +57,20 @@ export class TeamService {
    // Lato Admin
   updateTeam(team: Team) {
     const url = `${base_url}/teams/${team._id}`;
-    return this.http.put(url, team, this.headers);
+    return this.http.put<any>(url, team, this.headers)
+    .pipe(
+      map((res) => {
+
+        const data = {
+          _id: res.team._id,
+          img: res.team.img,
+          teamName: res.team.teamName,
+          user: res.team.user.name,
+          createdAt: res.team.createdAt
+        }
+        return data;
+      })
+    );
   }
 
   // Lato Admin

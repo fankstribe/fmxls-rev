@@ -1,4 +1,4 @@
-@import '.~@angular/material/theming';
+@import ".~@angular/material/theming";
 
 @mixin fmxls-utils-theme($theme) {
   $primary: map-get($theme, primary);
@@ -26,8 +26,8 @@
   }
 
   // Testo
-  .muted {
-    color: mat-color($foreground, secondary-text);
+  .title {
+    color: mat-color($foreground, title) !important;
   }
 
   .disabled {
@@ -35,11 +35,22 @@
   }
 
   .text-primary {
-    color: mat-color($foreground, text);
+    color: mat-color($foreground, text) !important;
+  }
+
+  .text-accent {
+    color: mat-color($accent) !important;
   }
 
   .secondary-text {
     color: mat-color($foreground, secondary-text);
+  }
+  .text-menu {
+    color: mat-color($foreground, text-menu);
+  }
+
+  .text-inverse {
+    color: mat-color($foreground, text-inverse);
   }
 
   .text-red {
@@ -48,6 +59,10 @@
 
   .text-green {
     color: $fm-green !important;
+  }
+
+  .text-white {
+    color: #fff !important;
   }
 
   .text-deep-orange {
@@ -63,8 +78,7 @@
     background-color: mat-color($background, hover);
     transition: 0.3s all;
   }
-  .bg-hover
-  {
+  .bg-hover {
     background-color: mat-color($background, hover);
   }
 
@@ -88,7 +102,6 @@
   // Tooltip
   .tooltip {
     background-color: mat-color($background, tooltip);
-    color: mat-color($primary, 500);
+    color: mat-color($foreground, text-inverse);
   }
-
 }

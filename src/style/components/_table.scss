@@ -1,20 +1,30 @@
-@import '../abstracts/breakpoints';
+@import "../abstracts/breakpoints";
 
 // Tabelle Admin
 .table-card {
   overflow: auto;
   margin-bottom: 20px;
+}
 
-  .toolbar-actions {
-    padding: 0 14px;
-    height: 4rem;
+.toolbar-actions {
+  margin-bottom: 10px;
+  padding: 0 14px;
+  height: 3.625rem;
+  border-radius: 8px;
 
-    @include bp-gt(xsmall) {
-      padding: 0 24px;
+  @include bp-gt(xsmall) {
+    padding: 10px 24px;
+  }
+
+  .toolbar-actions-search {
+    padding: 0 16px 0 6px;
+    .mat-icon {
+      font-size: 28px;
+      height: 28px;
+      width: 28px;
     }
-
-    .toolbar-actions-search {
-      border-radius: 9999px;
+    input {
+      font-size: 24px;
     }
   }
 }
@@ -30,8 +40,12 @@
   padding-right: 12px;
   padding-left: 12px;
   white-space: nowrap;
+  border-bottom-width: 2px;
 
-  .mat-slide-toggle > .mat-slide-toggle-label > .mat-slide-toggle-bar > .mat-slide-toggle-thumb-container {
+  .mat-slide-toggle
+    > .mat-slide-toggle-label
+    > .mat-slide-toggle-bar
+    > .mat-slide-toggle-thumb-container {
     z-index: 0;
   }
 
@@ -48,15 +62,10 @@ tr.element-row {
   cursor: pointer;
 }
 
-tr.mat-row, tr.mat-footer-row {
+tr.mat-row,
+tr.mat-footer-row {
   height: 57px !important;
 }
-
- // FIXME - colore del bordo quando la tabella è
- // visualizzata in posizione sticky
-// .mat-table-sticky:first-child {
-//   border-right: 1px solid black;
-// }
 
 .mat-paginator,
 .toolbar-actions {
@@ -64,8 +73,43 @@ tr.mat-row, tr.mat-footer-row {
   left: 0;
 }
 
+.mat-paginator {
+  background: none !important;
+}
+
+.mat-paginator-container {
+  justify-content: flex-start !important;
+}
+
 .cell-truncate-text {
   max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.mat-paginator .mat-form-field .mat-form-field-wrapper .mat-form-field-flex {
+  height: auto;
+  padding: 0 0.75em 0 0.75em !important;
+}
+
+.mat-paginator-page-size {
+  align-items: center !important;
+
+  .mat-form-field .mat-form-field-wrapper {
+    padding-bottom: 5px !important;
+  }
+}
+
+@include bp-gt(desktop) {
+  tr.element-row:hover {
+    box-shadow: 0px 0px 0.4px rgba(0, 0, 0, 0.016),
+      0px 0px 1px rgba(0, 0, 0, 0.022), 0px 0px 2.1px rgba(0, 0, 0, 0.028),
+      0px 0px 4.4px rgba(0, 0, 0, 0.034), 0px 0px 12px rgba(0, 0, 0, 0.05);
+
+    transform: scale(1);
+  }
+
+  .mat-table-sticky {
+    background: none !important;
+  }
 }

@@ -1,88 +1,154 @@
 <div class="table-card border-radius">
-  <div fxLayout fxLayoutAlign="start center" class="toolbar-actions">
-    <h3 fxHide fxShow.gt-xs fxFlex="none" class="p-r-16 m-r-16 m-y-0">Cerca Giocatori</h3>
-    <div class="toolbar-actions-search p-x-16" fxFlex="400px" fxFlex.lt-md="auto" fxLayout fxLayoutAlign="start center">
+  <div fxLayout fxLayoutAlign="start center" class="m-t-4 toolbar-actions">
+    <mat-icon
+      fxHide
+      fxShow.gt-xs
+      class="sidemenu-icon material-icons-outlined text-accent m-r-8"
+      >directions_run</mat-icon
+    >
+    <h5
+      matTooltip="Totale Giocatori"
+      matTooltipClass="tooltip"
+      fxHide
+      fxShow.gt-xs
+      fxFlex="none"
+      class="p-r-16 m-r-16 m-y-0"
+    >
+      {{ itemsCount }}
+    </h5>
+    <div
+      class="toolbar-actions-search p-x-16"
+      fxFlex="400px"
+      fxFlex.lt-md="auto"
+      fxLayout
+      fxLayoutAlign="start center"
+    >
       <mat-icon>search</mat-icon>
       <input
         class="p-x-16 p-y-12 full-width"
         placeholder="Cerca..."
         type="text"
         (keyup)="doFilter($event)"
-      >
+      />
     </div>
     <span fxFlex></span>
     <button
       fxFlex="none"
       mat-mini-fab
       class="mat-elevation-z0 m-l-16"
-      color="accent"
+      color="primary"
       type="button"
       (click)="add()"
     >
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <mat-progress-bar *ngIf="isLoadingResults" color="accent" mode="indeterminate" bufferValue="75" value="50"></mat-progress-bar>
 
-  <table #table [hidden]="noItems" mat-table class="full-width" [dataSource]="dataSource" matSort matSortActive="createdAt" matSortDirection="desc">
+  <table
+    #table
+    [hidden]="noItems"
+    mat-table
+    class="full-width"
+    [dataSource]="dataSource"
+    matSort
+    matSortActive="createdAt"
+    matSortDirection="desc"
+  >
     <ng-container matColumnDef="_id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td class="cell" mat-cell *matCellDef="let players">{{players._id}}</td>
+      <td class="cell" mat-cell *matCellDef="let players">{{ players._id }}</td>
     </ng-container>
-    <ng-container matColumnDef="img">
+    <ng-container matColumnDef="img" sticky>
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let players">
-        <img [src]="players.img" alt="" class="img-profile" (error)="players.img='../../../../assets/images/no_player.png'">
+        <img
+          [src]="players.img"
+          alt=""
+          class="img-profile"
+          (error)="players.img = '../../../../assets/images/no_player.png'"
+        />
       </td>
     </ng-container>
     <ng-container matColumnDef="playerName" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Giocatore</th>
-      <td class="cell cell-truncate-text" mat-cell *matCellDef="let players">{{players.playerName}}</td>
+      <td
+        class="cell title semi-bold cell-truncate-text"
+        mat-cell
+        *matCellDef="let players"
+      >
+        {{ players.playerName }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Posizione</th>
-      <td class="cell" mat-cell *matCellDef="let players">{{players.position}}</td>
+      <td class="cell" mat-cell *matCellDef="let players">
+        {{ players.position }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="age">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Età</th>
-      <td class="cell" mat-cell *matCellDef="let players">{{players.age}}</td>
+      <td class="cell" mat-cell *matCellDef="let players">{{ players.age }}</td>
     </ng-container>
     <ng-container matColumnDef="overall">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Potenziale</th>
-      <td class="cell" mat-cell *matCellDef="let players">{{players.overall}}</td>
+      <td class="cell" mat-cell *matCellDef="let players">
+        {{ players.overall }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="team">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Squadra</th>
       <td class="cell" mat-cell *matCellDef="let players">
-        <span *ngIf="players.team?.teamName">{{players.team?.teamName}}</span>
-        <span *ngIf="!players.team?.teamName"><img src="assets/images/no_team_player.png" alt="" class="img-profile"></span>
+        <span *ngIf="players.team?.teamName">{{ players.team?.teamName }}</span>
+        <span *ngIf="!players.team?.teamName"
+          ><img
+            src="assets/images/no_team_player.png"
+            alt=""
+            class="img-profile"
+        /></span>
       </td>
     </ng-container>
     <ng-container matColumnDef="value">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Valore</th>
       <td class="cell" mat-cell *matCellDef="let players">
-        {{players.value}}</td>
+        {{ players.value }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="wage">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Stipendio</th>
-      <td class="cell" mat-cell *matCellDef="let players">{{players.wage}}</td>
+      <td class="cell" mat-cell *matCellDef="let players">
+        {{ players.wage }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Modifica</th>
       <td class="cell" mat-cell *matCellDef="let players">
-        <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          (click)="$event.stopPropagation()"
+        >
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item (click)="update(dataSource.data.indexOf(players))">
+          <button
+            mat-menu-item
+            (click)="update(dataSource.data.indexOf(players))"
+          >
             <mat-icon class="material-icons-outlined">create</mat-icon>
             Modifica
           </button>
-          <button *ngIf="players.team !== null" mat-menu-item (click)="removeTeam(players)">
+          <button
+            *ngIf="players.team !== null"
+            mat-menu-item
+            (click)="removeTeam(players)"
+          >
             <mat-icon class="text-red material-icons-outlined">logout</mat-icon>
             Svincola
           </button>
-          <button mat-menu-item (click)="delete(dataSource.data.indexOf(players))">
+          <button
+            mat-menu-item
+            (click)="delete(dataSource.data.indexOf(players))"
+          >
             <mat-icon class="text-red material-icons-outlined">delete</mat-icon>
             Elimina
           </button>
@@ -90,9 +156,18 @@
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr class="element-row" mat-row *matRowDef="let players; columns: displayedColumns;" (click)="update(dataSource.data.indexOf(players))"></tr>
+    <tr
+      class="element-row"
+      mat-row
+      *matRowDef="let players; columns: displayedColumns"
+      (click)="update(dataSource.data.indexOf(players))"
+    ></tr>
   </table>
-  <mat-paginator #paginator [pageSize]="50" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+  <mat-paginator
+    #paginator
+    [pageSize]="50"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+  ></mat-paginator>
 
   <div [hidden]="!noItems" class="no-data-found-wrapper">
     <div class="no-data-found">
