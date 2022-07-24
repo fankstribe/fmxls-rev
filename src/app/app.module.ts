@@ -25,43 +25,37 @@ const socketConfig: SocketIoConfig = {
 }
 
 @NgModule({
-  declarations: [AppComponent, DialogComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-
-    AppRoutingModule,
-
-    // Socket
-    SocketIoModule.forRoot(socketConfig),
-
-    // Shared
-    SharedModule,
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpLoaderInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpLoadingPageInterceptor,
-      multi: true,
-    },
-    {
-      provide: LOCALE_ID,
-      useValue: 'it-IT'
-    }
-  ],
-  entryComponents: [
-    DialogComponent
-  ],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, DialogComponent],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        // Socket
+        SocketIoModule.forRoot(socketConfig),
+        // Shared
+        SharedModule,
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpErrorInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpLoaderInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpLoadingPageInterceptor,
+            multi: true,
+        },
+        {
+            provide: LOCALE_ID,
+            useValue: 'it-IT'
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
