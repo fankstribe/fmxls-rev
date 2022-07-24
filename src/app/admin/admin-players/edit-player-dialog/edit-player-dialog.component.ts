@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { TeamService } from '../../../core/services/team.service';
 import { SnackBarService } from '../../../core/services/snackbar.service';
@@ -16,7 +16,7 @@ import { PlayerService } from 'src/app/core/services/player.service';
   styleUrls: ['./edit-player-dialog.component.scss']
 })
 export class EditPlayerDialogComponent implements OnInit {
-  editPlayerForm: FormGroup;
+  editPlayerForm: UntypedFormGroup;
   playerToUpdate: Player;
   selectedTeams: Team[];
   selectedPosition: Player;
@@ -57,7 +57,7 @@ export class EditPlayerDialogComponent implements OnInit {
     private teamService: TeamService,
     private playerService: PlayerService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<EditPlayerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {

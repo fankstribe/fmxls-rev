@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../models/user';
@@ -12,7 +12,7 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
   styleUrls: ['./edit-user-dialog.component.scss']
 })
 export class EditUserDialogComponent implements OnInit {
-  editUserForm: FormGroup;
+  editUserForm: UntypedFormGroup;
   userToUpdate: User;
 
   formError = {
@@ -35,7 +35,7 @@ export class EditUserDialogComponent implements OnInit {
   constructor(
     private userService: UserService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {

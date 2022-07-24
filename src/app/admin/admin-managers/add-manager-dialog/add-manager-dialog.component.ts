@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { ManagerService } from '../../../core/services/manager.service';
 import { UserService } from '../../../core/services/user.service';
@@ -17,7 +17,7 @@ import { Team } from '../../../models/team';
   styleUrls: ['./add-manager-dialog.component.scss']
 })
 export class AddManagerDialogComponent implements OnInit {
-  addManagerForm: FormGroup;
+  addManagerForm: UntypedFormGroup;
 
   selectedUsers: User[];
   selectedTeams: Team[];
@@ -41,7 +41,7 @@ export class AddManagerDialogComponent implements OnInit {
     private userService: UserService,
     private managerService: ManagerService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<AddManagerDialogComponent>,
   ) {}
 

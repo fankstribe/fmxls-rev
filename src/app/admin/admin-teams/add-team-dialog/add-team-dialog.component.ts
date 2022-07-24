@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { TeamService } from '../../../core/services/team.service';
 
@@ -12,7 +12,7 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
   styleUrls: ['./add-team-dialog.component.scss']
 })
 export class AddTeamDialogComponent implements OnInit {
-  addTeamForm: FormGroup;
+  addTeamForm: UntypedFormGroup;
 
   formError = {
     teamName: '',
@@ -29,7 +29,7 @@ export class AddTeamDialogComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<AddTeamDialogComponent>,
   ) {}
 

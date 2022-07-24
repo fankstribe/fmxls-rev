@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../core/services/animations/route.animations';
 import { UserService } from '../../core/services/user.service';
@@ -15,7 +15,7 @@ import { SnackBarService } from '../../core/services/snackbar.service';
 export class SignupComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
-  signupForm: FormGroup;
+  signupForm: UntypedFormGroup;
 
   hide = true;
 
@@ -55,7 +55,7 @@ export class SignupComponent implements OnInit {
   };
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     private snackBar: SnackBarService,
     private router: Router
@@ -106,7 +106,7 @@ export class SignupComponent implements OnInit {
   }
 
   mustMatch(controlName: string, matchingControlName: string): any {
-    return (formGroup: FormGroup) => {
+    return (formGroup: UntypedFormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
 

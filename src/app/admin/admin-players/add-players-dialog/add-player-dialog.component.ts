@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { TeamService } from '../../../core/services/team.service';
 import { Player } from '../../../models/player';
@@ -12,7 +12,7 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
   styleUrls: ['./add-player-dialog.component.scss']
 })
 export class AddPlayerDialogComponent implements OnInit {
-  addPlayerForm: FormGroup;
+  addPlayerForm: UntypedFormGroup;
 
   formError = {
     playerName: '',
@@ -29,7 +29,7 @@ export class AddPlayerDialogComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<AddPlayerDialogComponent>,
   ) {}
 

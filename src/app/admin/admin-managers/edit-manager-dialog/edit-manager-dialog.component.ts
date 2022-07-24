@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { ManagerService } from '../../../core/services/manager.service';
 import { TeamService } from '../../../core/services/team.service';
@@ -15,7 +15,7 @@ import { Team } from '../../../models/team';
   styleUrls: ['./edit-manager-dialog.component.scss']
 })
 export class EditManagerDialogComponent implements OnInit {
-  editManagerForm: FormGroup;
+  editManagerForm: UntypedFormGroup;
 
   managerToUpdate: any = Manager;
   selectedTeams: Team[];
@@ -34,7 +34,7 @@ export class EditManagerDialogComponent implements OnInit {
     private managerService: ManagerService,
     private teamService: TeamService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<EditManagerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {

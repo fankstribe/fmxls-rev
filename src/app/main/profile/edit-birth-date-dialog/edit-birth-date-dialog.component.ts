@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../../../core/services/user.service';
 import { SnackBarService } from '../../../core/services/snackbar.service';
@@ -11,7 +11,7 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
   styleUrls: ['./edit-birth-date-dialog.component.scss']
 })
 export class EditBirthDateDialogComponent implements OnInit {
-  birthDateForm: FormGroup;
+  birthDateForm: UntypedFormGroup;
   getBirthDate: Date;
   validDate = new Date(new Date().setFullYear(new Date().getFullYear() - 16));
 
@@ -27,7 +27,7 @@ export class EditBirthDateDialogComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private snackBar: SnackBarService,
     private dialogRef: MatDialogRef<EditBirthDateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data

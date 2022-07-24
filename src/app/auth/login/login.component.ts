@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../../core/services/user.service';
 import { SnackBarService } from '../../core/services/snackbar.service';
@@ -13,7 +13,7 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '../../core/services/animations/route.
 })
 export class LoginComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  loginForm: FormGroup;
+  loginForm: UntypedFormGroup;
 
   formError = {
     email: '',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     private snackBar: SnackBarService,
     private router: Router

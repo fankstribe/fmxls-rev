@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { TournamentService } from '../../../core/services/tournament.service';
 import { SnackBarService } from '../../../core/services/snackbar.service';
@@ -15,7 +15,7 @@ import { Tournament } from '../../../models/tournament';
   styleUrls: ['./edit-tournament-dialog.component.scss']
 })
 export class EditTournamentDialogComponent implements OnInit {
-  editTournamentForm: FormGroup;
+  editTournamentForm: UntypedFormGroup;
   tournamentToUpdate: Tournament;
 
   formError = {
@@ -32,7 +32,7 @@ export class EditTournamentDialogComponent implements OnInit {
   constructor(
     private tournamentService: TournamentService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private fileUploadService: FileUploadService,
     private dialogRef: MatDialogRef<EditTournamentDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data

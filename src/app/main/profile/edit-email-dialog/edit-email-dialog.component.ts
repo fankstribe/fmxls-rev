@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 import { UserService } from '../../../core/services/user.service';
 import { SnackBarService } from '../../../core/services/snackbar.service';
@@ -11,7 +11,7 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
   styleUrls: ['./edit-email-dialog.component.scss']
 })
 export class EditEmailDialogComponent implements OnInit {
-  emailForm: FormGroup;
+  emailForm: UntypedFormGroup;
   getEmail: string;
   formError = {
     email: ''
@@ -25,7 +25,7 @@ export class EditEmailDialogComponent implements OnInit {
   };
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private snackBar: SnackBarService,
     private dialogRef: MatDialogRef<EditEmailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data

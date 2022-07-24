@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { TournamentService } from '../../../core/services/tournament.service';
 import { TeamService } from '../../../core/services/team.service';
@@ -14,7 +14,7 @@ import { Team } from '../../../models/team';
   styleUrls: ['./add-tournament-dialog.component.scss']
 })
 export class AddTournamentDialogComponent implements OnInit {
-  addTournamentForm: FormGroup;
+  addTournamentForm: UntypedFormGroup;
 
   selectedTeams: Team[];
 
@@ -40,7 +40,7 @@ export class AddTournamentDialogComponent implements OnInit {
     private tournamentService: TournamentService,
     private teamService: TeamService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<AddTournamentDialogComponent>,
   ) {}
 

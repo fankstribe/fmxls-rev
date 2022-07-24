@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { SnackBarService } from '../../../core/services/snackbar.service';
 import { PlayerService } from '../../../core/services/player.service';
@@ -12,7 +12,7 @@ import { PlayerService } from '../../../core/services/player.service';
   styleUrls: ['./add-database-dialog.component.scss']
 })
 export class AddDatabaseDialogComponent implements OnInit {
-  addDatabaseForm: FormGroup;
+  addDatabaseForm: UntypedFormGroup;
   checkSubmit = false;
   formError = {
     source: '',
@@ -27,7 +27,7 @@ export class AddDatabaseDialogComponent implements OnInit {
   constructor(
     private snackBar: SnackBarService,
     private playerService: PlayerService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private dialogRef: MatDialogRef<AddDatabaseDialogComponent>,
   ) {}
 

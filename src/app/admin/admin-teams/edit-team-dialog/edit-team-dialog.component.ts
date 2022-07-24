@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { TeamService } from '../../../core/services/team.service';
 import { SnackBarService } from '../../../core/services/snackbar.service';
@@ -15,7 +15,7 @@ import { Team } from '../../../models/team';
   styleUrls: ['./edit-team-dialog.component.scss']
 })
 export class EditTeamDialogComponent implements OnInit {
-  editTeamForm: FormGroup;
+  editTeamForm: UntypedFormGroup;
   teamToUpdate: Team;
 
   formError = {
@@ -32,7 +32,7 @@ export class EditTeamDialogComponent implements OnInit {
   constructor(
     private teamService: TeamService,
     private snackBar: SnackBarService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private fileUploadService: FileUploadService,
     private dialogRef: MatDialogRef<EditTeamDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
