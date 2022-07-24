@@ -1,5 +1,5 @@
 // Functions and helpers
-@use '~@angular/material' as mat;
+@use "@angular/material" as mat;
 @import "abstracts/abstracts";
 
 // Base
@@ -14,7 +14,6 @@
 // Material theme
 @import "material/material";
 
-
 // Custom typography
 // h1 = headline
 // h2 = title
@@ -25,16 +24,42 @@ $fmxls-typography: mat.define-typography-config(
   $font-family: "Poppins, arial, sans-serif",
   $body-1: mat.define-typography-level(14px, 1.5, 400),
   $headline:
-    mat.define-typography-level(3.052rem, 1.5rem, 600, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(
+      3.052rem,
+      1.5rem,
+      600,
+      '"Poppins", arial, sans-serif'
+    ),
   $title:
-    mat.define-typography-level(2.3rem, 1.5rem, 600, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(
+      2.3rem,
+      1.5rem,
+      600,
+      '"Poppins", arial, sans-serif'
+    ),
   $subheading-2:
-    mat.define-typography-level(1.953rem, 1.5, 600, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(
+      1.953rem,
+      1.5,
+      600,
+      '"Poppins", arial, sans-serif'
+    ),
   $subheading-1:
-    mat.define-typography-level(1.4rem, 1.5, 600, '"Poppins", arial, sans-serif'),
-  $button: mat.define-typography-level(14px, 24px, 500, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(
+      1.4rem,
+      1.5,
+      600,
+      '"Poppins", arial, sans-serif'
+    ),
+  $button:
+    mat.define-typography-level(14px, 24px, 500, '"Poppins", arial, sans-serif'),
   $input:
-    mat.define-typography-level(inherit, 1.125, 400, '"Poppins", arial, sans-serif'),
+    mat.define-typography-level(
+      inherit,
+      1.125,
+      400,
+      '"Poppins", arial, sans-serif'
+    ),
 );
 
 @include mat.core($fmxls-typography);

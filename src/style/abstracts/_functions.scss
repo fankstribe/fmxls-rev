@@ -1,13 +1,7 @@
-@use '~@angular/material' as mat;
-@import '~@angular/material/theming';
+@use "@angular/material" as mat;
+@import "@angular/material/theming";
 
-
-
-@function custom-mat-dark-theme(
-  $primary,
-  $accent,
-  $warn
-) {
+@function custom-mat-dark-theme($primary, $accent, $warn) {
   @return (
     primary: $primary,
     accent: $accent,
@@ -23,7 +17,7 @@
 
   @each $key, $value in $map {
     @if $key !=0 {
-      $result: map-merge($result, ('-' + $key: (-$value)));
+      $result: map-merge($result, ("-" + $key: (-$value)));
     }
   }
 

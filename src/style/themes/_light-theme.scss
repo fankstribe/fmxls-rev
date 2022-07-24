@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use "@angular/material" as mat;
 $my-white-theme-primary: (
   50: #ffe1eb,
   100: #ffb3cc,
@@ -65,7 +65,7 @@ $my-white-theme-accent: (
   ),
 );
 
-mat.$light-theme-foreground-palette: (
+$mat-light-theme-foreground: (
   base: black,
   divider: #d6dbe6,
   dividers: #d6dbe6,
@@ -87,7 +87,7 @@ mat.$light-theme-foreground-palette: (
   snack-bar: white,
 );
 
-mat.$light-theme-background-palette: (
+$mat-light-theme-background: (
   sidebar: #03001f,
   toolbar: #f0f4f6,
   toolbar-brand: #03001f,
@@ -108,14 +108,18 @@ mat.$light-theme-background-palette: (
   input: #d9e1ec,
 );
 
-@function my-mat-light-theme($primary, $accent, $warn: mat.define-palette(mat.$red-palette)) {
+@function my-mat-light-theme(
+  $primary,
+  $accent,
+  $warn: mat.define-palette(mat.$red-palette)
+) {
   @return (
     primary: $primary,
     accent: $accent,
     warn: $warn,
     is-dark: false,
-    foreground: mat.$light-theme-foreground-palette,
-    background: mat.$light-theme-background-palette
+    foreground: $mat-light-theme-foreground,
+    background: $mat-light-theme-background
   );
 }
 

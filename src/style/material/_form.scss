@@ -1,5 +1,4 @@
-@use '~@angular/material' as mat;
-@import '.~@angular/material/theming';
+@use "@angular/material" as mat;
 
 @mixin fmxls-form-theme($theme) {
   $primary: map-get($theme, primary);
@@ -10,8 +9,7 @@
 
   a,
   .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
-  .mat-form-field.mat-focused .mat-form-field-label
-  {
+  .mat-form-field.mat-focused .mat-form-field-label {
     color: mat.get-color-from-palette($primary);
   }
 
@@ -19,14 +17,12 @@
     background-color: mat.get-color-from-palette($primary);
   }
 
-  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled)
-  {
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
     color: mat.get-color-from-palette($foreground, text);
   }
 
   .mat-form-field.mat-form-field-invalid .mat-form-field-label,
-  .mat-form-field.mat-form-field-invalid .mat-form-field-ripple
-   {
+  .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
     color: mat.get-color-from-palette($warn);
   }
 

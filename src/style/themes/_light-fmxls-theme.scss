@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use "@angular/material" as mat;
 $light-fmxls-theme-primary: (
   50: #e0f3fe,
   100: #b3e2fd,
@@ -84,7 +84,7 @@ mat.$light-theme-foreground-palette: (
   slider-min: rgba(black, 0.87),
   slider-off: rgba(black, 0.26),
   slider-off-active: rgba(black, 0.38),
-  snack-bar: white,
+  snack-bar: white
 );
 
 mat.$light-theme-background-palette: (
@@ -105,7 +105,7 @@ mat.$light-theme-background-palette: (
   disabled-list-option: map_get(mat.$grey-palette, 200),
   snack-bar: #202124,
   tooltip: #202124,
-  input: #f5f8fa,
+  input: #f5f8fa
 );
 
 @function fmxls-mat-light-theme(

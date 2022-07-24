@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
     "bootstrap": "^4.5.0",
-    "concurrently": "^6.0.2",
+    "concurrently": "^6.5.1",
     "lodash": "^4.17.21",
     "ngx-socket-io": "^3.2.0",
     "ngx-spinner": "^10.0.1",

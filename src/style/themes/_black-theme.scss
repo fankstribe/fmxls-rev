@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use "@angular/material" as mat;
 $my-black-theme-primary: (
   50: #e4eaf6,
   100: #bccae9,
@@ -107,7 +107,11 @@ $mat-black-theme-background: (
   input: #282c34,
 );
 
-@function my-mat-black-theme($primary, $accent, $warn: mat.define-palette(mat.$red-palette)) {
+@function my-mat-black-theme(
+  $primary,
+  $accent,
+  $warn: mat.define-palette(mat.$red-palette)
+) {
   @return (
     primary: $primary,
     accent: $accent,

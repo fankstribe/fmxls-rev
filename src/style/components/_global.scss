@@ -1,5 +1,5 @@
-@import '../abstracts/breakpoints';
-@import '~@angular/material/theming';
+@import "../abstracts/breakpoints";
+@import "@angular/material/theming";
 
 // Globals
 a {
@@ -13,7 +13,7 @@ a {
 }
 
 .img-upload {
-  transition: opacity .2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
   background-color: rgb(32, 33, 36, 0.6);
   bottom: 0;
   height: 33%;
@@ -68,10 +68,10 @@ a {
 }
 
 .badge {
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  padding: .35rem .75rem;
-  border-radius: .25rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.25rem;
   letter-spacing: 0;
   display: inline-block;
   white-space: normal;

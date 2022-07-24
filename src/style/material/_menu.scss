@@ -1,5 +1,4 @@
-@use '~@angular/material' as mat;
-@import '~@angular/material/theming';
+@use "@angular/material" as mat;
 
 @mixin fmxls-menu-theme($theme) {
   $primary: map-get($theme, primary);
@@ -15,13 +14,14 @@
       color: mat.get-color-from-palette($foreground, text);
       border-bottom: 1px solid mat.get-color-from-palette($foreground, divider);
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         background: mat.get-color-from-palette($background, hover);
       }
     }
   }
 
   .fm-menu .menu-wrap .line {
-    background-color: mat.get-color-from-palette($foreground, icon);;
+    background-color: mat.get-color-from-palette($foreground, icon);
   }
 }

@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use "@angular/material" as mat;
 $black-fmxls-theme-primary: (
   50: #e0f9f6,
   100: #b3f0ea,
@@ -88,14 +88,14 @@ $mat-black-theme-foreground: (
 
 $mat-black-theme-background: (
   sidebar: #1f2431,
-  toolbar: #181C28,
+  toolbar: #181c28,
   status-bar: black,
   app-bar: mat.get-color-from-palette($my-black-theme-primary, 500),
   toolbar-brand: #1f2431,
-  background: #181C28,
+  background: #181c28,
   hover: #292e3d,
-  card: #2E3748,
-  dialog: #2E3748,
+  card: #2e3748,
+  dialog: #2e3748,
   disabled-button: rgba(white, 0.12),
   raised-button: map-get(mat.$grey-palette, 800),
   focused-button: $light-focused,
@@ -106,7 +106,7 @@ $mat-black-theme-background: (
   disabled-list-option: black,
   snack-bar: white,
   tooltip: white,
-  input: #181C28
+  input: #181c28,
 );
 
 @function fmxls-mat-black-theme(

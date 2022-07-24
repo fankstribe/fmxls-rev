@@ -1,5 +1,5 @@
-@use '~@angular/material' as mat;
-@import ".~@angular/material/theming";
+@use "@angular/material" as mat;
+
 @import "../abstracts/breakpoints";
 
 @mixin fmxls-layout-theme($theme) {
@@ -66,7 +66,14 @@
     color: mat.get-color-from-palette($foreground, icon) !important;
   }
 
-  .auth-logo,
+  .auth-logo {
+    @if $is-dark {
+      background-image: url("../../assets/images/logo-white.png");
+    } @else {
+      background-image: url("../../assets/images/logo.png");
+    }
+  }
+
   .brand {
     @if $is-dark {
       background-image: url("../../assets/images/logo-white.png");
