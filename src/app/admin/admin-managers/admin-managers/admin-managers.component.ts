@@ -1,9 +1,19 @@
-import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  OnDestroy,
+} from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { BreakpointState, BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import {
+  BreakpointState,
+  BreakpointObserver,
+  Breakpoints,
+} from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 
 import { ManagerService } from '../../../core/services/manager.service';
@@ -13,30 +23,32 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
 import { Manager } from '../../../models/manager';
 import { EditManagerDialogComponent } from '../edit-manager-dialog/edit-manager-dialog.component';
 import { AddManagerDialogComponent } from '../add-manager-dialog/add-manager-dialog.component';
-import { CommonChild, eventSubscriber } from '../../../interfaces/common-child.interface';
+import {
+  CommonChild,
+  eventSubscriber,
+} from '../../../interfaces/common-child.interface';
 import { AppService } from '../../../core/services/app.service';
 
 @Component({
   selector: 'app-admin-managers',
   templateUrl: './admin-managers.component.html',
-  styleUrls: ['./admin-managers.component.scss']
+  styleUrls: ['./admin-managers.component.scss'],
 })
-export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChild, OnDestroy {
-  isSmall: Observable<BreakpointState> = this.breakpointObs.observe([Breakpoints.XSmall]);
+export class AdminManagersComponent
+  implements OnInit, AfterViewInit, CommonChild, OnDestroy
+{
+  isSmall: Observable<BreakpointState> = this.breakpointObs.observe([
+    Breakpoints.XSmall,
+  ]);
   dataSource = new MatTableDataSource<Manager>();
   noItems = false;
-  itemsCount: number
+  itemsCount: number;
 
-  displayedColumns: string[] = [
-    'user',
-    'team',
-    'createdAt',
-    'action'
-  ];
+  displayedColumns: string[] = ['user', 'team', 'createdAt', 'action'];
 
   @ViewChild(MatTable) table: MatTable<Manager>;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private managerService: ManagerService,
@@ -56,7 +68,10 @@ export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChil
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (item: any, property: string): string => {
+    this.dataSource.sortingDataAccessor = (
+      item: any,
+      property: string
+    ): string => {
       if (property === 'user') {
         return item.user.toLocaleLowerCase();
       } else if (property === 'team') {
@@ -64,16 +79,16 @@ export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChil
       } else {
         return item[property];
       }
-    }
+    };
     this.dataSource.paginator = this.paginator;
   }
 
   managersTableList() {
-    this.managerService.getManagers().subscribe(list => {
-      !list.length ? this.noItems = true : this.noItems = false;
+    this.managerService.getManagers().subscribe((list) => {
+      !list.length ? (this.noItems = true) : (this.noItems = false);
       this.dataSource.data = list;
       this.itemsCount = list.length;
-    })
+    });
   }
 
   doFilter($event: any) {
@@ -92,7 +107,7 @@ export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChil
 
     const dialogRef = this.d.open(AddManagerDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
+    const smallDialogSub = this.isSmall.subscribe((size) => {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
@@ -117,11 +132,11 @@ export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChil
     dialogConfig.width = '500px';
     dialogConfig.maxWidth = '100vw';
     dialogConfig.maxHeight = '100%';
-    dialogConfig.data = {data: this.dataSource.data[id]};
+    dialogConfig.data = { data: this.dataSource.data[id] };
 
     const dialogRef = this.d.open(EditManagerDialogComponent, dialogConfig);
 
-    const smallDialogSub = this.isSmall.subscribe(size => {
+    const smallDialogSub = this.isSmall.subscribe((size) => {
       if (size.matches) {
         dialogRef.updateSize('100%', '100%');
       } else {
@@ -141,15 +156,19 @@ export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChil
   delete(_id: string) {
     const data = this.dataSource.data[_id];
 
-    const dialogRef = this.dialogService.confirmDialog('Vuoi davvero eliminare questo manager?');
-    dialogRef.afterClosed().subscribe(res => {
+    const dialogRef = this.dialogService.confirmDialog(
+      'Vuoi davvero eliminare questo manager?'
+    );
+    dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.managerService.deleteManager(data._id).subscribe(() => {
           this.managersTableList();
-          this.snackBar.showSuccessSnackbar(`Il manager ${data.user} è stato eliminato con successo!`);
+          this.snackBar.showSuccessSnackbar(
+            `Il manager ${data.user} è stato eliminato con successo!`
+          );
         });
       }
-    })
+    });
   }
 
   addRowData(manager: Manager): void {
@@ -158,7 +177,7 @@ export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChil
   }
 
   updateRowData(manager: Manager): void {
-    const i = this.dataSource.data.findIndex(el => el._id === manager._id);
+    const i = this.dataSource.data.findIndex((el) => el._id === manager._id);
     if (i !== -1) {
       this.dataSource.data[i] = manager;
       this.refreshTable();
@@ -166,7 +185,7 @@ export class AdminManagersComponent implements OnInit, AfterViewInit, CommonChil
   }
 
   deleteRowData(_id: string): void {
-    const i = this.dataSource.data.findIndex(el => el._id === _id);
+    const i = this.dataSource.data.findIndex((el) => el._id === _id);
     if (i !== -1) {
       this.dataSource.data.splice(i, 1);
       this.refreshTable();

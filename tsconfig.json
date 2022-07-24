@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "tslib":["path/to/node_modules/tslib/tslib.d.ts"]
+      "tslib": ["path/to/node_modules/tslib/tslib.d.ts"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -16,9 +16,6 @@
     "target": "es2015",
     "module": "es2020",
     "types": ["node"],
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "lib": ["es2018", "dom"]
   }
 }
