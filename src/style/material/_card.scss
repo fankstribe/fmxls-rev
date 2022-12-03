@@ -6,12 +6,11 @@
   $warn: map-get($theme, warn);
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
+  $is-dark: map-get($theme, is-dark);
 
   .mat-card {
-    border: 1px solid mat.get-color-from-palette($foreground, divider);
-  }
-
-  .mat.card .card-title {
-    color: mat.get-color-from-palette($foreground, title);
+    .card-title {
+      color: mat.get-color-from-palette($foreground, title);
+    }
   }
 }

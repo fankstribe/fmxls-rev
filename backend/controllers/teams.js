@@ -1,97 +1,123 @@
-const { deleteImage } = require('../helpers/save-image')
-const Team = require('../models/team')
-const User = require('../models/user')
-const Manager = require('../models/manager')
-const Player = require('../models/player')
+const { deleteImage } = require("../helpers/save-image");
+const Team = require("../models/team");
+const User = require("../models/user");
+const Manager = require("../models/manager");
+const Player = require("../models/player");
 
-const getTeams = async(req, res) => {
-  const teams = await Team.find().populate("user", "name")
+const getTeams = async (req, res) => {
+  const teams = await Team.find().populate("user", "name");
   return res.status(200).json({
     msg: "Team trovati.",
-    teams
-  })
-}
+    teams,
+  });
+};
 
-const createTeam = async(req, res) => {
-  const team = new Team(req.body)
+const getTeam = async (req, res = response) => {
+  const userId = req.params.team;
+
   try {
-    const teamDB = await team.save()
+    const team = await Team.findOne({ user: userId });
+
+    if (!team) {
+      return res.status(404).json({
+        ok: false,
+        msg: "Non sei ancora associato a un team.",
+      });
+    }
+
+    res.json({
+      ok: true,
+      team: team,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Errore inatteso",
+    });
+  }
+};
+
+const createTeam = async (req, res) => {
+  const team = new Team(req.body);
+  try {
+    const teamDB = await team.save();
     return res.status(200).json({
       msg: "Team creato.",
-      team: teamDB
-    })
+      team: teamDB,
+    });
   } catch (error) {
-    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." });
   }
-}
+};
 
-const deleteTeam = async(req, res) => {
-  const id = req.params.id
+const deleteTeam = async (req, res) => {
+  const id = req.params.id;
   try {
-    const team = await Team.findById(id)
-    const player = await Player.find({team: id})
-    const pathView = `./uploads/teams/${team.img}`
+    const team = await Team.findById(id);
+    const player = await Player.find({ team: id });
+    const pathView = `./uploads/teams/${team.img}`;
     if (!team) {
       return res.status(402).json({
         msg: "Squadra non trovata.",
-        id
-      })
+        id,
+      });
     }
 
     if (team.img) {
-      await deleteImage(pathView)
+      await deleteImage(pathView);
     }
 
     if (team.user) {
-      await  User.findByIdAndUpdate(team.user, {assignedTeam: false})
-      await  Manager.deleteOne({user: team.user})
-      await  Team.findByIdAndDelete(id)
+      await User.findByIdAndUpdate(team.user, { assignedTeam: false });
+      await Manager.deleteOne({ user: team.user });
+      await Team.findByIdAndDelete(id);
     } else {
-      await Team.findByIdAndDelete(id)
+      await Team.findByIdAndDelete(id);
     }
 
     if (player) {
-      await Player.updateMany({team: id}, {team: null})
+      await Player.updateMany({ team: id }, { team: null });
     }
 
     res.json({
       msg: "Squadra eliminata",
-      status: 200
-    })
+      status: 200,
+    });
   } catch (error) {
-    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." });
   }
-}
+};
 
-const updateTeam = async(req, res = response) => {
-  const id = req.params.id
+const updateTeam = async (req, res = response) => {
+  const id = req.params.id;
   try {
-    const team = await Team.findById(id)
+    const team = await Team.findById(id);
     if (!team) {
       return res.status(402).json({
         msg: "Squadra non trovata.",
-        id
-      })
+        id,
+      });
     }
-    const teamDB = { ...req.body }
+    const teamDB = { ...req.body };
 
     const updateTeam = await Team.findByIdAndUpdate(id, teamDB, {
-      new: true
-    })
-    .populate("user", "name")
+      new: true,
+    }).populate("user", "name");
 
     res.json({
       team: updateTeam,
-      status: 200
-    })
+      status: 200,
+    });
   } catch (error) {
-    res.status(500).send({ msg: "Qualcosa non ha funzionato." })
+    res.status(500).send({ msg: "Qualcosa non ha funzionato." });
   }
-}
+};
 
 module.exports = {
   getTeams,
+  getTeam,
   createTeam,
   updateTeam,
-  deleteTeam
-}
+  deleteTeam,
+};

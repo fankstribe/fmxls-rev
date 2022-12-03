@@ -17,15 +17,16 @@
       #file
     />
   </button>
-  <h4 class="m-b-0 title" fxFlex="auto">{{ tournamentToUpdate.tournamentName }}</h4>
+  <h5 class="m-b-0" fxFlex="auto">
+    {{ tournamentToUpdate.tournamentName }}
+  </h5>
   <button mat-dialog-close mat-icon-button>
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<mat-divider style="margin: 0 -1.5rem;"></mat-divider>
 <form [formGroup]="editTournamentForm" (ngSubmit)="onSubmitForm()">
   <mat-dialog-content>
-    <mat-form-field class="full-width m-t-24">
+    <mat-form-field class="w-100 m-t-24">
       <mat-label>Nome Torneo</mat-label>
       <input
         cdkFocusInitial
@@ -40,9 +41,7 @@
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close type="button">
-      Annulla
-    </button>
+    <button mat-button mat-dialog-close type="button">Annulla</button>
     <button
       mat-button
       type="submit"

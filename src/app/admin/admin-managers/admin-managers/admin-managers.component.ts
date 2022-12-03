@@ -28,6 +28,8 @@ import {
   eventSubscriber,
 } from '../../../interfaces/common-child.interface';
 import { AppService } from '../../../core/services/app.service';
+import { filterTable } from '../../../../shared/utils/filter-table';
+import { FilterDialogComponent } from '../filter-dialog/filter-dialog.component';
 
 @Component({
   selector: 'app-admin-managers',
@@ -43,8 +45,13 @@ export class AdminManagersComponent
   dataSource = new MatTableDataSource<Manager>();
   noItems = false;
   itemsCount: number;
+  isFiltered = false;
 
-  displayedColumns: string[] = ['user', 'team', 'createdAt', 'action'];
+  filterValue = {};
+
+  displayedColumns: string[] = ['img', 'user', 'team', 'createdAt', 'action'];
+
+  filterSelectObj = [];
 
   @ViewChild(MatTable) table: MatTable<Manager>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -60,10 +67,20 @@ export class AdminManagersComponent
   ) {
     this.add = this.add.bind(this);
     eventSubscriber(appService.openSubscription, this.add);
+
+    this.filterSelectObj = [
+      {
+        name: 'CREATEDAT',
+        columnProp: 'createdAt',
+        options: [],
+      },
+    ];
+    this.isFiltered = false;
   }
 
   ngOnInit() {
     this.managersTableList();
+    this.dataSource.filterPredicate = filterTable();
   }
 
   ngAfterViewInit() {
@@ -81,6 +98,17 @@ export class AdminManagersComponent
       }
     };
     this.dataSource.paginator = this.paginator;
+    this.paginator._intl.itemsPerPageLabel = '';
+  }
+
+  resetFilters() {
+    this.filterValue = {};
+    this.filterSelectObj.forEach((value, key) => {
+      value.modelValue = undefined;
+    });
+    this.dataSource.filter = '';
+    this.isFiltered = false;
+    this.noItems = false;
   }
 
   managersTableList() {
@@ -88,11 +116,15 @@ export class AdminManagersComponent
       !list.length ? (this.noItems = true) : (this.noItems = false);
       this.dataSource.data = list;
       this.itemsCount = list.length;
+      console.log(list);
     });
   }
 
-  doFilter($event: any) {
-    const filterValue = $event.target.value;
+  applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
+      console.log(data);
+      return data.user.toLocaleLowerCase().includes(filter);
+    };
     this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
   }
 
@@ -171,6 +203,49 @@ export class AdminManagersComponent
     });
   }
 
+  filterData() {
+    if (this.isFiltered) {
+      this.resetFilters();
+      return false;
+    }
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = '500px';
+    dialogConfig.maxWidth = '100vw';
+    dialogConfig.maxHeight = '100%';
+    dialogConfig.data = { data: this.dataSource.data };
+
+    const dialogRef = this.d.open(FilterDialogComponent, dialogConfig);
+
+    const smallDialogSub = this.isSmall.subscribe((size) => {
+      if (size.matches) {
+        dialogRef.updateSize('100%', '100%');
+      } else {
+        dialogRef.updateSize('500px');
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        Object.values(res).every((o) => o === '')
+          ? (this.noItems = true)
+          : (this.noItems = false);
+        Object.keys(res).forEach((key) => {
+          if (res[key] === '') {
+            delete res[key];
+          }
+        });
+        this.isFiltered = true;
+
+        this.filterValue = res;
+        this.dataSource.filter = JSON.stringify(this.filterValue);
+      }
+      smallDialogSub.unsubscribe();
+    });
+  }
+
   addRowData(manager: Manager): void {
     this.dataSource.data.push(manager);
     this.refreshTable();
@@ -195,6 +270,7 @@ export class AdminManagersComponent
   refreshTable() {
     this.dataSource.sort = this.sort;
     this.table.renderRows();
+    this.dataSource._updateChangeSubscription();
   }
 
   ngOnDestroy() {

@@ -9,8 +9,8 @@
       routerLinkActive="active"
       (click)="onSidenavClose()"
     >
-      <mat-icon class="sidemenu-icon material-icons-outlined">{{menu.icon}}</mat-icon>
-      <span class="sidemenu-item">{{menu.name}}</span>
+      <i [className]="menu.icon"></i>
+      <span class="sidemenu-item">{{ menu.name }}</span>
     </a>
   </ng-container>
 </div>

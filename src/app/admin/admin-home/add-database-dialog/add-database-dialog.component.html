@@ -1,14 +1,12 @@
 <form [formGroup]="addDatabaseForm" (ngSubmit)="onSubmitForm()">
-  <div fxLayoutAlign="start center"  class="mat-dialog-title">
-    <img class="img-user">
-    <h2 class="m-b-0" fxFlex="auto">Carica Nuovo Database</h2>
+  <div fxLayoutAlign="start center" class="mat-dialog-title">
+    <h5 class="m-b-0" fxFlex="auto">Nuovo Database</h5>
     <button mat-dialog-close mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <mat-divider style="margin: 0 -1.5rem;"></mat-divider>
   <mat-dialog-content>
-    <mat-form-field class="full-width m-t-24" appearance="fill">
+    <mat-form-field class="w-100 m-t-24">
       <mat-label>Sorgente</mat-label>
       <mat-select placeholder="Seleziona un sito" formControlName="source">
         <mat-option value="sofifa">Sofifa</mat-option>
@@ -20,26 +18,38 @@
     </mat-form-field>
     <div class="m-b-16">
       <div fxLayoutAlign="start start" class="p-y-12">
-        <div fxLayoutAlign="start" class="m-t-2 m-r-16" fxFlex="0 0 0" style="width: 32px; height: 32px;">
+        <div
+          fxLayoutAlign="start"
+          class="m-t-2 m-r-16"
+          fxFlex="0 0 0"
+          style="width: 24px; height: 24px"
+        >
           <mat-icon class="text-red material-icons-outlined">info</mat-icon>
         </div>
         <div>
-          <h2 class="m-b-4 bold text-red">Avvertenza</h2>
-          <div>Tempo stimato per il completamento: 30 - 60 minuti, in base alla velocità della connessione.</div>
-          <div>Durante il processo puoi continuare a navigare normalmente, sarai avvisato tramite notifica al completamento.</div>
-          <div>Se perdi la connessione, clicca il menu "Riconnetti" e ripeti il processo.</div>
+          <h5 class="m-b-12">Avvertenza</h5>
+          <p>
+            Tempo stimato per il completamento: 30 - 60 minuti, in base alla
+            velocità della connessione.
+          </p>
+          <p>
+            Durante il processo puoi continuare a navigare normalmente, sarai
+            avvisato tramite notifica al completamento.
+          </p>
+          <p>
+            Se perdi la connessione, clicca il menu "Riconnetti" e ripeti il
+            processo.
+          </p>
         </div>
       </div>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close type="button">
-      Annulla
-    </button>
+    <button mat-button mat-dialog-close type="button">Annulla</button>
     <button
       mat-button
       type="submit"
-      color="accent"
+      color="primary"
       [disabled]="!addDatabaseForm.valid"
     >
       Salva

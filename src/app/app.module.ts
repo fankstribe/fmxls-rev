@@ -16,46 +16,46 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { DialogComponent } from '../shared/dialog/dialog.component';
+import { ConfirmDialogComponent } from '../shared/components/dialog/confirm-dialog/confirm-dialog.component';
 
 registerLocaleData(localeIt);
 
 const socketConfig: SocketIoConfig = {
   url: environment.socket_url,
-}
+};
 
 @NgModule({
-    declarations: [AppComponent, DialogComponent],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        // Socket
-        SocketIoModule.forRoot(socketConfig),
-        // Shared
-        SharedModule,
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpErrorInterceptor,
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpLoaderInterceptor,
-            multi: true,
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpLoadingPageInterceptor,
-            multi: true,
-        },
-        {
-            provide: LOCALE_ID,
-            useValue: 'it-IT'
-        }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [AppComponent, ConfirmDialogComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    // Socket
+    SocketIoModule.forRoot(socketConfig),
+    // Shared
+    SharedModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoaderInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoadingPageInterceptor,
+      multi: true,
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'it',
+    },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

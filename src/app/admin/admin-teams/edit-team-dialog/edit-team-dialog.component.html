@@ -17,15 +17,14 @@
       #file
     />
   </button>
-  <h4 class="m-b-0 title" fxFlex="auto">{{ teamToUpdate.teamName }}</h4>
+  <h5 class="m-b-0" fxFlex="auto">{{ teamToUpdate.teamName }}</h5>
   <button mat-dialog-close mat-icon-button>
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<mat-divider style="margin: 0 -1.5rem"></mat-divider>
 <form [formGroup]="editTeamForm" (ngSubmit)="onSubmitForm()">
   <mat-dialog-content>
-    <mat-form-field class="full-width m-t-24">
+    <mat-form-field class="w-100 m-t-12">
       <mat-label>Nome Squadra</mat-label>
       <input
         cdkFocusInitial

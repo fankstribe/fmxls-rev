@@ -1,20 +1,17 @@
 <div fxLayoutAlign="start center" class="mat-dialog-title">
-  <button
-    class="header-img"
-  >
+  <button class="header-img">
     <img [src]="managerToUpdate.user.img | images: 'users'" />
   </button>
-  <h4 class="m-b-0 title" fxFlex="auto">{{ managerToUpdate.user }}</h4>
+  <h5 class="m-b-0" fxFlex="auto">{{ managerToUpdate.user }}</h5>
   <button mat-dialog-close mat-icon-button>
     <mat-icon>close</mat-icon>
   </button>
 </div>
-<mat-divider style="margin: 0 -1.5rem;"></mat-divider>
 <form [formGroup]="editManagerForm" (ngSubmit)="onSubmitForm()">
   <mat-dialog-content>
-    <mat-form-field class="full-width m-t-24">
+    <mat-form-field class="w-100 m-t-12">
       <mat-label>Squadra</mat-label>
-      <mat-select [compareWith]="compareSelectedObj"  formControlName="teamName">
+      <mat-select [compareWith]="compareSelectedObj" formControlName="teamName">
         <mat-option *ngFor="let team of selectedTeams" [value]="team._id">
           {{ team.teamName }}
         </mat-option>
@@ -25,9 +22,7 @@
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close type="button">
-      Annulla
-    </button>
+    <button mat-button mat-dialog-close type="button">Annulla</button>
     <button
       mat-button
       type="submit"

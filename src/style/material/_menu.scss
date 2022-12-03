@@ -19,6 +19,9 @@
         background: mat.get-color-from-palette($background, hover);
       }
     }
+    .dropdown-menu-icons {
+      color: mat.get-color-from-palette($foreground, icon);
+    }
   }
 
   .fm-menu .menu-wrap .line {

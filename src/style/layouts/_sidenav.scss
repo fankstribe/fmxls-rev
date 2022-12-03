@@ -1,23 +1,27 @@
 @import "../abstracts/breakpoints";
+.sidenav {
+  border: 0 !important;
 
-.list {
-  margin-right: 10px;
+  .list {
+    margin-right: 10px;
 
-  .list-item {
-    position: relative;
-    align-items: center;
-    min-height: 48px;
-    margin: 0.25rem 1rem;
-    border-radius: 8px;
-    padding: 0.75rem 0.875rem;
-    width: unset;
-  }
+    .list-item {
+      position: relative;
+      align-items: center;
+      min-height: 48px;
+      margin: 0.25rem 1rem;
+      border-radius: 100px;
+      padding: 0.75rem 1rem;
+      width: unset;
+    }
 
-  .list-item.active {
-    font-weight: 600;
-  }
+    .list-item.active {
+      font-weight: 600;
+    }
 
-  .sidemenu-icon {
-    margin-right: 12px;
+    .sidemenu-icon {
+      margin-right: 14px;
+      flex-shrink: 0;
+    }
   }
 }

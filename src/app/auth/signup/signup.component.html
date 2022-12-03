@@ -1,104 +1,149 @@
 <mat-card class="auth-card m-b-0">
   <div class="auth-logo"></div>
-  <div class="text-center p-t-12">
-    <h4>Registrati</h4>
+  <div class="text-center p-t-8">
+    <h5 class="p-b-16">Registrati</h5>
   </div>
   <mat-card-content>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmitForm()">
-      <mat-form-field
-        class="full-width"
-        [ngClass]="routeAnimationsElements"
-      >
+      <mat-form-field class="w-100">
         <mat-label>Username</mat-label>
         <input
           matInput
+          #iconNameInput="matInput"
           type="text"
           autocomplete="name"
           autocorrect="off"
           formControlName="name"
         />
-        <mat-icon class="material-icons-outlined" matSuffix>person</mat-icon>
+        <i
+          class="ri-user-line ri-lg"
+          [ngClass]="
+            iconNameInput.focused && iconNameInput.errorState
+              ? 'text-warn'
+              : iconNameInput.focused
+              ? 'text-primary'
+              : iconNameInput.errorState
+              ? 'text-warn'
+              : ''
+          "
+          matSuffix
+        ></i>
         <mat-error *ngIf="formError.name">
           {{ formError.name }}
         </mat-error>
       </mat-form-field>
-      <mat-form-field
-        class="full-width"
-        [ngClass]="routeAnimationsElements"
-      >
+      <mat-form-field class="w-100">
         <mat-label>Email</mat-label>
         <input
           matInput
+          #iconEmailInput="matInput"
           type="email"
           autocomplete="email"
           autocorrect="off"
           formControlName="email"
         />
-        <mat-icon class="material-icons-outlined" matSuffix>email</mat-icon>
+        <i
+          class="ri-mail-line ri-lg"
+          [ngClass]="
+            iconEmailInput.focused && iconEmailInput.errorState
+              ? 'text-warn'
+              : iconEmailInput.focused
+              ? 'text-primary'
+              : iconEmailInput.errorState
+              ? 'text-warn'
+              : ''
+          "
+          matSuffix
+        ></i>
         <mat-error *ngIf="formError.email">
           {{ formError.email }}
         </mat-error>
       </mat-form-field>
-      <mat-form-field
-        class="full-width"
-        [ngClass]="routeAnimationsElements"
-      >
+      <mat-form-field class="w-100">
         <mat-label>Data di Nascita</mat-label>
         <input
           matInput
+          #iconDateInput="matInput"
           [max]="validDate"
           [matDatepicker]="picker"
           placeholder="Scegli una data"
           formControlName="birthDate"
         />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <i
+            class="ri-calendar-line ri-lg"
+            matDatepickerToggleIcon
+            [ngClass]="
+              iconDateInput.focused && iconDateInput.errorState
+                ? 'text-warn'
+                : iconDateInput.focused
+                ? 'text-primary'
+                : iconDateInput.errorState
+                ? 'text-warn'
+                : ''
+            "
+            matSuffix
+          ></i>
+        </mat-datepicker-toggle>
         <mat-datepicker #picker touchUi startView="year"></mat-datepicker>
         <mat-hint>Età minima richiesta: <strong>16</strong> anni.</mat-hint>
         <mat-error *ngIf="formError.birthDate">
           {{ formError.birthDate }}
         </mat-error>
       </mat-form-field>
-      <mat-form-field
-        class="full-width"
-        [ngClass]="routeAnimationsElements"
-      >
+      <mat-form-field class="w-100">
         <mat-label>Password</mat-label>
         <input
           matInput
+          #iconPasswordInput="matInput"
           [type]="hide ? 'password' : 'text'"
           autocomplete="new-password"
           autocorrect="off"
           formControlName="password"
         />
-        <mat-icon
-          class="material-icons-outlined"
-          style="cursor: pointer"
+        <i
+          class="cursor-pointer ri-lg"
           matSuffix
           (click)="hide = !hide"
-          >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
-        >
+          [ngClass]="[
+            iconDateInput.focused && iconPasswordInput.errorState
+              ? 'text-warn'
+              : iconPasswordInput.focused
+              ? 'text-primary'
+              : iconPasswordInput.errorState
+              ? 'text-warn'
+              : '',
+            hide ? 'ri-eye-line' : 'ri-eye-off-line'
+          ]"
+        ></i>
         <mat-error *ngIf="formError.password">
           {{ formError.password }}
         </mat-error>
       </mat-form-field>
-      <mat-form-field
-        class="full-width"
-        [ngClass]="routeAnimationsElements"
-      >
+      <mat-form-field class="w-100">
         <mat-label>Confirm Password</mat-label>
         <input
           matInput
+          #iconConfirmPasswordInput="matInput"
           [type]="hide ? 'password' : 'text'"
           autocomplete="new-password"
           formControlName="confirmPassword"
         />
-        <mat-icon
-          class="material-icons-outlined"
-          style="cursor: pointer"
+        <i
+          class="cursor-pointer ri-lg"
           matSuffix
-          (click)="hide = !hide"
-          >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
-        >
+          (click)="hideC = !hideC"
+          [ngClass]="[
+            iconDateInput.focused && iconPasswordInput.errorState
+              ? 'text-warn'
+              : iconPasswordInput.focused
+              ? 'text-primary'
+              : iconPasswordInput.errorState
+              ? 'text-warn'
+              : '',
+            hideC ? 'ri-eye-line' : 'ri-eye-off-line'
+          ]"
+        ></i>
         <mat-error *ngIf="formError.confirmPassword">
           {{ formError.confirmPassword }}
         </mat-error>
@@ -110,7 +155,6 @@
             type="submit"
             color="primary"
             [disabled]="!signupForm.valid"
-            [ngClass]="routeAnimationsElements"
           >
             Registrami
           </button>
@@ -120,8 +164,6 @@
   </mat-card-content>
   <div class="additional-link">
     Sei già registrato?
-    <a style="display: inline-block" routerLink="/login">
-      Accedi
-    </a>
+    <a style="display: inline-block" routerLink="/login"> Accedi </a>
   </div>
 </mat-card>

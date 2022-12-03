@@ -16,6 +16,8 @@ import { SnackBarService } from '../../../core/services/snackbar.service';
 
 import { User } from '../../../models/user';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { filterTable } from '../../../../shared/utils/filter-table';
+import { FilterDialogComponent } from '../filter-dialog/filter-dialog.component';
 
 @Component({
   selector: 'app-admin-users',
@@ -28,6 +30,10 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
   ]);
   dataSource = new MatTableDataSource<User>();
   itemsCount: number;
+  isFiltered = false;
+  noItems = false;
+
+  filterValue = {};
 
   displayedColumns: string[] = [
     'img',
@@ -37,6 +43,8 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
     'createdAt',
     'action',
   ];
+
+  filterSelectObj = [];
 
   @ViewChild(MatTable) table: MatTable<User>;
   @ViewChild(MatSort) sort: MatSort;
@@ -48,10 +56,30 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
     private dialogService: DialogService,
     private breakpointObs: BreakpointObserver,
     private snackBar: SnackBarService
-  ) {}
+  ) {
+    this.filterSelectObj = [
+      {
+        name: 'EMAIL',
+        columnProp: 'email',
+        options: [],
+      },
+      {
+        name: 'ROLE',
+        columnProp: 'role',
+        options: [],
+      },
+      {
+        name: 'CREATEDAT',
+        columnProp: 'createdAt',
+        options: [],
+      },
+    ];
+    this.isFiltered = false;
+  }
 
   ngOnInit() {
     this.usersTableList();
+    this.dataSource.filterPredicate = filterTable();
   }
 
   ngAfterViewInit() {
@@ -77,9 +105,21 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  doFilter($event: any) {
-    const filterValue = $event.target.value;
+  applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate = (data, filter: string): boolean => {
+      return data.name.toLocaleLowerCase().includes(filter);
+    };
     this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+  }
+
+  resetFilters() {
+    this.filterValue = {};
+    this.filterSelectObj.forEach((value, key) => {
+      value.modelValue = undefined;
+    });
+    this.dataSource.filter = '';
+    this.isFiltered = false;
+    this.noItems = false;
   }
 
   update(uid: string) {
@@ -126,11 +166,56 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
       if (res) {
         this.userService.deleteUser(data.uid).subscribe(() => {
           this.deleteRowData(data.uid);
+          this.resetFilters();
           this.snackBar.showSuccessSnackbar(
             `L'utente ${data.name} è stato eliminato con successo!`
           );
         });
       }
+    });
+  }
+
+  filterData() {
+    if (this.isFiltered) {
+      this.resetFilters();
+      return false;
+    }
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = '500px';
+    dialogConfig.maxWidth = '100vw';
+    dialogConfig.maxHeight = '100%';
+    dialogConfig.data = { data: this.dataSource.data };
+
+    const dialogRef = this.d.open(FilterDialogComponent, dialogConfig);
+
+    const smallDialogSub = this.isSmall.subscribe((size) => {
+      if (size.matches) {
+        dialogRef.updateSize('100%', '100%');
+      } else {
+        dialogRef.updateSize('500px');
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        console.log(res);
+        Object.values(res).every((o) => o === '')
+          ? (this.noItems = true)
+          : (this.noItems = false);
+        Object.keys(res).forEach((key) => {
+          if (res[key] === '') {
+            delete res[key];
+          }
+        });
+        this.isFiltered = true;
+
+        this.filterValue = res;
+        this.dataSource.filter = JSON.stringify(this.filterValue);
+      }
+      smallDialogSub.unsubscribe();
     });
   }
 
@@ -153,5 +238,6 @@ export class AdminUsersComponent implements OnInit, AfterViewInit {
   refreshTable() {
     this.dataSource.sort = this.sort;
     this.table.renderRows();
+    this.dataSource._updateChangeSubscription();
   }
 }

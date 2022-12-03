@@ -12,37 +12,17 @@
     color: mat.get-color-from-palette($foreground, button-text);
   }
 
-  // a,
-  // .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
-  // .mat-form-field.mat-focused .mat-form-field-label
-  // {
-  //   color: mat-color($primary);
-  // }
+  .mat-icon-button,
+  .mat-icon {
+    color: mat.get-color-from-palette($foreground, icon);
+  }
 
-  // .mat-form-field.mat-focused .mat-form-field-ripple {
-  //   background-color: mat-color($primary);
-  // }
+  .mat-raised-button:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+    background-color: mat.get-color-from-palette($background, card);
+  }
 
-  // .mat-primary .mat-option.mat-selected:not(.mat-option-disabled)
-  // {
-  //   color: mat-color($foreground, text);
-  // }
-
-  // .mat-form-field.mat-form-field-invalid .mat-form-field-label,
-  // .mat-form-field.mat-form-field-invalid .mat-form-field-ripple
-  //  {
-  //   color: mat-color($warn);
-  // }
-
-  // .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
-  //   background-color: mat-color($warn);
-  // }
-
-  // .mat-input-element {
-  //   caret-color: mat-color($foreground, text);
-  // }
-
-  // .mat-form-field-appearance-outline .mat-form-field-outline {
-  //   color: mat-color($foreground, divider);
-  // }
+  .mat-raised-button:not(.mat-button-disabled):active:not([class*="mat-elevation-z"]) {
+    box-shadow: none;
+  }
 }

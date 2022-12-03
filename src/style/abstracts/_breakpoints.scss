@@ -3,14 +3,15 @@ $breakpoints: (
   small: 600px,
   medium: 768px,
   tablet: 960px,
+  tabletls: 992px,
   desktop: 1024px,
-  xdesktop: 1200px
+  xdesktop: 1200px,
 );
 
 @function bp($name, $breakpoints: $breakpoints) {
   $min: map-get($breakpoints, $name);
 
-  @return $min
+  @return $min;
 }
 
 @mixin bp-gt($name, $breakpoints: $breakpoints) {
@@ -20,9 +21,7 @@ $breakpoints: (
     @media (min-width: $min) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @content;
   }
 }
@@ -34,10 +33,7 @@ $breakpoints: (
     @media (max-width: $max) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @content;
   }
-
 }

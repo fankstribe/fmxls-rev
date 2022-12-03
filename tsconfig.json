@@ -16,6 +16,6 @@
     "target": "es2020",
     "module": "es2020",
     "types": ["node"],
-    "lib": ["es2018", "dom"]
+    "lib": ["es2019", "dom"]
   }
 }

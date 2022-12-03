@@ -26,20 +26,20 @@
   }
 
   // Testo
-  .title {
-    color: mat.get-color-from-palette($foreground, title) !important;
-  }
-
   .disabled {
     color: mat.get-color-from-palette($foreground, disabled-button);
   }
 
   .text-primary {
-    color: mat.get-color-from-palette($foreground, text) !important;
+    color: mat.get-color-from-palette($primary) !important;
   }
 
   .text-accent {
     color: mat.get-color-from-palette($accent) !important;
+  }
+
+  .text-warn {
+    color: mat.get-color-from-palette($warn) !important;
   }
 
   .secondary-text {
@@ -74,15 +74,15 @@
   }
 
   // Background
-  .hover:hover {
-    background-color: mat.get-color-from-palette($background, hover);
-    transition: 0.3s all;
+  @include bp-gt(desktop) {
+    .hover:hover {
+      background-color: mat.get-color-from-palette($background, hover);
+      transition: 0.3s all;
+    }
+    .bg-hover {
+      background-color: mat.get-color-from-palette($background, hover);
+    }
   }
-  .bg-hover {
-    background-color: mat.get-color-from-palette($background, hover);
-  }
-
-  // Background
 
   .bg-accent {
     background-color: mat.get-color-from-palette($accent);
@@ -99,9 +99,65 @@
     color: white;
   }
 
+  .bg-green-light {
+    background-color: rgb(139 195 74 / 15%);
+    color: $fm-green;
+  }
+
+  .bg-deep-orange-light {
+    background-color: rgb(255 87 34 / 15%);
+    color: $fm-deep-orange;
+  }
+
   // Tooltip
   .tooltip {
     background-color: mat.get-color-from-palette($background, tooltip);
     color: mat.get-color-from-palette($foreground, text-inverse);
+  }
+
+  // Icone
+  .icon-primary-light {
+    background-color: mat.get-color-from-palette($primary, A200);
+    color: mat.get-color-from-palette($primary);
+  }
+
+  .icon-cyan-light {
+    background-color: $fm-cyan-500;
+    color: $fm-cyan-a200;
+  }
+
+  .icon-green-light {
+    background-color: $fm-light-green-500;
+    color: $fm-light-green-a200;
+  }
+
+  .icon-lime-light {
+    background-color: $fm-lime-500;
+    color: $fm-lime-a200;
+  }
+
+  // Input
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: mat.get-color-from-palette($foreground, secondary-text);
+    opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: mat.get-color-from-palette($foreground, secondary-text);
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: mat.get-color-from-palette($foreground, secondary-text);
+  }
+
+  .chip {
+    border: 1px solid mat.get-color-from-palette($foreground, divider);
+  }
+
+  .title {
+    color: mat.get-color-from-palette($foreground, title);
   }
 }

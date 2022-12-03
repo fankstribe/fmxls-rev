@@ -7,30 +7,33 @@
     </div>
   </div>
   <span class="spacer"></span>
-  <button mat-icon-button [matMenuTriggerFor]="themeSwitch" class="m-x-4">
-    <mat-icon>wb_sunny</mat-icon>
+  <button mat-icon-button class="m-x-4">
+    <mat-icon
+      style="width: 20px; height: 20px; line-height: 20px"
+      [svgIcon]="isDarkMode ? 'lightbulb' : 'lightbulb-off'"
+      (click)="toggleDarkMode()"
+    ></mat-icon>
   </button>
-  <mat-menu #themeSwitch="matMenu" xPosition="before">
-    <div class="switch-theme-list">
-      <mat-radio-group class="theme-list" [(ngModel)]="selectedTheme">
-        <mat-radio-button
-          *ngFor="let theme of themes"
-          [value]="theme"
-          (click)="setTheme(theme)"
-        >
-          {{ theme.name }}
-        </mat-radio-button>
-      </mat-radio-group>
-    </div>
-  </mat-menu>
-  <button
-    class="m-x-4"
-    mat-icon-button
+  <div
     [matMenuTriggerFor]="toolbarUserMenu"
-    disableRipple="true"
+    matRipple
+    fxLayout
+    fxLayoutAlign="start center"
+    class="toolbar-widget rounded-all cursor-pointer m-l-12"
   >
-    <img class="img-profile" [src]="user.imageUrl" />
-  </button>
+    <button class="img-button" disableRipple="true" mat-icon-button>
+      <img class="img-profile rounded-all" [src]="user.imageUrl" />
+    </button>
+    <div fxHide fxShow.gt-sm class="widget-username">
+      <div class="content-title title">{{ user.name }}</div>
+      <div class="content-subtitle secondary-text">Admin</div>
+    </div>
+    <i
+      fxHide
+      fxShow.gt-sm
+      class="content-icon ri-arrow-down-s-line ri-xl dropdown-menu-icons"
+    ></i>
+  </div>
   <mat-menu
     #toolbarUserMenu="matMenu"
     xPosition="before"
@@ -43,22 +46,23 @@
         <img class="img-profile" [src]="user.imageUrl" />
       </div>
       <div class="dropdown-menu-header-info">
-        <h4 class="header-name title m-b-0">{{ user.name }}</h4>
+        <h4 class="header-name m-b-0">{{ user.name }}</h4>
         <div class="header-email secondary-text">{{ user.email }}</div>
       </div>
     </div>
     <mat-divider></mat-divider>
     <div class="dropdown-menu-content">
-      <a routerLink="/" matRipple class="dropdown-menu-item">
-        <mat-icon class="dropdown-menu-icons material-icons-outlined"
-          >home</mat-icon
-        >
+      <a routerLink="/" matRipple class="dropdown-menu-item items-center">
+        <i
+          fxHide
+          fxShow.gt-sm
+          class="ri-home-line ri-lg dropdown-menu-icons"
+        ></i>
         <div fxFlex="auto">Vai al sito</div>
-        <mat-icon
-          class="dropdown-menu-icons-chevron-right material-icons-outlined"
+        <i
           fxFlex="none"
-          >chevron_right</mat-icon
-        >
+          class="ri-arrow-drop-right-line ri-xl dropdown-menu-icons-chevron-right"
+        ></i>
       </a>
     </div>
     <div class="dropdown-menu-footer">

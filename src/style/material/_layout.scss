@@ -12,23 +12,42 @@
 
   // Sidebar
   .sidenav {
-    background-color: mat.get-color-from-palette($background, sidebar);
-    border-right: 1px solid mat.get-color-from-palette($foreground, divider);
+    background-color: mat.get-color-from-palette($background, card);
+
+    @include bp-gt(tablet) {
+      background-color: mat.get-color-from-palette(
+        $background,
+        sidebar
+      ) !important;
+    }
   }
 
   .list .list-item {
     color: mat.get-color-from-palette($foreground, text-menu);
     font-weight: 500;
 
+    .sidemenu-icon {
+      color: mat.get-color-from-palette($foreground, text-menu);
+    }
+
     &.active,
     &:hover {
       background: rgba(mat.get-color-from-palette($primary, default), 0.15);
       color: lighten(mat.get-color-from-palette($primary, default), 0);
+      transition: all 0.5s ease;
+
+      .sidemenu-icon {
+        color: lighten(mat.get-color-from-palette($primary, default), 0);
+      }
     }
 
     .mat-ripple-element {
       background-color: mat.get-color-from-palette($primary, 200, 0.3);
     }
+  }
+
+  .mat-toolbar .brand-text {
+    color: #fff;
   }
 
   // Notification
@@ -57,13 +76,39 @@
   }
 
   .toolbar-brand {
-    background: mat.get-color-from-palette($background, toolbar-brand);
+    background: mat.get-color-from-palette($background, card);
+
+    @include bp-gt(tablet) {
+      background: mat.get-color-from-palette(
+        $background,
+        toolbar-brand
+      ) !important;
+    }
   }
 
   .toolbar {
-    background: mat.get-color-from-palette($background, toolbar) !important;
-    box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
-    color: mat.get-color-from-palette($foreground, icon) !important;
+    background: mat.get-color-from-palette($background, card) !important;
+    color: mat.get-color-from-palette($foreground, text) !important;
+
+    @include bp-gt(tablet) {
+      background: mat.get-color-from-palette($background, toolbar) !important;
+    }
+
+    .mat-icon-button {
+      background: mat.get-color-from-palette($background, toolbar);
+
+      @include bp-gt(tablet) {
+        background: mat.get-color-from-palette($background, card) !important;
+      }
+    }
+  }
+
+  .toolbar-widget {
+    background: mat.get-color-from-palette($background, card);
+
+    .content-icon {
+      color: mat.get-color-from-palette($foreground, icon);
+    }
   }
 
   .auth-logo {
@@ -78,7 +123,7 @@
     @if $is-dark {
       background-image: url("../../assets/images/logo-white.png");
     } @else {
-      background-image: url("../../assets/images/fmxls-logo-main.png");
+      background-image: url("../../assets/images/logo.png");
     }
   }
 }

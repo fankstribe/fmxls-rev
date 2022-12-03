@@ -1,4 +1,10 @@
-import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 
 import { SidenavService } from '../../../core/services/sidenav.service';
@@ -6,7 +12,7 @@ import { SidenavService } from '../../../core/services/sidenav.service';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
   @Output() sidenavClose = new EventEmitter();
@@ -20,7 +26,7 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {
     this.mediaOb.asObservable().subscribe(() => {
       this.toggleMobileView();
-    })
+    });
   }
 
   onSidenavClose() {
@@ -31,7 +37,7 @@ export class SidenavComponent implements OnInit {
 
   toggleMobileView() {
     if (this.mediaOb.isActive('xs') || this.mediaOb.isActive('sm')) {
-      this.isMobile = true
+      this.isMobile = true;
     } else {
       this.isMobile = false;
     }

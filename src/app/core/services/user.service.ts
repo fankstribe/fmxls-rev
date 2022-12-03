@@ -10,6 +10,7 @@ import { SignupForm } from '../../interfaces/signup-form';
 import { LoginForm } from '../../interfaces/login-form';
 
 import { User } from '../../models/user';
+import { convertDate } from 'src/shared/utils/convert-date';
 
 const base_url = environment.base_url;
 
@@ -19,10 +20,7 @@ const base_url = environment.base_url;
 export class UserService {
   user: User;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   get token(): string {
     return localStorage.getItem('token') || '';
@@ -39,14 +37,15 @@ export class UserService {
   get headers() {
     return {
       headers: {
-        'x-token': this.token
-      }
-    }
+        'x-token': this.token,
+      },
+    };
   }
 
-  getLocalStorage(token: string, menu: any) {
+  getLocalStorage(token: string, menu: any, adminMenu: any) {
     localStorage.setItem('token', token);
     localStorage.setItem('menu', JSON.stringify(menu));
+    localStorage.setItem('adminMenu', JSON.stringify(adminMenu));
   }
 
   validateToken(): Observable<boolean> {
@@ -56,10 +55,10 @@ export class UserService {
       map((res: any) => {
         const { email, name, birthDate, role, img = '', uid } = res.user;
         this.user = new User(name, email, '', birthDate, img, role, uid);
-        this.getLocalStorage(res.token, res.menu);
+        this.getLocalStorage(res.token, res.menu, res.adminMenu);
         return true;
       }),
-      catchError(error => of(false))
+      catchError((error) => of(false))
     );
   }
 
@@ -68,44 +67,49 @@ export class UserService {
 
     return this.http.post(url, formData).pipe(
       tap((res: any) => {
-        this.getLocalStorage(res.token, res.menu);
+        this.getLocalStorage(res.token, res.menu, res.adminMenu);
       })
     );
   }
 
-  updateName(data: {name: string, email: string, role: string}) {
+  updateName(data: { name: string; email: string; role: string }) {
     const url = `${base_url}/users/${this.uid}`;
 
     data = {
       ...data,
       email: this.user.email,
-      role: this.user.role
-    }
+      role: this.user.role,
+    };
 
     return this.http.put(url, data, this.headers);
   }
 
-  updateEmail(data: {name: string, email: string, role: string}) {
+  updateEmail(data: { name: string; email: string; role: string }) {
     const url = `${base_url}/users/${this.uid}`;
 
     data = {
       ...data,
       name: this.user.name,
-      role: this.user.role
-    }
+      role: this.user.role,
+    };
 
     return this.http.put(url, data, this.headers);
   }
 
-  updateBirthDate(data: {name: string, email: string, birthDate: Date, role: string}) {
+  updateBirthDate(data: {
+    name: string;
+    email: string;
+    birthDate: Date;
+    role: string;
+  }) {
     const url = `${base_url}/users/${this.uid}`;
 
     data = {
       ...data,
       name: this.user.name,
       email: this.user.email,
-      role: this.user.role
-    }
+      role: this.user.role,
+    };
 
     return this.http.put(url, data, this.headers);
   }
@@ -115,7 +119,7 @@ export class UserService {
 
     return this.http.post(url, formData).pipe(
       tap((res: any) => {
-        this.getLocalStorage(res.token, res.menu);
+        this.getLocalStorage(res.token, res.menu, res.adminMenu);
       })
     );
   }
@@ -123,20 +127,29 @@ export class UserService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('menu');
+    localStorage.removeItem('adminMenu');
     this.router.navigateByUrl('/login');
   }
 
   getUsers() {
     const url = `${base_url}/users`;
 
-    return this.http.get<User>(url, this.headers)
-      .pipe(
-        map((res: any) => {
-          const users = res.users.map(user => new User(user.name, user.email, '', user.birthDate, user.img, user.role, user.uid, user.assignedTeam, user.createdAt)
-        );
-          return users;
-        })
-      );
+    return this.http.get<User>(url, this.headers).pipe(
+      map((res: any) => {
+        const users = res.users.map((user) => ({
+          name: user.name,
+          email: user.email,
+          password: '',
+          birthDate: user.birthDate,
+          img: user.img,
+          role: user.role,
+          uid: user.uid,
+          assignedTeam: user.assignedTeam,
+          createdAt: convertDate(user.createdAt),
+        }));
+        return users;
+      })
+    );
   }
 
   // Lato Admin
@@ -150,5 +163,4 @@ export class UserService {
     const url = `${base_url}/users/${user.uid}`;
     return this.http.put(url, user, this.headers);
   }
-
 }

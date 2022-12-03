@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { UserService } from '../../core/services/user.service';
 import { SnackBarService } from '../../core/services/snackbar.service';
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../core/services/animations/route.animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   loginForm: UntypedFormGroup;
 
   formError = {
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private snackBar: SnackBarService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -74,5 +76,4 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/');
     });
   }
-
 }

@@ -1,14 +1,14 @@
 <form [formGroup]="emailForm" (ngSubmit)="onSubmitForm()">
-  <div fxLayoutAlign="start center"  class="mat-dialog-title">
-    <img class="img-user">
+  <div fxLayoutAlign="start center" class="mat-dialog-title">
+    <img class="img-user" />
     <h4 class="m-b-0 title" fxFlex="auto">Modifica Email</h4>
     <button mat-dialog-close mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <mat-divider style="margin: 0 -1.5rem;"></mat-divider>
+  <mat-divider style="margin: 0 -1.5rem"></mat-divider>
   <mat-dialog-content>
-    <mat-form-field class="full-width m-t-24">
+    <mat-form-field class="w-100 m-t-24">
       <mat-label>Email</mat-label>
       <input
         matInput
@@ -24,6 +24,13 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button type="button" mat-dialog-close>Annulla</button>
-    <button mat-button type="submit" color="primary" [disabled]="!emailForm.valid">Salva</button>
+    <button
+      mat-button
+      type="submit"
+      color="primary"
+      [disabled]="!emailForm.valid"
+    >
+      Salva
+    </button>
   </mat-dialog-actions>
 </form>

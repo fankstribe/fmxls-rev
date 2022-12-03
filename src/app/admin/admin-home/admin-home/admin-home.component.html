@@ -7,7 +7,7 @@
   <div gdColumn="span 12">
     <mat-card class="p-0">
       <div fxLayoutAlign="center center" class="border-bottom p-24">
-        <h4 fxFlex="auto" class="m-0 title">Database</h4>
+        <h6 fxFlex="auto" class="m-0">Database</h6>
         <button
           mat-icon-button
           [disabled]="dbName || checkCreateStatus"
@@ -15,7 +15,7 @@
           matTooltip="Carica DB"
           matTooltipClass="tooltip"
         >
-          <mat-icon class="material-icons-outlined">add</mat-icon>
+          <i class="ri-add-line ri-xl"></i>
         </button>
         <button
           mat-icon-button
@@ -24,7 +24,7 @@
           matTooltip="Aggiorna DB"
           matTooltipClass="tooltip"
         >
-          <mat-icon class="material-icons-outlined">update</mat-icon>
+          <i class="ri-refresh-line ri-xl"></i>
         </button>
         <button
           mat-icon-button
@@ -33,104 +33,99 @@
           matTooltip="Elimina DB"
           matTooltipClass="tooltip"
         >
-          <mat-icon
+          <i
             [ngClass]="dbName ? 'text-red' : 'disabled'"
-            class="material-icons-outlined"
-            >delete</mat-icon
-          >
+            class="ri-delete-bin-line ri-xl"
+          ></i>
         </button>
         <button
           mat-icon-button
           [matMenuTriggerFor]="menu"
           (click)="$event.stopPropagation()"
         >
-          <mat-icon>more_vert</mat-icon>
+          <i class="ri-more-line ri-xl"></i>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item>
-            <mat-icon class="material-icons-outlined">file_download</mat-icon>
+          <button class="flex items-center" mat-menu-item>
+            <i class="m-r-8 ri-download-2-line ri-xl"></i>
             Scarica CSV
           </button>
-          <button mat-menu-item>
-            <mat-icon class="material-icons-outlined">file_upload</mat-icon>
+          <button class="flex items-center" mat-menu-item>
+            <i class="m-r-8 ri-upload-2-line ri-xl"></i>
             Carica CSV
           </button>
-          <button (click)="onRestart()" mat-menu-item>
-            <mat-icon class="material-icons-outlined">restart_alt</mat-icon>
-            Riconnetti
+          <button class="flex items-center" (click)="onRestart()" mat-menu-item>
+            <i class="m-r-8 ri-git-commit-line ri-xl"></i>
+            <span>Riconnetti</span>
           </button>
         </mat-menu>
       </div>
-      <div fxLayout fxLayout.lt-sm="column" class="p-24">
-        <div
-          fxFlex.xs="100"
-          fxFlex="50"
-          fxLayout.xs="column"
-          class="p-t-16 p-b-24 p-l-16 p-r-16"
-        >
-          <h2 *ngIf="dbName" class="title text-accent">
+      <div
+        gdColumns.gt-sm="repeat(2, minmax(0,1fr))"
+        gdColumns="repeat(1, minmax(0,1fr))"
+        gdGap="48px"
+        class="p-24"
+      >
+        <div fxLayout="column" class="p-t-16 p-b-24 p-l-16 p-r-16">
+          <h2 *ngIf="dbName" class="m-b-0 xbold">
             {{ dbName | uppercase }}
           </h2>
-          <h2 *ngIf="!dbName" class="title text-primary">Vuoto</h2>
-          <h5>Fonte</h5>
-          <div fxLayoutAlign="start center" class="m-b-4" fxLayoutGap="8px">
-            <mat-icon
-              matTooltip="Data Creazione"
-              matTooltipClass="tooltip"
+          <h2 *ngIf="!dbName" class="m-b-0 xbold">Vuoto</h2>
+          <span class="m-t-12 subtitle">Fonte</span>
+          <div fxLayoutAlign="start center" class="m-t-24" fxLayoutGap="16px">
+            <div
               *ngIf="createdAt"
-              class="text-purple material-icons-outlined"
-              >fiber_new</mat-icon
+              class="circle-icon w-2 h-2 icon-primary-light"
             >
+              <i class="ri-calendar-line ri-lg"></i>
+            </div>
+
             <p *ngIf="createdAt" class="m-b-0">
-              Creato: <span>{{ createdAt | date }}</span>
+              <span class="text-green semi-bold">Creato il</span>
+              {{ createdAt | date }}
             </p>
           </div>
-          <div fxLayoutAlign="start center" fxLayoutGap="8px">
-            <mat-icon
-              matTooltip="Ultimo Aggiornamento"
-              matTooltipClass="tooltip"
+          <div fxLayoutAlign="start center" class="m-t-16" fxLayoutGap="16px">
+            <div
               *ngIf="updatedAt"
-              class="text-green material-icons-outlined"
-              >updated</mat-icon
+              class="circle-icon w-2 h-2 icon-primary-light"
             >
+              <i class="ri-calendar-check-line ri-lg"></i>
+            </div>
             <p *ngIf="updatedAt" class="m-b-0">
-              Aggiornato: <span>{{ updatedAt | date }}</span>
+              <span class="text-green semi-bold">Aggiornato il</span>
+              {{ updatedAt | date }}
             </p>
           </div>
         </div>
-        <div
-          fxFlex.xs="100"
-          fxFlex="50"
-          fxLayout.xs="column"
-          class="p-t-16 p-b-24 p-l-16 p-r-16"
-        >
-          <h2 *ngIf="countPlayers" class="title text-accent">
+        <div fxLayout="column" class="p-t-16 p-b-24 p-l-16 p-r-16">
+          <h2 *ngIf="countPlayers" class="m-b-0 xbold">
             {{ countPlayers | number }}
           </h2>
-          <h2 *ngIf="!countPlayers" class="title text-primary">0</h2>
-          <h5>Giocatori</h5>
-          <div fxLayoutAlign="start center" class="m-b-4" fxLayoutGap="8px">
-            <mat-icon
-              matTooltip="Ultimo Aggiornamento"
-              matTooltipClass="tooltip"
+          <h2 *ngIf="!countPlayers" class="m-b-0 xbold">0</h2>
+          <span class="m-t-12 subtitle">Giocatori</span>
+          <div fxLayoutAlign="start center" class="m-t-24" fxLayoutGap="16px">
+            <div
               *ngIf="updatedAt"
-              class="text-purple material-icons-outlined"
-              >upgrade</mat-icon
+              class="circle-icon w-2 h-2 icon-primary-light"
             >
+              <i class="ri-arrow-up-line ri-lg"></i>
+            </div>
             <p *ngIf="updatedAt" class="m-b-0">
-              Nuovi: <span>{{ addedPlayers | number }}</span>
+              <span class="text-green semi-bold">Nuove entrate</span>
+              {{ addedPlayers | number }}
             </p>
           </div>
-          <div fxLayoutAlign="start center" fxLayoutGap="8px">
-            <mat-icon
-              matTooltip="Ultimo aggiornamento"
-              matTooltipClass="tooltip"
+          <div fxLayoutAlign="start center" class="m-t-16" fxLayoutGap="16px">
+            <div
               *ngIf="updatedAt"
-              class="text-deep-orange material-icons-outlined"
-              >refresh</mat-icon
+              class="circle-icon w-2 h-2 icon-primary-light"
             >
+              <i class="ri-edit-2-line ri-lg"></i>
+            </div>
             <p *ngIf="updatedAt" class="m-b-0">
-              Aggiornati: <span>{{ modifiedPlayers | number }}</span>
+              <span class="text-green semi-bold">Modificati</span>
+              {{ modifiedPlayers | number }}
             </p>
           </div>
         </div>

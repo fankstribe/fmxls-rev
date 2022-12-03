@@ -1,9 +1,88 @@
-<div fxLayout fxLayoutAlign="start center" class="page-header m-b-32">
+<div class="w-100 main-left">
+  <div class="page-title m-b-12" fxLayout fxLayoutAlign="start center">
+    <h5>Tornei</h5>
+  </div>
+  <ng-container *ngFor="let tournament of tournaments">
+    <div class="m-y-4">
+      <mat-card
+        *ngIf="tournament.status"
+        matRipple
+        class="tournament-card m-b-16 cursor-pointer hover no-shadow"
+        routerLink="/tournaments/fixtures/{{ tournament._id }}"
+      >
+        <div
+          fxLayout.xs="column wrap"
+          fxLayoutAlign="start center"
+          fxLayoutAlign.xs="start"
+          class="w-100"
+        >
+          <div fxLayout>
+            <img
+              class="tournament-img"
+              [src]="tournament.img | images: 'tournaments'"
+            />
+            <div class="m-l-12">
+              <span class="tournament-title title">{{
+                tournament.tournamentName
+              }}</span>
+              <div fxLayout class="m-t-10">
+                <div fxLayout fxLayoutAlign="start center">
+                  <div class="circle-icon w-1-25 h-1-25 icon-cyan-light">
+                    <i class="ri-t-shirt-2-line ri-sm"></i>
+                  </div>
+                  <span class="tournament-detail-text">{{
+                    tournament.teams.length
+                  }}</span>
+                </div>
+                <div
+                  class="tournament-detail"
+                  fxLayout
+                  fxLayoutAlign="start center"
+                >
+                  <div class="circle-icon w-1-25 h-1-25 icon-lime-light">
+                    <i class="ri-gamepad-line ri-sm"></i>
+                  </div>
+                  <span class="tournament-detail-text">{{
+                    tournament.matches.length
+                  }}</span>
+                </div>
+                <div
+                  class="tournament-detail"
+                  fxLayout
+                  fxLayoutAlign="start center"
+                >
+                  <div class="circle-icon w-1-25 h-1-25 icon-green-light">
+                    <i class="ri-check-line ri-sm"></i>
+                  </div>
+                  <span class="tournament-detail-text"> In Corso </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout class="ml-auto link-detail-wrapper">
+            <span class="link-detail">
+              <span>Dettagli</span>
+              <i class="ri-arrow-right-s-fill ri-lg"></i>
+            </span>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>
+<!-- <div fxLayout fxLayoutAlign="start center" class="page-header m-b-32">
   <div fxFlex="1 1 auto" class="page-header-title">
     <h4 class="m-b-0 title">Competizioni</h4>
   </div>
-</div>
-<div
+</div> -->
+<!-- <div class="container">
+  <div fxLayout fxLayoutAlign="start center" class="page-header m-b-32">
+    <div fxFlex="1 1 auto" class="page-header-title">
+      <h4 class="m-b-0 title">Competizioni</h4>
+    </div>
+  </div>
+</div> -->
+<!-- <div
   gdColumn="1/span 12"
   gdColumns="repeat(12,minmax(0,1fr))"
   gdGap="16px 32px"
@@ -56,4 +135,4 @@
       </mat-card>
     </div>
   </aside>
-</div>
+</div> -->

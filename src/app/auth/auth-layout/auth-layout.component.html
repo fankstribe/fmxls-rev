@@ -1,6 +1,5 @@
 <div fxLayout="column" class="auth-wrapper">
-  <div class="auth-content" [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig.data && o.activatedRoute.routeConfig.data.title">
+  <div class="auth-content">
     <router-outlet #o="outlet"></router-outlet>
   </div>
 </div>
-

@@ -1,3 +1,5 @@
+@import "../abstracts/breakpoints";
+
 .mat-dialog-title {
   font-size: 16px !important;
 
@@ -33,5 +35,9 @@
 }
 
 .mat-dialog-container {
-  border-radius: 8px !important;
+  border-radius: 15px !important;
+
+  @include bp-lt(small) {
+    border-radius: 0 !important;
+  }
 }

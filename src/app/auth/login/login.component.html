@@ -1,38 +1,58 @@
 <mat-card class="auth-card m-b-0">
   <div class="auth-logo"></div>
-  <div class="text-center p-t-12">
-    <h4>Accedi a FMXLS</h4>
+  <div class="text-center p-t-8">
+    <h5 class="p-b-16">Accedi a FMXLS</h5>
   </div>
   <mat-card-content>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmitForm()">
-      <mat-form-field
-        class="full-width"
-        [ngClass]="routeAnimationsElements"
-      >
+      <mat-form-field class="w-100">
         <mat-label>Email</mat-label>
         <input
           matInput
+          #iconEmailInput="matInput"
           type="email"
           autocomplete="email"
           formControlName="email"
         />
-        <mat-icon class="material-icons-outlined" matSuffix>email</mat-icon>
+        <i
+          class="ri-mail-line ri-lg"
+          [ngClass]="
+            iconEmailInput.focused && iconEmailInput.errorState
+              ? 'text-warn'
+              : iconEmailInput.focused
+              ? 'text-primary'
+              : iconEmailInput.errorState
+              ? 'text-warn'
+              : ''
+          "
+          matSuffix
+        ></i>
         <mat-error *ngIf="formError.email">
           {{ formError.email }}
         </mat-error>
       </mat-form-field>
-      <mat-form-field
-        class="full-width"
-        [ngClass]="routeAnimationsElements"
-      >
+      <mat-form-field class="w-100">
         <mat-label>Password</mat-label>
         <input
+          #iconPswInput="matInput"
           matInput
           type="password"
           autocomplete="current-password"
           formControlName="password"
         />
-        <mat-icon class="material-icons-outlined" matSuffix>lock</mat-icon>
+        <i
+          class="ri-lock-2-line ri-lg"
+          [ngClass]="
+            iconPswInput.focused && iconPswInput.errorState
+              ? 'text-warn'
+              : iconPswInput.focused
+              ? 'text-primary'
+              : iconPswInput.errorState
+              ? 'text-warn'
+              : ''
+          "
+          matSuffix
+        ></i>
         <mat-hint><a routerLink="/reset-password">Reset Password</a></mat-hint>
         <mat-error *ngIf="formError.password">
           {{ formError.password }}
@@ -44,9 +64,8 @@
             mat-flat-button
             type="submit"
             color="primary"
-            [ngClass]="routeAnimationsElements"
             [disabled]="!loginForm.valid"
-            >
+          >
             Accedi
           </button>
         </mat-card-actions>
@@ -55,9 +74,6 @@
   </mat-card-content>
   <div class="additional-link">
     Non sei ancora registrato?
-    <a style="display: inline-block" routerLink="/signup">
-      Registrati
-    </a>
+    <a style="display: inline-block" routerLink="/signup"> Registrati </a>
   </div>
 </mat-card>
-

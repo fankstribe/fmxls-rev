@@ -1,11 +1,23 @@
 import { BREAKPOINT } from '@angular/flex-layout';
 
 const MMD_BREAKPOINTS = [
-  { alias: 'xs', mediaQuery: 'screen and (max-width: 767px)' },
-  { alias: 'sm', mediaQuery: 'screen and (min-width: 768px) and (max-width: 991px)' },
-  { alias: 'md', mediaQuery: 'screen and (min-width: 992px) and (max-width: 1199px)' },
-  { alias: 'lg', mediaQuery: 'screen and (min-width: 1200px) and (max-width: 1669px)' },
-  { alias: 'xl', mediaQuery: 'screen and (min-width: 1670px) and (max-width: 5000px)' },
+  { alias: 'xs', mediaQuery: 'screen and (max-width: 600px)' },
+  {
+    alias: 'sm',
+    mediaQuery: 'screen and (min-width: 768px) and (max-width: 991px)',
+  },
+  {
+    alias: 'md',
+    mediaQuery: 'screen and (min-width: 992px) and (max-width: 1199px)',
+  },
+  {
+    alias: 'lg',
+    mediaQuery: 'screen and (min-width: 1200px) and (max-width: 1669px)',
+  },
+  {
+    alias: 'xl',
+    mediaQuery: 'screen and (min-width: 1670px) and (max-width: 5000px)',
+  },
 
   { alias: 'lt-sm', mediaQuery: 'screen and (max-width: 767px)' },
   { alias: 'lt-md', mediaQuery: 'screen and (max-width: 991px)' },
@@ -20,6 +32,6 @@ const MMD_BREAKPOINTS = [
 
 export const CustomBreakPointsProvider = {
   provide: BREAKPOINT,
-  useValue:MMD_BREAKPOINTS,
-  multi: true
+  useValue: MMD_BREAKPOINTS,
+  multi: true,
 };

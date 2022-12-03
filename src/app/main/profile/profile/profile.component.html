@@ -7,7 +7,7 @@
       (hovered)="toggleHover($event)"
       class="avatar-profile border cursor-pointer"
     >
-      <img [src]="user.imageUrl"/>
+      <img [src]="user.imageUrl" />
       <div class="img-upload">
         <mat-icon>camera_alt</mat-icon>
       </div>
@@ -19,9 +19,7 @@
       />
     </button>
   </div>
-  <h2 class="profile-header-title title">
-    Ciao, {{user.name}}
-  </h2>
+  <h2 class="profile-header-title">Ciao, {{ user.name }}</h2>
   <div class="profile-header-subtitle secondary-text">
     Gestisci il tuo account e le impostazioni del sito
   </div>
@@ -29,10 +27,8 @@
 <div class="row">
   <div class="col" fxLayout="column" fxFlex="100">
     <mat-card class="m-t-24 p-x-0" [ngClass]="routeAnimationsElements">
-      <div class="card-title title">
-        Account
-      </div>
-      <div class="card-subtitle">
+      <div class="card-title">Account</div>
+      <div class="card-subtitle secondary-text">
         Aggiorna i tuoi dati personali
       </div>
       <mat-card-content class="profile-content">
@@ -48,7 +44,7 @@
                   </div>
                   <div class="profile-list-description">
                     <div class="p-t-4" fxLayoutAlign="center center">
-                      <div class="profile-description">{{user.name}}</div>
+                      <div class="profile-description">{{ user.name }}</div>
                     </div>
                   </div>
                 </div>
@@ -74,7 +70,7 @@
                   </div>
                   <div class="profile-list-description">
                     <div class="p-t-4" fxLayoutAlign="center center">
-                      <div class="profile-description">{{user.email}}</div>
+                      <div class="profile-description">{{ user.email }}</div>
                     </div>
                   </div>
                 </div>
@@ -89,7 +85,10 @@
         </div>
         <mat-divider></mat-divider>
         <div class="profile-list" matRipple>
-          <a class="profile-inner cursor-pointer hover" (click)="onEditBirthDate()">
+          <a
+            class="profile-inner cursor-pointer hover"
+            (click)="onEditBirthDate()"
+          >
             <div fxLayoutAlign="center center">
               <div fxFlex fxGrow="1" fxShrink="1" fxBasis="0">
                 <div class="profile-container">
@@ -100,7 +99,9 @@
                   </div>
                   <div class="profile-list-description">
                     <div class="p-t-4" fxLayoutAlign="center center">
-                      <div class="profile-description">{{user.birthDate | date: "dd/MM/yyyy"}}</div>
+                      <div class="profile-description">
+                        {{ user.birthDate | date: "dd/MM/yyyy" }}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -117,5 +118,3 @@
     </mat-card>
   </div>
 </div>
-
-

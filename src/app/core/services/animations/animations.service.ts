@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnimationsService {
   constructor() {
-    AnimationsService.routeAnimationType = 'NONE';
+    AnimationsService.routeAnimationType = 'PAGE';
   }
 
-  private static routeAnimationType: RouteAnimationType = 'NONE';
+  private static routeAnimationType: RouteAnimationType = 'PAGE';
 
   static isRouteAnimationsType(type: RouteAnimationType) {
     return AnimationsService.routeAnimationType === type;

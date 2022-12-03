@@ -14,8 +14,8 @@
   }
 
   .snack-error-custom.mat-snack-bar-container {
-    background-color: $fm-red-a700;
-    color: white;
+    background-color: mat.get-color-from-palette($background, snack-bar);
+    color: mat.get-color-from-palette($foreground, snack-bar);
     font-weight: 500;
   }
 

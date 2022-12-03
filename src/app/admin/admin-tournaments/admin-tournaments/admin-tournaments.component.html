@@ -1,13 +1,20 @@
 <div class="table-card border-radius">
   <div fxLayout fxLayoutAlign="start center" class="m-t-4 toolbar-actions">
-    <mat-icon fxHide fxShow.gt-xs class="sidemenu-icon material-icons-outlined text-accent m-r-8">emoji_events</mat-icon>
+    <mat-icon
+      fxHide
+      fxShow.gt-xs
+      class="sidemenu-icon material-icons-outlined text-accent m-r-8"
+      >emoji_events</mat-icon
+    >
     <h5
       matTooltip="Totale Tornei"
       matTooltipClass="tooltip"
-      fxHide fxShow.gt-xs fxFlex="none"
+      fxHide
+      fxShow.gt-xs
+      fxFlex="none"
       class="p-r-16 m-r-16 m-y-0"
     >
-      {{itemsCount}}
+      {{ itemsCount }}
     </h5>
     <div
       class="toolbar-actions-search p-x-16"
@@ -18,7 +25,7 @@
     >
       <mat-icon>search</mat-icon>
       <input
-        class="p-x-16 p-y-12 full-width"
+        class="p-x-16 p-y-12 w-100"
         placeholder="Cerca..."
         type="text"
         (keyup)="doFilter($event)"
@@ -40,7 +47,7 @@
   <table
     [hidden]="noItems"
     mat-table
-    class="full-width"
+    class="w-100"
     [dataSource]="dataSource"
     matSort
     matSortActive="createdAt"
@@ -59,7 +66,7 @@
     <ng-container matColumnDef="tournamentName" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Torneo</th>
       <td
-        class="cell semi-bold cell-truncate-text"
+        class="cell semi-bold cell-truncate-text title"
         mat-cell
         *matCellDef="let tournaments"
       >

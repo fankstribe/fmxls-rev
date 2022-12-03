@@ -14,7 +14,8 @@
 // Material theme
 @import "material/material";
 
-// Custom typography
+// Icons
+@import "remixicon/fonts/remixicon.css"; // Custom typography
 // h1 = headline
 // h2 = title
 // h3 = subheading-2
@@ -27,28 +28,28 @@ $fmxls-typography: mat.define-typography-config(
     mat.define-typography-level(
       3.052rem,
       1.5rem,
-      600,
+      700,
       '"Poppins", arial, sans-serif'
     ),
   $title:
     mat.define-typography-level(
-      2.3rem,
+      2rem,
       1.5rem,
-      600,
+      700,
       '"Poppins", arial, sans-serif'
     ),
   $subheading-2:
     mat.define-typography-level(
-      1.953rem,
+      1.853rem,
       1.5,
-      600,
+      700,
       '"Poppins", arial, sans-serif'
     ),
   $subheading-1:
     mat.define-typography-level(
       1.4rem,
       1.5,
-      600,
+      700,
       '"Poppins", arial, sans-serif'
     ),
   $button:
@@ -57,7 +58,7 @@ $fmxls-typography: mat.define-typography-config(
     mat.define-typography-level(
       inherit,
       1.125,
-      400,
+      500,
       '"Poppins", arial, sans-serif'
     ),
 );
@@ -65,8 +66,7 @@ $fmxls-typography: mat.define-typography-config(
 @include mat.core($fmxls-typography);
 
 // Themes
-@import "themes/light-theme", "themes/black-theme", "themes/light-fmxls-theme",
-  "themes/black-fmxls-theme";
+@import "themes/light-theme", "themes/black-theme";
 
 @mixin custom-components-theme($theme) {
   @include fmxls-utils-theme($theme);
@@ -77,24 +77,13 @@ $fmxls-typography: mat.define-typography-config(
   @include fmxls-menu-theme($theme);
   @include fmxls-snackbar-theme($theme);
   @include fmxls-table-theme($theme);
+  @include fmxls-typography-theme($theme);
 }
 
-.light-theme {
-  @include mat.all-component-themes($my-white-theme);
-  @include custom-components-theme($my-white-theme);
-}
+@include mat.all-component-themes($my-white-theme);
+@include custom-components-theme($my-white-theme);
 
 .black-theme {
   @include mat.all-component-themes($my-black-theme);
   @include custom-components-theme($my-black-theme);
-}
-
-.fmxls-light-theme {
-  @include mat.all-component-themes($fmxls-light-theme);
-  @include custom-components-theme($fmxls-light-theme);
-}
-
-.fmxls-black-theme {
-  @include mat.all-component-themes($fmxls-black-theme);
-  @include custom-components-theme($fmxls-black-theme);
 }

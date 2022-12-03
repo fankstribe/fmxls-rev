@@ -11,6 +11,7 @@ import { routeAnimations } from '../../core/services/animations/route.animations
 import { AnimationsService } from '../../core/services/animations/animations.service';
 import { AppService } from '../../core/services/app.service';
 import { LoaderService } from '../../core/services/loader.service';
+import { SidenavService } from 'src/app/core/services/sidenav.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -27,6 +28,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewChecked {
     private mediaOb: MediaObserver,
     private animationService: AnimationsService,
     private appService: AppService,
+    private sidenavService: SidenavService,
     public loaderService: LoaderService
   ) {}
 
@@ -34,6 +36,8 @@ export class AdminLayoutComponent implements OnInit, AfterViewChecked {
     this.mediaOb.asObservable().subscribe(() => {
       this.toggleView();
     });
+
+    this.sidenavService.loadAdminMenu();
 
     this.animationService.updateRouteAnimationType(true, true);
   }

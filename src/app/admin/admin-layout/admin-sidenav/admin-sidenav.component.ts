@@ -6,24 +6,21 @@ import { SidenavService } from '../../../core/services/sidenav.service';
 @Component({
   selector: 'app-admin-sidenav',
   templateUrl: './admin-sidenav.component.html',
-  styleUrls: ['./admin-sidenav.component.scss']
+  styleUrls: ['./admin-sidenav.component.scss'],
 })
 export class AdminSidenavComponent implements OnInit {
   @Output() sidenavClose = new EventEmitter();
   isMobile = false;
-  menuItems: any[];
 
   constructor(
     private mediaOb: MediaObserver,
-    private sidenavService: SidenavService
-  ) {
-    this.menuItems = sidenavService.adminMenu;
-   }
+    public sidenavService: SidenavService
+  ) {}
 
   ngOnInit(): void {
     this.mediaOb.asObservable().subscribe(() => {
       this.toggleMobileView();
-    })
+    });
   }
 
   onSidenavClose() {
@@ -39,5 +36,4 @@ export class AdminSidenavComponent implements OnInit {
       this.isMobile = false;
     }
   }
-
 }

@@ -1,22 +1,21 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 
 import { AdminManagersRoutingModule } from './admin-managers.routing.module';
 
 import { SharedModule } from '../../../shared/shared.module';
 
 import { AdminManagersComponent } from './admin-managers/admin-managers.component';
-import { EditManagerDialogComponent } from "./edit-manager-dialog/edit-manager-dialog.component";
+import { EditManagerDialogComponent } from './edit-manager-dialog/edit-manager-dialog.component';
 import { AddManagerDialogComponent } from './add-manager-dialog/add-manager-dialog.component';
+import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    AdminManagersRoutingModule
-  ],
+  imports: [SharedModule, AdminManagersRoutingModule],
   declarations: [
     AdminManagersComponent,
     AddManagerDialogComponent,
-    EditManagerDialogComponent
-  ]
+    EditManagerDialogComponent,
+    FilterDialogComponent,
+  ],
 })
 export class AdminManagersModule {}

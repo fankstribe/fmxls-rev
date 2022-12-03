@@ -68,9 +68,22 @@ export class PlayerService {
 
   getPlayers() {
     const url = `${base_url}/players`;
-    return this.http
-      .get<Player>(url, this.headers)
-      .pipe(map((res: any) => res.players));
+    return this.http.get<Player>(url, this.headers).pipe(
+      map((res: any) => {
+        const players = res.players.map((player) => ({
+          _id: player._id,
+          img: player.img,
+          playerName: player.playerName,
+          position: player.position,
+          age: player.age,
+          overall: player.overall,
+          team: player.team?.teamName,
+          value: player.value,
+          wage: player.wage,
+        }));
+        return players;
+      })
+    );
   }
 
   getPosition() {
@@ -91,5 +104,4 @@ export class PlayerService {
     const url = `${base_url}/players/${_id}`;
     return this.http.delete(url, this.headers);
   }
-
 }

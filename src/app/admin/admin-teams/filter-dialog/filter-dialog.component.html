@@ -1,0 +1,22 @@
+<form [formGroup]="filterDataForm" (ngSubmit)="onSubmitForm()">
+  <div fxLayoutAlign="start center" class="mat-dialog-title">
+    <h5 class="m-b-0" fxFlex="auto">Filtra Risultati</h5>
+    <button mat-dialog-close mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <mat-form-field class="w-100 m-t-12" *ngFor="let filter of filterSelectObj">
+      <mat-label>{{ filter.name }}</mat-label>
+      <mat-select formControlName="{{ filter.columnProp }}">
+        <mat-option [value]="item" *ngFor="let item of filter.options">
+          {{ item | dateOrString: "d MMM YYYY" }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button (click)="resetFilters()" mat-button type="button">Annulla</button>
+    <button mat-button type="submit" color="primary">Filtra</button>
+  </mat-dialog-actions>
+</form>

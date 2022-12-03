@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { ManagerService } from '../../../core/services/manager.service';
 import { TeamService } from '../../../core/services/team.service';
@@ -12,7 +16,7 @@ import { Team } from '../../../models/team';
 @Component({
   selector: 'app-edit-manager-dialog',
   templateUrl: './edit-manager-dialog.component.html',
-  styleUrls: ['./edit-manager-dialog.component.scss']
+  styleUrls: ['./edit-manager-dialog.component.scss'],
 })
 export class EditManagerDialogComponent implements OnInit {
   editManagerForm: UntypedFormGroup;
@@ -21,13 +25,13 @@ export class EditManagerDialogComponent implements OnInit {
   selectedTeams: Team[];
 
   formError = {
-    teamName: ''
+    teamName: '',
   };
 
   validationMessages = {
     teamName: {
       required: 'Seleziona una squadra.',
-    }
+    },
   };
 
   constructor(
@@ -44,20 +48,24 @@ export class EditManagerDialogComponent implements OnInit {
   ngOnInit() {
     this.createForm();
 
-    this.teamService.getTeams().subscribe(data => {
+    this.teamService.getTeams().subscribe((data) => {
       let arrayTeam = [];
-      const team = data.filter(team => team._id === this.managerToUpdate.teamId)
-      arrayTeam = data.filter(team => !team.user);
+      const team = data.filter(
+        (team) => team._id === this.managerToUpdate.teamId
+      );
+      arrayTeam = data.filter((team) => !team.user);
       arrayTeam.push(...team);
       this.selectedTeams = arrayTeam;
-    })
+    });
   }
 
   createForm() {
     this.editManagerForm = this.formBuilder.group({
-      teamName: [this.managerToUpdate.teamId, [Validators.required]]
+      teamName: [this.managerToUpdate.teamId, [Validators.required]],
     });
-    this.editManagerForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.editManagerForm.valueChanges.subscribe((data) =>
+      this.onValueChanged(data)
+    );
   }
 
   compareSelectedObj(obj1: number, obj2: number): boolean {
@@ -86,12 +94,15 @@ export class EditManagerDialogComponent implements OnInit {
   onSubmitForm() {
     const data: Manager = {
       _id: this.managerToUpdate._id,
-      team: this.editManagerForm.value.teamName
-    }
-    this.managerService.updateManager(data).subscribe((res) => {
-      this.dialogRef.close(res);
-    }, err => {
-      this.dialogRef.close(false);
-    });
+      team: this.editManagerForm.value.teamName,
+    };
+    this.managerService.updateManager(data).subscribe(
+      (res) => {
+        this.dialogRef.close(res);
+      },
+      (err) => {
+        this.dialogRef.close(false);
+      }
+    );
   }
 }

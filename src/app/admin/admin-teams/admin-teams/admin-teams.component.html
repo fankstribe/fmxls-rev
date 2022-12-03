@@ -1,59 +1,73 @@
-<div class="table-card border-radius">
-  <div fxLayout fxLayoutAlign="start center" class="m-t-4 toolbar-actions">
-    <mat-icon fxHide fxShow.gt-xs class="sidemenu-icon material-icons-outlined text-accent m-r-8">admin_panel_settings</mat-icon>
-    <h5
-      matTooltip="Totale Squadre"
-      matTooltipClass="tooltip"
-      fxHide fxShow.gt-xs fxFlex="none"
-      class="p-r-16 m-r-16 m-y-0"
-    >
-      {{itemsCount}}
-    </h5>
-    <div
-      class="toolbar-actions-search p-x-16"
-      fxFlex="400px"
-      fxFlex.lt-md="auto"
-      fxLayout
-      fxLayoutAlign="start center"
-    >
-      <mat-icon>search</mat-icon>
-      <input
-        class="p-x-16 p-y-12 full-width"
-        placeholder="Cerca..."
-        type="text"
-        (keyup)="doFilter($event)"
-      />
+<div fxLayout="column" fxLayoutAlign="center flex-start" class="page-header">
+  <div fxLayout fxLayoutAlign="space-between center" class="w-100">
+    <div>
+      <h4 class="m-b-4">Squadre</h4>
+      <span class="secondary-text semi-bold"> Crea e modifica le squadre </span>
     </div>
-    <span fxFlex></span>
-    <button
-      fxFlex="none"
-      mat-mini-fab
-      class="mat-elevation-z0 m-l-16"
-      color="primary"
-      type="button"
-      (click)="add()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
+    <div fxHide fxShow.gt-xs>
+      <button (click)="filterData()" mat-raised-button class="m-r-16">
+        <i
+          *ngIf="!isFiltered; else elseBlock"
+          class="ri-filter-line ri-lg m-r-4"
+        ></i>
+        <ng-template #elseBlock>
+          <i class="ri-filter-off-line ri-lg m-r-4"></i>
+        </ng-template>
+        <span>Filtra</span>
+      </button>
+      <button (click)="add()" mat-raised-button>
+        <i class="ri-add-line ri-lg m-r-4"></i>
+        <span>Nuovo</span>
+      </button>
+    </div>
+    <div fxHide fxShow.lt-sm class="toolbar-btn">
+      <button (click)="filterData()" mat-icon-button class="m-x-4">
+        <i *ngIf="!isFiltered; else elseBlock" class="ri-filter-line ri-lg"></i>
+        <ng-template #elseBlock>
+          <i class="ri-filter-off-line ri-lg"></i>
+        </ng-template>
+      </button>
+      <button (click)="add()" mat-icon-button class="m-x-4">
+        <i class="ri-add-line ri-lg m-r-4"></i>
+      </button>
+    </div>
   </div>
+</div>
 
-  <mat-paginator
-  showFirstLastButtons
-  [pageSize]="50"
-  [pageSizeOptions]="[5, 10, 25, 50, 100]"
-></mat-paginator>
+<div fxLayout fxLayoutAlign="start center" class="m-t-4 toolbar-actions">
+  <div
+    class="toolbar-actions-search"
+    fxFlex="300px"
+    fxFlex.lt-sm="auto"
+    fxLayout
+    fxLayoutAlign="start center"
+  >
+    <i class="secondary-text ri-search-2-line ri-xl"></i>
+    <input
+      class="p-x-16 p-y-12 w-100"
+      placeholder="Cerca squadre..."
+      type="text"
+      (keyup)="applyFilter($event.target.value)"
+    />
+  </div>
+</div>
 
+<div class="table-card border-radius">
   <table
     #table
     [hidden]="noItems"
     mat-table
-    class="full-width"
+    class="w-100"
     [dataSource]="dataSource"
     matSort
     matSortActive="createdAt"
     matSortDirection="desc"
   >
-    <ng-container matColumnDef="img">
+    <ng-container matColumnDef="_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td class="cell" mat-cell *matCellDef="let teams">{{ teams._id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="img" sticky>
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let teams">
         <img [src]="teams.img | images: 'teams'" alt="" class="img-profile" />
@@ -61,14 +75,18 @@
     </ng-container>
     <ng-container matColumnDef="teamName" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Squadra</th>
-      <td class="cell semi-bold text-primary cell-truncate-text" mat-cell *matCellDef="let teams">
+      <td
+        class="cell semi-bold cell-truncate-text title"
+        mat-cell
+        *matCellDef="let teams"
+      >
         {{ teams.teamName }}
       </td>
     </ng-container>
     <ng-container matColumnDef="user">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Manager</th>
       <td class="cell" mat-cell *matCellDef="let teams">
-        <span *ngIf="teams.user">{{ teams.user }}</span>
+        <span *ngIf="teams.user">{{ teams?.user }}</span>
         <span *ngIf="!teams?.user"
           ><img src="assets/images/no_manager.png" alt="" class="img-profile"
         /></span>
@@ -117,7 +135,6 @@
     ></tr>
   </table>
 
-
   <div [hidden]="!noItems" class="no-data-found-wrapper">
     <div class="no-data-found">
       <div class="no-data-found-container">
@@ -128,4 +145,9 @@
       </div>
     </div>
   </div>
+  <mat-paginator
+    showFirstLastButtons
+    [pageSize]="50"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+  ></mat-paginator>
 </div>

@@ -1,15 +1,23 @@
-@import '../abstracts/breakpoints';
+@import "../abstracts/breakpoints";
 
 .mat-toolbar-single-row.toolbar {
-  padding: 0 4px !important;
-  padding-left: 12px !important;
+  padding: 0 1rem !important;
+  @include bp-gt(tablet) {
+    padding: 0 1.5rem !important;
 
-  @include bp-gt(xsmall) {
-    padding: 0 8px !important;
+    .mat-icon-button:not(.img-button) {
+      width: 52px;
+      height: 52px;
+      line-height: 52px;
+    }
   }
 
   @include bp-lt(small) {
-    height: 56px;
+    height: 64px;
+  }
+
+  @include bp-gt(tabletls) {
+    height: 74px;
   }
 
   .brand {
@@ -35,28 +43,48 @@
   }
 
   .img-profile {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
   }
-}
 
-.switch-theme-list {
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-  padding: 16px 16px 0;
+  .toolbar-widget {
+    padding: 2px;
 
-  .theme-list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    .img-button {
+      margin-left: 0;
+      margin-right: 0;
+    }
 
-    .mat-radio-button {
-      margin-bottom: 12px;
+    @include bp-gt(tabletls) {
+      padding-right: 16px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+
+      .img-button {
+        margin-left: 2px;
+        margin-right: 12px;
+      }
+    }
+
+    .widget-username {
+      line-height: 1.5;
+      .content-title {
+        font-size: 0.88rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .content-subtitle {
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+    }
+
+    .content-icon {
+      font-size: 0.8rem;
+      margin-left: 15px;
     }
   }
-
 }
 
 .mat-menu-panel.dropdown {
@@ -64,7 +92,6 @@
   max-width: 100vw;
   overflow: hidden;
   border-radius: 16px;
-  box-shadow: 0 0 50px 0 rgb(82 63 105 / 10%) !important;
 
   .mat-menu-content:not(:empty) {
     padding: 0;
@@ -97,8 +124,8 @@
       font-size: 16px;
       font-weight: 500;
 
-      .header-name  {
-        letter-spacing: .29px;
+      .header-name {
+        letter-spacing: 0.29px;
         margin: 0;
         text-align: center;
         text-overflow: ellipsis;
@@ -107,8 +134,7 @@
 
       .header-email {
         @extend .header-name;
-        font-size: 14px;
-        font-weight: 400
+        font-size: 0.8rem;
       }
     }
   }
@@ -123,10 +149,10 @@
       position: relative;
       white-space: nowrap;
       padding: 12px 33px 13px;
-      height: 50px;
 
       .dropdown-menu-icons {
-        margin-right: 20px;
+        margin-right: 12px;
+        line-height: 1.3333em;
       }
 
       .dropdown-menu-icons-chevron {
@@ -134,7 +160,6 @@
         width: 18px;
         height: 18px;
       }
-
     }
   }
 
@@ -144,7 +169,7 @@
 
     a {
       display: inline-block;
-      margin: 16px;
+      margin: 20px;
     }
   }
 

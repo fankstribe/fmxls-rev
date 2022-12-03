@@ -1,13 +1,16 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SidenavService {
   public sidenavToggleSubject: BehaviorSubject<any> = new BehaviorSubject(null);
 
   mainMenu = [];
+
+  // Admin menu
+  adminMenu = [];
 
   toggle() {
     return this.sidenavToggleSubject.next(null);
@@ -18,37 +21,7 @@ export class SidenavService {
     this.mainMenu = JSON.parse(localStorage.getItem('menu')) || [];
   }
 
-  // Admin menu
-  adminMenu: any[] = [
-    {
-      'name': 'Home',
-      'icon': 'home',
-      'link': '/admin-home'
-    },
-    {
-      'name': 'Utenti',
-      'icon': 'person',
-      'link': '/admin-users'
-    },
-    {
-      'name': 'Squadre',
-      'icon': 'admin_panel_settings',
-      'link': '/admin-teams'
-    },
-    {
-      'name': 'Manager',
-      'icon': 'face',
-      'link': '/admin-managers'
-    },
-    {
-      'name': 'Tornei',
-      'icon': 'emoji_events',
-      'link': '/admin-tournaments'
-    },
-    {
-      'name': 'Giocatori',
-      'icon': 'directions_run',
-      'link': '/admin-players'
-    }
-  ];
+  loadAdminMenu() {
+    this.adminMenu = JSON.parse(localStorage.getItem('adminMenu')) || [];
+  }
 }

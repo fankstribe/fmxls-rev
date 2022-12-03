@@ -1,13 +1,13 @@
 <form [formGroup]="nameForm" (ngSubmit)="onSubmitForm()">
-  <div fxLayoutAlign="start center"  class="mat-dialog-title">
-    <img class="img-user">
+  <div fxLayoutAlign="start center" class="mat-dialog-title">
+    <img class="img-user" />
     <h4 class="m-b-0 title" fxFlex="auto">Modifica Nome</h4>
     <button mat-dialog-close mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
   </div>
   <mat-dialog-content>
-    <mat-form-field class="full-width m-t-24">
+    <mat-form-field class="w-100 m-t-24">
       <mat-label>Nome</mat-label>
       <input
         matInput
@@ -23,6 +23,13 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button type="button" mat-dialog-close>Annulla</button>
-    <button mat-button type="submit" color="primary" [disabled]="!nameForm.valid">Salva</button>
+    <button
+      mat-button
+      type="submit"
+      color="primary"
+      [disabled]="!nameForm.valid"
+    >
+      Salva
+    </button>
   </mat-dialog-actions>
 </form>

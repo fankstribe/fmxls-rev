@@ -8,10 +8,19 @@
     height: 100vh;
 
     .sidenav {
-      width: 260px;
+      width: 240px;
+
+      .mat-drawer-inner-container {
+        overflow: hidden;
+      }
 
       .mat-toolbar {
-        padding: 0 1.5rem;
+        padding: 0 16px;
+        justify-content: center;
+
+        @include bp-gt(tabletls) {
+          height: 74px;
+        }
       }
 
       .brand {
@@ -21,6 +30,7 @@
         height: 50px;
         margin: 10px 0 0 0;
       }
+
       .team-panel .divider {
         padding-top: 15px;
         width: 14.5rem;
@@ -50,7 +60,7 @@
         max-width: 1176px;
         margin: 0 auto;
         width: 100%;
-        padding-top: 16px;
+        padding-top: 20px;
         padding-left: 32px;
         padding-right: 32px;
         padding-bottom: 32px;
@@ -60,16 +70,6 @@
           padding-right: 16px;
         }
       }
-
-      // @include bp-gt(medium) {
-      //   padding-left: 24px;
-      //   padding-right: 24px
-      // }
-
-      // @include bp-gt(desktop) {
-      //   padding-left: 48px;
-      //   padding-right: 48px
-      // }
     }
   }
 }

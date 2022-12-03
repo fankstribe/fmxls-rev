@@ -17,6 +17,14 @@
   padding: 8px 16px !important;
 }
 
+.mat-form-field-appearance-outline .mat-form-field-suffix {
+  top: 0 !important;
+  margin-right: 5px;
+  .fa-lg {
+    vertical-align: 0;
+  }
+}
+
 .mat-form-field-infix {
   border-top: 0.4em solid transparent !important;
 }
@@ -33,4 +41,11 @@
 .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
   .mat-form-field-outline-gap {
   border-top-color: currentColor !important;
+}
+
+.mat-form-field:not(.mat-form-field-appearance-legacy)
+  .mat-form-field-suffix
+  .mat-icon-button {
+  width: 100% !important;
+  height: 0 !important;
 }

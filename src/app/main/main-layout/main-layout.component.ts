@@ -22,9 +22,6 @@ export class MainLayoutComponent implements OnInit, AfterViewChecked {
   sidenavOpened: boolean = true;
   sidenavMode: string = 'side';
 
-  scrollInterval = undefined;
-  lastScroll = false;
-
   constructor(
     private changeDetector: ChangeDetectorRef,
     private mediaOb: MediaObserver,
@@ -40,7 +37,7 @@ export class MainLayoutComponent implements OnInit, AfterViewChecked {
 
     this.sidenavService.loadMainMenu();
 
-    this.animationService.updateRouteAnimationType(true, true);
+    this.animationService.updateRouteAnimationType(false, false);
   }
 
   ngAfterViewChecked() {
@@ -59,5 +56,4 @@ export class MainLayoutComponent implements OnInit, AfterViewChecked {
       this.sidenavOpened = false;
     }
   }
-
 }

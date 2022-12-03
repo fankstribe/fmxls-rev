@@ -2,9 +2,6 @@
 
 // Admin
 .page-header {
-  height: 48px;
-
-  .page-header-title {
-    padding-left: 7px;
-  }
+  box-sizing: content-box !important;
+  padding-bottom: 14px;
 }

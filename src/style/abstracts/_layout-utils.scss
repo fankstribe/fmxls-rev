@@ -1,5 +1,5 @@
 .flex {
-  display: flex;
+  display: flex !important;
 }
 
 .flex-auto {
@@ -14,8 +14,16 @@
   flex-direction: row;
 }
 
-.full-width {
-  width: 100%;
+.items-center {
+  align-items: center;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
 }
 
 @include bp-gt(small) {

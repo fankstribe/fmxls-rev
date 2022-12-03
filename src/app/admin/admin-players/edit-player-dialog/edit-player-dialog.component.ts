@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { TeamService } from '../../../core/services/team.service';
 import { SnackBarService } from '../../../core/services/snackbar.service';
@@ -9,11 +13,10 @@ import { Player } from '../../../models/player';
 import { Team } from '../../../models/team';
 import { PlayerService } from 'src/app/core/services/player.service';
 
-
 @Component({
   selector: 'app-edit-player-dialog',
   templateUrl: './edit-player-dialog.component.html',
-  styleUrls: ['./edit-player-dialog.component.scss']
+  styleUrls: ['./edit-player-dialog.component.scss'],
 })
 export class EditPlayerDialogComponent implements OnInit {
   editPlayerForm: UntypedFormGroup;
@@ -28,7 +31,7 @@ export class EditPlayerDialogComponent implements OnInit {
     age: '',
     overall: '',
     value: '',
-    wage: ''
+    wage: '',
   };
 
   validationMessages = {
@@ -40,18 +43,17 @@ export class EditPlayerDialogComponent implements OnInit {
     //   required: 'Seleziona una squadra.'
     // },
     position: {
-      required: 'Seleziona una posizione.'
+      required: 'Seleziona una posizione.',
     },
     age: {
-      required: 'L\'età è obbligatoria',
-      pattern: 'Inserisci un numero'
+      required: "L'età è obbligatoria",
+      pattern: 'Inserisci un numero',
     },
     overall: {
       required: 'Il valore potenziale è obbligatorio.',
-      pattern: 'Inserisci un numero'
-    }
-
-  }
+      pattern: 'Inserisci un numero',
+    },
+  };
 
   constructor(
     private teamService: TeamService,
@@ -66,46 +68,40 @@ export class EditPlayerDialogComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.teamService.getTeams().subscribe(data => {
-      const teamsData = data.map(team => ({
+    this.teamService.getTeams().subscribe((data) => {
+      const teamsData = data.map((team) => ({
         teamId: team._id,
         teamName: team.teamName,
-      }))
-       this.selectedTeams = teamsData
-    })
-    this.playerService.getPosition().subscribe(data => {
-      this.selectedPosition = data
-    })
-
+      }));
+      this.selectedTeams = teamsData;
+    });
+    this.playerService.getPosition().subscribe((data) => {
+      this.selectedPosition = data;
+    });
   }
 
   createForm() {
     this.editPlayerForm = this.formBuilder.group({
-      playerName: [this.playerToUpdate.playerName,
-        [
-          Validators.required,
-          Validators.maxLength(25),
-        ]
+      playerName: [
+        this.playerToUpdate.playerName,
+        [Validators.required, Validators.maxLength(25)],
       ],
       teamName: [this.playerToUpdate.team ? this.playerToUpdate.team._id : 0],
-      position: [this.playerToUpdate.position, [Validators.required]
+      position: [this.playerToUpdate.position, [Validators.required]],
+      age: [
+        this.playerToUpdate.age,
+        [Validators.required, Validators.pattern('^[0-9]*$')],
       ],
-      age: [this.playerToUpdate.age,
-        [
-          Validators.required,
-          Validators.pattern('^[0-9]*$')
-        ]
-      ],
-      overall: [this.playerToUpdate.overall,
-        [
-          Validators.required,
-          Validators.pattern('^[0-9]*$')
-        ]
+      overall: [
+        this.playerToUpdate.overall,
+        [Validators.required, Validators.pattern('^[0-9]*$')],
       ],
       value: [this.playerToUpdate.value],
       wage: [this.playerToUpdate.wage],
     });
-    this.editPlayerForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.editPlayerForm.valueChanges.subscribe((data) =>
+      this.onValueChanged(data)
+    );
   }
 
   onValueChanged(data?: any) {
@@ -133,7 +129,7 @@ export class EditPlayerDialogComponent implements OnInit {
 
   onSubmitForm() {
     const data: Player = {
-      _id:  this.playerToUpdate._id,
+      _id: this.playerToUpdate._id,
       playerName: this.editPlayerForm.value.playerName,
       img: this.playerToUpdate.img,
       age: this.editPlayerForm.value.age,
@@ -143,11 +139,14 @@ export class EditPlayerDialogComponent implements OnInit {
       wage: this.editPlayerForm.value.wage,
       source: this.playerToUpdate.source,
       team: this.editPlayerForm.value.teamName || null,
-    }
-    this.playerService.updatePlayer(data).subscribe((res) => {
-      this.dialogRef.close(res);
-    }, (err) => {
-      this.dialogRef.close(false);
-    });
+    };
+    this.playerService.updatePlayer(data).subscribe(
+      (res) => {
+        this.dialogRef.close(res);
+      },
+      (err) => {
+        this.dialogRef.close(false);
+      }
+    );
   }
 }

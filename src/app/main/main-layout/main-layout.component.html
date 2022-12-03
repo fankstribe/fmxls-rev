@@ -2,7 +2,7 @@
   <div *ngIf="loaderService.isLoading | async" class="loader-container">
     <mat-progress-bar color="primary" mode="indeterminate"></mat-progress-bar>
   </div>
-  <mat-sidenav-container class="sidenav-container" autosize fullscreen>
+  <mat-sidenav-container class="sidenav-container" fullscreen>
     <mat-sidenav
       #sidenav
       autoFocus="false"
@@ -22,12 +22,17 @@
       position="end"
       class="side-notification"
     >
-    <app-notification (sidenavRightClose)="sidenavRight.close()"></app-notification>
+      <app-notification
+        (sidenavRightClose)="sidenavRight.close()"
+      ></app-notification>
     </mat-sidenav>
 
     <mat-sidenav-content>
       <div class="main-container">
-        <app-topnav [sidenavRight]="sidenavRight" [sidenav]="sidenav"></app-topnav>
+        <app-topnav
+          [sidenavRight]="sidenavRight"
+          [sidenav]="sidenav"
+        ></app-topnav>
         <div
           class="main-content"
           [@routeAnimations]="

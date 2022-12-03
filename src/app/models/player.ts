@@ -1,7 +1,6 @@
-import { Team } from "./team";
+import { Team } from './team';
 
 export class Player {
-
   constructor(
     public playerName: string,
     public _id?: number,

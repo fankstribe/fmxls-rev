@@ -1,9 +1,10 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-
-import { ROUTE_ANIMATIONS_ELEMENTS } from '../../core/services/animations/route.animations';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
 import { SnackBarService } from '../../core/services/snackbar.service';
 
@@ -13,11 +14,10 @@ import { SnackBarService } from '../../core/services/snackbar.service';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-
   signupForm: UntypedFormGroup;
 
   hide = true;
+  hideC = true;
 
   validDate = new Date(new Date().setFullYear(new Date().getFullYear() - 16));
 
@@ -36,17 +36,17 @@ export class SignupComponent implements OnInit {
       maxlength: 'Il nome non può superare i 25 caratteri',
     },
     email: {
-      required: "La mail è obbligatoria.",
+      required: 'La mail è obbligatoria.',
       pattern: 'Inserisci una mail valida.',
     },
     birthDate: {
-      required: 'La data di nascita è obbligatoria.'
+      required: 'La data di nascita è obbligatoria.',
     },
     password: {
       required: '',
-      pattern: 'La password deve avere almeno un numero e un carattere.',
-      minlength: 'La password deve avere almeno 6 caratteri.',
-      maxlength: 'La password non può superare i 25 caratteri.',
+      pattern: 'Aggiungi un numero e un carattere.',
+      minlength: 'Minimo 6 caratteri.',
+      maxlength: 'Meno di 25 caratteri.',
     },
     confirmPassword: {
       required: '',
@@ -142,7 +142,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmitForm() {
-
     console.log(this.signupForm.value);
     this.userService.createUser(this.signupForm.value).subscribe(() => {
       this.router.navigateByUrl('/');

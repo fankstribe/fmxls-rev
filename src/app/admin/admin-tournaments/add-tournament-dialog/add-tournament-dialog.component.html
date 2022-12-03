@@ -1,14 +1,13 @@
 <form [formGroup]="addTournamentForm" (ngSubmit)="onSubmitForm()">
-  <div fxLayoutAlign="start center"  class="mat-dialog-title">
-    <img class="img-user">
-    <h4 class="m-b-0 title" fxFlex="auto">Crea Torneo</h4>
+  <div fxLayoutAlign="start center" class="mat-dialog-title">
+    <img class="img-user" />
+    <h5 class="m-b-0" fxFlex="auto">Crea Torneo</h5>
     <button mat-dialog-close mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <mat-divider style="margin: 0 -1.5rem;"></mat-divider>
   <mat-dialog-content>
-    <mat-form-field class="full-width m-t-24">
+    <mat-form-field class="w-100 m-t-24">
       <mat-label>Nome Torneo</mat-label>
       <input
         cdkFocusInitial
@@ -21,9 +20,13 @@
         {{ formError.tournamentName }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="full-width m-t-24">
+    <mat-form-field class="w-100 m-t-24">
       <mat-label>Squadre Partecipanti</mat-label>
-      <mat-select placeholder="Seleziona squadre" formControlName="teams" multiple>
+      <mat-select
+        placeholder="Seleziona squadre"
+        formControlName="teams"
+        multiple
+      >
         <mat-option *ngFor="let team of selectedTeams" [value]="team._id">
           {{ team.teamName }}
         </mat-option>
@@ -32,15 +35,13 @@
         {{ formError.teams }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="full-width m-t-24">
+    <mat-form-field class="w-100 m-t-24">
       <mat-label>Modalità</mat-label>
       <mat-select placeholder="Seleziona la modalità" formControlName="format">
         <mat-option value="double_round_robin">
           Girone all'italiana
         </mat-option>
-        <mat-option value="eliminazione">
-          Eliminazione
-        </mat-option>
+        <mat-option value="eliminazione"> Eliminazione </mat-option>
       </mat-select>
       <mat-error *ngIf="formError.format">
         {{ formError.format }}
@@ -48,9 +49,7 @@
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close type="button">
-      Annulla
-    </button>
+    <button mat-button mat-dialog-close type="button">Annulla</button>
     <button
       mat-button
       type="submit"

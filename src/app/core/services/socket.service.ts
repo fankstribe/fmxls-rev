@@ -1,15 +1,12 @@
-import { Injectable } from "@angular/core";
-import { Socket } from "ngx-socket-io";
+import { Injectable } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SocketService {
-
-  constructor(
-    private socket: Socket
-  ) {}
+  constructor(private socket: Socket) {}
 
   connect() {
     this.socket.connect();
@@ -32,9 +29,8 @@ export class SocketService {
   }
 
   onEvent(event: string): Observable<any> {
-    return new Observable<string>(observer => {
+    return new Observable<string>((observer) => {
       this.socket.on(event, (data) => observer.next(data));
     });
   }
-
 }

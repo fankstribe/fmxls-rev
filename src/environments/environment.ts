@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   base_url: 'http://localhost:3000/api',
   SOCKET_ENDPOINT: 'http://localhost:3000',
-  socket_url: 'http://localhost:3000'
+  socket_url: 'http://localhost:3000',
+  host: 'http://localhost:4200',
 };
 
 /*

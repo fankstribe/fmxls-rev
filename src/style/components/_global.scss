@@ -85,3 +85,18 @@ button.action-fab {
   bottom: 15px;
   right: 15px;
 }
+
+.mat-raised-button {
+  border-radius: 12px !important;
+  padding: 3px 16px !important;
+}
+
+.circle-icon {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}

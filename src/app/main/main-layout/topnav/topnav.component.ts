@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { MediaObserver } from '@angular/flex-layout';
 
 import { UserService } from '../../../core/services/user.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { User } from '../../../models/user';
+import { TeamService } from '../../../core/services/team.service';
 
 @Component({
   selector: 'app-topnav',
@@ -15,29 +17,34 @@ export class TopnavComponent implements OnInit {
   @Input() sidenav: any;
   @Input() sidenavRight: any;
   open = false;
-  themes: Array<any> = [];
-  selectedTheme: any;
-
+  isDarkMode = false;
   user: User;
+  teamName: string;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private mediaOb: MediaObserver,
     private themeService: ThemeService,
     private userService: UserService,
-    private router: Router
+    private teamService: TeamService,
+    private router: Router,
+    private renderer: Renderer2
   ) {
-    this.themes = themeService.themes;
-    this.selectedTheme = themeService.currentTheme();
-
     this.user = userService.user;
   }
 
   ngOnInit() {
-    this.themeService.updateTheme();
-  }
-
-  setTheme(theme: any) {
-    this.themeService.setTheme(theme);
+    this.teamService.getMyTeam().subscribe((res) => {
+      if (res) {
+        this.teamName = res.teamName;
+      }
+    });
+    const settings = this.themeService.getSettings();
+    if (settings.isDarkMode !== undefined) {
+      if (settings.isDarkMode) {
+        this.toggleDarkMode();
+      }
+    }
   }
 
   goToAdmin(): void {
@@ -55,6 +62,17 @@ export class TopnavComponent implements OnInit {
       } else {
         this.open = true;
       }
+    }
+  }
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    this.themeService.updateSettings({ isDarkMode: this.isDarkMode });
+
+    if (this.isDarkMode) {
+      this.renderer.addClass(this.document.body, 'black-theme');
+    } else {
+      this.renderer.removeClass(this.document.body, 'black-theme');
     }
   }
 }

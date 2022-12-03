@@ -1,27 +1,36 @@
 /* Route: /api/teams */
-const { Router } = require('express')
-const { check } = require('express-validator')
+const { Router } = require("express");
+const { check } = require("express-validator");
 
-const { fieldValidator } = require('../middlewares/validate')
-const { jwtValidator } = require('../middlewares/validate-jwt')
+const { fieldValidator } = require("../middlewares/validate");
+const { jwtValidator } = require("../middlewares/validate-jwt");
 
-const { getTeams, createTeam, updateTeam, deleteTeam } = require('../controllers/teams')
+const {
+  getTeams,
+  createTeam,
+  updateTeam,
+  deleteTeam,
+  getTeam,
+} = require("../controllers/teams");
 
-const router = Router()
+const router = Router();
 
-router.get('/', jwtValidator, getTeams)
+router.get("/", jwtValidator, getTeams);
 
-router.post('/',
+router.get("/:team", jwtValidator, getTeam);
+
+router.post(
+  "/",
   [
     jwtValidator,
-    check('teamName', 'Il nome della squadra è obbligatorio').not().isEmpty(),
-    fieldValidator
+    check("teamName", "Il nome della squadra è obbligatorio").not().isEmpty(),
+    fieldValidator,
   ],
   createTeam
-)
+);
 
-router.put('/:id', jwtValidator, updateTeam)
+router.put("/:id", jwtValidator, updateTeam);
 
-router.delete('/:id', jwtValidator, deleteTeam)
+router.delete("/:id", jwtValidator, deleteTeam);
 
-module.exports = router
+module.exports = router;

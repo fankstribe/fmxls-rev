@@ -22,8 +22,8 @@
       top: 0;
       right: 0;
       position: absolute;
-      opacity: .45;
-      background-color: rgba(0,0,0,1);
+      opacity: 0.25;
+      background-color: rgba(0, 0, 0, 1);
     }
 
     .img-bg {
@@ -97,7 +97,6 @@
         }
       }
     }
-
   }
 
   .matchday-title {
@@ -105,9 +104,8 @@
   }
 
   .fixture-page .teams {
-
     width: 85%;
-    padding-right: .75rem;
+    padding-right: 0.75rem;
 
     .teams-content {
       display: block;
@@ -139,5 +137,4 @@
       }
     }
   }
-
 }

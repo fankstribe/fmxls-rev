@@ -1,7 +1,7 @@
 $utilities: ();
 
 $margin-auto: (
-  auto: auto
+  auto: auto,
 );
 
 $spacer: 16px !default;
@@ -9,13 +9,15 @@ $spacers: () !default;
 $spacers: map-merge(
   (
     0: 0,
-    4: $spacer * .25,
-    8: $spacer * .5,
-    12: $spacer * .75,
+    4: $spacer * 0.25,
+    8: $spacer * 0.5,
+    10: $spacer * 0.625,
+    12: $spacer * 0.75,
     16: $spacer,
+    20: $spacer * 1.25,
     24: $spacer * 1.5,
     32: $spacer * 2,
-    48: $spacer * 3
+    48: $spacer * 3,
   ),
   $spacers
 );
@@ -23,111 +25,111 @@ $spacers: map-merge(
 $negative-spacers: negativify-map($spacers) !default;
 
 $spacing: (
-  'margin': (
+  "margin": (
     property: margin,
     class: m,
-    values: map-merge($spacers, $margin-auto)
+    values: map-merge($spacers, $margin-auto),
   ),
-  'margin-x': (
+  "margin-x": (
     property: margin-left margin-right,
     class: m-x,
-    values: map-merge($spacers, $margin-auto)
+    values: map-merge($spacers, $margin-auto),
   ),
-  'margin-y': (
+  "margin-y": (
     property: margin-top margin-bottom,
     class: m-y,
-    values: map-merge($spacers, $margin-auto)
+    values: map-merge($spacers, $margin-auto),
   ),
-  'margin-top': (
+  "margin-top": (
     property: margin-top,
     class: m-t,
-    values: map-merge($spacers, $margin-auto)
+    values: map-merge($spacers, $margin-auto),
   ),
-  'margin-right': (
+  "margin-right": (
     property: margin-right,
     class: m-r,
-    values: map-merge($spacers, $margin-auto)
+    values: map-merge($spacers, $margin-auto),
   ),
-  'margin-bottom': (
+  "margin-bottom": (
     property: margin-bottom,
     class: m-b,
-    values: map-merge($spacers, $margin-auto)
+    values: map-merge($spacers, $margin-auto),
   ),
-  'negative-margin': (
+  "negative-margin": (
     property: margin,
     class: m,
-    values: $negative-spacers
+    values: $negative-spacers,
   ),
-  'negative-margin-x': (
+  "negative-margin-x": (
     property: margin-left margin-right,
     class: m-x,
-    values: $negative-spacers
+    values: $negative-spacers,
   ),
-  'negative-margin-y': (
+  "negative-margin-y": (
     property: margin-top margin-bottom,
     class: m-y,
-    values: $negative-spacers
+    values: $negative-spacers,
   ),
-  'negative-margin-top': (
+  "negative-margin-top": (
     property: margin-top,
     class: m-t,
-    values: $negative-spacers
+    values: $negative-spacers,
   ),
-  'negative-margin-right': (
+  "negative-margin-right": (
     property: margin-right,
     class: m-r,
-    values: $negative-spacers
+    values: $negative-spacers,
   ),
-  'negative-margin-bottom': (
+  "negative-margin-bottom": (
     property: margin-bottom,
     class: m-b,
-    values: $negative-spacers
+    values: $negative-spacers,
   ),
-  'negative-margin-left': (
+  "negative-margin-left": (
     property: margin-left,
     class: m-l,
-    values: $negative-spacers
+    values: $negative-spacers,
   ),
-  'margin-left': (
+  "margin-left": (
     property: margin-left,
     class: m-l,
-    values: map-merge($spacers, $margin-auto)
+    values: map-merge($spacers, $margin-auto),
   ),
-  'padding': (
+  "padding": (
     property: padding,
     class: p,
-    values: $spacers
+    values: $spacers,
   ),
-  'padding-x': (
+  "padding-x": (
     property: padding-left padding-right,
     class: p-x,
-    values: $spacers
+    values: $spacers,
   ),
-  'padding-y': (
+  "padding-y": (
     property: padding-top padding-bottom,
     class: p-y,
-    values: $spacers
+    values: $spacers,
   ),
-  'padding-top': (
+  "padding-top": (
     property: padding-top,
     class: p-t,
-    values: $spacers
+    values: $spacers,
   ),
-  'padding-right': (
+  "padding-right": (
     property: padding-right,
     class: p-r,
-    values: $spacers
+    values: $spacers,
   ),
-  'padding-bottom': (
+  "padding-bottom": (
     property: padding-bottom,
     class: p-b,
-    values: $spacers
+    values: $spacers,
   ),
-  'padding-left': (
+  "padding-left": (
     property: padding-left,
     class: p-l,
-    values: $spacers
-  )
+    values: $spacers,
+  ),
 );
 
 $utilities: map-merge($spacing, $utilities);

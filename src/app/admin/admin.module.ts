@@ -13,9 +13,6 @@ import { AdminSidenavComponent } from './admin-layout/admin-sidenav/admin-sidena
     AdminTopnavComponent,
     AdminSidenavComponent,
   ],
-  imports: [
-    SharedModule,
-    AdminRoutingModule
-  ]
+  imports: [SharedModule, AdminRoutingModule],
 })
-export class AdminModule { }
+export class AdminModule {}

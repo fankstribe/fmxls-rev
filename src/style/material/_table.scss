@@ -11,20 +11,25 @@
 
   .table-card {
     background-color: mat.get-color-from-palette($background, card);
-    box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
+    box-shadow: rgb(58 53 65 / 10%) 0px 2px 10px 0px !important;
+  }
+
+  .toolbar-btn {
+    button {
+      background: mat.get-color-from-palette($background, card);
+      color: mat.get-color-from-palette($foreground, text);
+    }
   }
 
   .toolbar-actions {
-    background: mat.get-color-from-palette($background, input);
-    h5 {
-      border-right: 1px solid mat.get-color-from-palette($foreground, divider);
-    }
-
     .toolbar-actions-search {
+      background: mat.get-color-from-palette($background, table-search);
+
       input {
         border-width: 0;
         outline: none;
         background-color: transparent;
+        color: mat.get-color-from-palette($foreground, text);
       }
     }
   }
@@ -35,7 +40,7 @@
   }
 
   .mat-table .mat-header-cell {
-    color: mat.get-color-from-palette($foreground, text);
+    color: mat.get-color-from-palette($foreground, title);
   }
 
   td.mat-cell,
@@ -43,11 +48,10 @@
     border-bottom-color: mat.get-color-from-palette($background, background);
   }
 
-  .mat-cell {
-    color: mat.get-color-from-palette($foreground, text);
-  }
-
-  .mat-sort-header-content {
-    font-weight: 600;
+  @include bp-gt(desktop) {
+    tr.element-row:hover {
+      background-color: mat.get-color-from-palette($background, hover);
+      transition: 0.3s all;
+    }
   }
 }

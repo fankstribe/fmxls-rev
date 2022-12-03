@@ -3,28 +3,27 @@
 // Tabelle Admin
 .table-card {
   overflow: auto;
-  margin-bottom: 20px;
+  margin: 10px 0 20px 0;
+  border: 0;
 }
 
 .toolbar-actions {
   margin-bottom: 10px;
-  padding: 0 14px;
+  padding: 0;
   height: 3.625rem;
-  border-radius: 8px;
 
   @include bp-gt(xsmall) {
-    padding: 10px 24px;
+    padding: 10px 0;
   }
 
   .toolbar-actions-search {
-    padding: 0 16px 0 6px;
+    border-radius: 12px;
+    padding: 3px 16px;
+
     .mat-icon {
       font-size: 28px;
       height: 28px;
       width: 28px;
-    }
-    input {
-      font-size: 24px;
     }
   }
 }
@@ -58,6 +57,11 @@
   }
 }
 
+.mat-table .mat-header-cell {
+  font-size: 14px;
+  font-weight: 600;
+}
+
 tr.element-row {
   cursor: pointer;
 }
@@ -79,10 +83,23 @@ tr.mat-footer-row {
 
 .mat-paginator-container {
   justify-content: flex-start !important;
+
+  @include bp-lt(xsmall) {
+    .mat-paginator-range-actions .mat-paginator-range-label {
+      display: none !important;
+    }
+  }
+}
+
+.mat-paginator-outer-container {
+  padding: 16px 0;
 }
 
 .cell-truncate-text {
-  max-width: 150px;
+  @include bp-lt(small) {
+    max-width: 130px;
+  }
+
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -100,13 +117,9 @@ tr.mat-footer-row {
   }
 }
 
-@include bp-gt(desktop) {
+@include bp-gt(xdesktop) {
   tr.element-row:hover {
-    box-shadow: 0px 0px 0.4px rgba(0, 0, 0, 0.016),
-      0px 0px 1px rgba(0, 0, 0, 0.022), 0px 0px 2.1px rgba(0, 0, 0, 0.028),
-      0px 0px 4.4px rgba(0, 0, 0, 0.034), 0px 0px 12px rgba(0, 0, 0, 0.05);
-
-    transform: scale(1);
+    transition: all 0.15s;
   }
 
   .mat-table-sticky {
